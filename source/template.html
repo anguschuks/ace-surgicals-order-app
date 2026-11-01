@@ -1,0 +1,728 @@
+<title>ACE Surgicals Order Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky brand bar + category rail over a dense product grid; order drawer slides from the right (bottom sheet on phones). */
+:root{
+  --navy:#071266; --sky:#0398F5; --sky-soft:#E3F2FE; --sky-ink:#0270B8;
+  --bg:#FFFFFF; --field:#F4F7FC; --surface:#FFFFFF; --fg:#0B1440; --muted:#5A6488; --line:#DCE3F0;
+  --tile:#EAF3FD; --tile-ink:#071266; --wa:#1DA851; --wa-ink:#FFFFFF; --danger:#C62828;
+  --shadow:0 1px 2px rgba(7,18,102,.06),0 6px 24px rgba(7,18,102,.07);
+  color-scheme:light;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* Header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:14px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;flex:none;text-decoration:none}
+.logo{background:#fff;border-radius:10px;padding:3px 6px;display:flex;line-height:0}
+.logo img{height:44px;width:auto}
+.brand-txt{display:flex;flex-direction:column;line-height:1.1}
+.brand-txt b{font-family:var(--f-display);font-stretch:85%;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--navy)}
+.brand-txt span{font-size:12px;color:var(--muted)}
+.search{flex:1;min-width:0;position:relative}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--muted)}
+.search input{width:100%;height:44px;border:1.5px solid var(--line);background:var(--field);border-radius:12px;padding:0 38px 0 40px;font-size:15px}
+.search input:focus{border-color:var(--sky);outline:none;background:var(--surface)}
+.search .clr{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;width:32px;height:32px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:18px;display:grid;place-items:center}
+.cartbtn{flex:none;position:relative;height:44px;border:0;border-radius:12px;background:var(--navy);color:var(--surface);display:flex;align-items:center;gap:8px;padding:0 14px;cursor:pointer;font-weight:600}
+.cartbtn svg{font-size:20px}
+.badge{min-width:22px;height:22px;border-radius:11px;background:var(--sky);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;padding:0 6px;font-variant-numeric:tabular-nums}
+.rail{display:flex;gap:8px;overflow-x:auto;padding-block:0 10px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:500;cursor:pointer;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.chip small{color:var(--muted);font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--surface)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.75}
+
+/* Intro */
+.intro{padding-block:22px 6px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.intro h1{margin:0;font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:clamp(26px,4vw,38px);line-height:1.02;letter-spacing:-.01em;color:var(--navy);text-wrap:balance}
+.intro h1 em{font-style:normal;color:var(--sky)}
+.intro p{margin:6px 0 0;color:var(--muted);max-width:60ch}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tools label{font-size:13px;color:var(--muted)}
+.tools select{height:38px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);padding:0 10px}
+.count{font-size:13px;color:var(--muted);padding-block:8px 12px;font-variant-numeric:tabular-nums}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding-bottom:110px}
+.card{background:var(--surface);border:1px solid var(--line);box-shadow:0 1px 2px rgba(7,18,102,.04);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;content-visibility:auto;contain-intrinsic-size:auto 330px}
+.pic{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--tile);color:var(--tile-ink);display:grid;place-items:center}
+.pic svg{font-size:68px;stroke-width:1.3}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+.pic.hasimg>svg{display:none}
+.sn{position:absolute;left:10px;top:10px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--sky-ink);background:var(--surface);border-radius:6px;padding:2px 7px;font-variant-numeric:tabular-nums}
+.cat{position:absolute;right:10px;bottom:10px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.name{font-family:var(--f-display);font-stretch:92%;font-weight:700;font-size:16.5px;line-height:1.2;margin:0;color:var(--fg)}
+.desc{font-size:13.5px;color:var(--muted);margin:0}
+.foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-family:var(--f-display);font-weight:800;font-size:18px;color:var(--navy);font-variant-numeric:tabular-nums;white-space:nowrap}
+.price small{font-family:var(--f-body);font-weight:500;font-size:11px;color:var(--muted);display:block;letter-spacing:.02em}
+.add{height:38px;border:0;border-radius:10px;background:var(--sky);color:#fff;font-weight:600;padding:0 14px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.add:hover{filter:brightness(.95)}
+.step{display:flex;align-items:center;border:1.5px solid var(--sky);border-radius:10px;height:38px;overflow:hidden}
+.step button{width:34px;height:100%;border:0;background:var(--sky-soft);color:var(--sky-ink);font-size:18px;font-weight:600;cursor:pointer}
+.step input{width:40px;height:100%;border:0;text-align:center;background:var(--surface);font-weight:600;font-variant-numeric:tabular-nums;-moz-appearance:textfield}
+.step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.empty{grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--muted)}
+.empty b{display:block;font-family:var(--f-display);font-size:20px;color:var(--fg);margin-bottom:4px}
+
+/* Floating order bar (phones and desktop) */
+.chat{position:fixed;z-index:16;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:48px;padding:0 16px 0 12px;border-radius:24px;background:var(--wa);color:var(--wa-ink);text-decoration:none;font-weight:600;box-shadow:var(--shadow)}
+.chat svg{font-size:26px;stroke:none;fill:currentColor}
+@media (max-width:600px){.chat span{display:none}.chat{width:52px;height:52px;padding:0;justify-content:center;border-radius:50%}}
+.float{position:fixed;left:0;right:0;bottom:0;z-index:15;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));padding-top:12px;pointer-events:none}
+.float .wrap{display:flex;justify-content:flex-end;padding-left:64px}
+.float button{pointer-events:auto;display:flex;align-items:center;gap:14px;border:0;border-radius:14px;background:var(--navy);color:var(--surface);padding:12px 16px;box-shadow:var(--shadow);cursor:pointer;font-weight:600;max-width:100%}
+.float button span.t{font-family:var(--f-display);font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(3,8,34,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--surface);z-index:41;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s ease;box-shadow:var(--shadow);padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px)}
+.drawer.on{transform:none}
+@media (max-width:560px){.drawer{top:auto;height:92%;width:100%;border-radius:18px 18px 0 0;transform:translateY(100%);padding-top:0}}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line)}
+.dh h2{margin:0;font-family:var(--f-display);font-weight:800;font-stretch:85%;font-size:22px;color:var(--navy)}
+.x{border:0;background:var(--field);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:20px;display:grid;place-items:center}
+.db{flex:1;overflow-y:auto;padding:6px 18px 18px}
+.line{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-bottom:1px dashed var(--line)}
+.line .mini{width:44px;height:44px;border-radius:10px;background:var(--tile);color:var(--tile-ink);display:grid;place-items:center;font-size:24px}
+.line .ln{min-width:0}
+.line .ln b{display:block;font-size:14px;line-height:1.25}
+.line .ln span{font-size:12.5px;color:var(--muted)}
+.line .ln .unit{display:block;margin-top:2px;font-variant-numeric:tabular-nums}
+.line .lr{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.line .lt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.line .step{height:32px}.line .step button{width:28px}.line .step input{width:34px}
+.rm{border:0;background:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;padding:0}
+.totals{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 4px}
+.totals span{color:var(--muted);font-size:13px}
+.totals b{font-family:var(--f-display);font-weight:800;font-size:24px;color:var(--navy);font-variant-numeric:tabular-nums}
+.fine{font-size:12px;color:var(--muted);margin:0 0 14px}
+fieldset{border:0;padding:0;margin:8px 0 0;display:grid;gap:10px}
+legend{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--sky-ink);margin-bottom:8px}
+.f{display:grid;gap:4px}
+.f label{font-size:13px;font-weight:500}
+.f label i{font-style:normal;color:var(--danger)}
+.f input,.f textarea,.f select{width:100%;border:1.5px solid var(--line);border-radius:10px;background:var(--field);padding:10px 12px}
+.f textarea{min-height:64px;resize:vertical}
+.f input:focus,.f textarea:focus{border-color:var(--sky);outline:none}
+.f.bad input{border-color:var(--danger)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.df{border-top:1px solid var(--line);padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));display:grid;gap:8px}
+.wa{display:flex;align-items:center;justify-content:center;gap:10px;height:50px;border-radius:12px;background:var(--wa);color:var(--wa-ink);font-weight:700;font-size:16px;text-decoration:none}
+.wa svg{font-size:22px;stroke:none;fill:currentColor}
+.wa[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.alt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.alt b{color:var(--fg);user-select:all;font-variant-numeric:tabular-nums}
+.ghost{border:1.5px solid var(--line);background:var(--surface);border-radius:9px;padding:6px 10px;cursor:pointer;font-size:12.5px;font-weight:600}
+.err{color:var(--danger);font-size:13px;min-height:1em;margin:0}
+.dempty{text-align:center;padding:40px 10px;color:var(--muted)}
+.dempty svg{font-size:48px;color:var(--sky)}
+
+/* Footer */
+footer{background:var(--navy);color:#fff}
+footer .wrap{padding-block:28px 120px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;font-size:14px}
+footer h3{margin:0 0 6px;font-family:var(--f-display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;color:#7CC8FF}
+footer p{margin:2px 0;color:#D7DEF8}
+footer a{color:#fff}
+.wa2{display:flex;align-items:center;justify-content:center;gap:10px;height:46px;border-radius:12px;border:1.5px solid var(--wa);background:var(--surface);color:var(--fg);font-weight:600;font-size:15px;cursor:pointer}
+.wa2 svg{font-size:20px}
+.modal{position:fixed;z-index:45;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100% - 32px));max-height:calc(100% - 48px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));background:var(--surface);border-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.mb{padding:14px 18px 18px;overflow-y:auto;display:grid;gap:12px}
+.mb p{margin:0}
+.mb .shot{width:100%;border:1px solid var(--line);border-radius:10px;display:block}
+.mb textarea{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:10px;background:var(--field);padding:10px 12px;resize:vertical}
+.btnrow{display:grid;gap:8px}
+.ghostbtn{display:flex;align-items:center;justify-content:center;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;cursor:pointer;text-decoration:none;color:var(--fg)}
+.vstat{border-radius:10px;padding:10px 12px;font-weight:600}
+.vstat.ok{background:#E6F6EC;color:#0E6B33}
+.vstat.bad{background:#FDECEC;color:#A31919}
+.vstat ul{margin:6px 0 0;padding-left:18px;font-weight:500}
+.vtab{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.vtab th,.vtab td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.vtab td.r,.vtab th.r{text-align:right;white-space:nowrap}
+.vtab tfoot td{font-weight:700;border-bottom:0}
+.staff{font-size:12px;color:#AFC0F0;cursor:pointer;background:none;border:0;padding:0;text-decoration:underline}
+.nojs{max-width:640px;margin:40px auto;padding:20px;border:2px solid #0398F5;border-radius:12px;font-size:16px;color:#0B1440;background:#fff}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;font-weight:500;opacity:0;transition:.2s;z-index:60;pointer-events:none;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+@media (max-width:720px){.brand-txt{display:none}.cartbtn .lbl{display:none}.logo img{height:38px}}
+@media (max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.pic svg{font-size:52px}.name{font-size:15px}.body{padding:10px}.foot{flex-direction:column;align-items:stretch}.add,.step{justify-content:center}.step input{flex:1}.price{font-size:16px}.cat{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 6v13M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-8v6"/><circle cx="6.5" cy="11.5" r="1.8"/></symbol>
+<symbol id="i-pillow" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="8" rx="3"/><path d="M6 8v8M18 8v8"/></symbol>
+<symbol id="i-steth" viewBox="0 0 24 24"><path d="M5 3H4v5a5 5 0 0 0 10 0V3h-1"/><path d="M9 13v2a5 5 0 0 0 10 0v-2"/><circle cx="19" cy="11" r="2"/></symbol>
+<symbol id="i-micro" viewBox="0 0 24 24"><path d="M5 21h14M8 21v-2.5h8M13 18.5a6 6 0 0 0 4-9.5"/><path d="M9 3h4l-1 9h-2z"/><path d="M8 12h6"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3M7.5 14h9"/></symbol>
+<symbol id="i-beaker" viewBox="0 0 24 24"><path d="M4 3h15M5.5 3v15a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V3M5.5 11h5M5.5 15h3"/></symbol>
+<symbol id="i-bottle" viewBox="0 0 24 24"><path d="M10 2h4v3h-4zM9 5h6l1.5 3v12a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2V8z"/><path d="M7.5 11h9v6h-9z"/></symbol>
+<symbol id="i-syringe" viewBox="0 0 24 24"><path d="M18 2l4 4M20 4l-3 3M17 7L8 16l-3-3 9-9zM6.5 14.5L2 19M11 9l1.5 1.5M9 11l1.5 1.5"/></symbol>
+<symbol id="i-drip" viewBox="0 0 24 24"><path d="M8 2h8v8a4 4 0 0 1-8 0zM8 6h8M12 14v2c0 2 4 2 4 4v2"/></symbol>
+<symbol id="i-glove" viewBox="0 0 24 24"><path d="M7.5 21v-5L4 11.5 5.5 10 8 12V5a1.5 1.5 0 0 1 3 0v5V3.5a1.5 1.5 0 0 1 3 0V10V5a1.5 1.5 0 0 1 3 0v8.5c0 4-2 7.5-5 7.5z"/></symbol>
+<symbol id="i-forceps" viewBox="0 0 24 24"><path d="M7 21l4-11 1-7 1 7 4 11"/><path d="M9.5 15h5"/><circle cx="7" cy="21" r=".6"/><circle cx="17" cy="21" r=".6"/></symbol>
+<symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.2 15.8L19 3M15.8 15.8L5 3"/></symbol>
+<symbol id="i-retractor" viewBox="0 0 24 24"><path d="M5 3v10a4 4 0 0 0 4 4h10M19 12v9M14 17v4"/></symbol>
+<symbol id="i-scalpel" viewBox="0 0 24 24"><path d="M3 21l7.5-7.5M10.5 13.5L20 4c1.2 3.5-1 8-5.5 9.5z"/></symbol>
+<symbol id="i-needle" viewBox="0 0 24 24"><path d="M5 19A10 10 0 0 1 19 5"/><circle cx="19.5" cy="4.5" r="1"/><path d="M5 19c2.5 2 6 1.5 7-1s-1-4 1-6"/></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M6 11h3l2-3 2 5 2-2h3M9 20h6M12 16v4"/></symbol>
+<symbol id="i-device" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="13" rx="2"/><path d="M8 6V4h8v2M8 11h4M8 15h8"/><circle cx="16" cy="11" r="1.5"/></symbol>
+<symbol id="i-drum" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="12" cy="12" r="4.5"/><path d="M12 9.5V12l1.5 1.5"/></symbol>
+<symbol id="i-fridge" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M6 9h12M9 5v2M9 12v3"/></symbol>
+<symbol id="i-xray" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 6v12M9 8h6M8 11h8M8 14h8M9.5 17h5"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24"><circle cx="12" cy="11" r="7"/><circle cx="12" cy="11" r="3"/><path d="M4 21h16M8 18l-1 3M16 18l1 3"/></symbol>
+<symbol id="i-probe" viewBox="0 0 24 24"><path d="M9.5 3h5v7l2.5 4H7l2.5-4z"/><path d="M7 14c0 4 2 7 5 7s5-3 5-7"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-tooth" viewBox="0 0 24 24"><path d="M7.5 3C5 3 3.5 5 3.5 8c0 4 2 5 2.5 9s1 4 2 4 1.5-3 2.5-6c.5-1.5 1.5-1.5 2 0 1 3 1.5 6 2.5 6s1.5-1 2-4 2.5-5 2.5-9c0-3-1.5-5-4-5-2 0-3 1-4.5 1S9.5 3 7.5 3z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-ear" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 4-4 5-4 8a3 3 0 0 1-6 0"/><path d="M10 9a2 2 0 0 1 4 0c0 2-2 2-2 4"/></symbol>
+<symbol id="i-wheel" viewBox="0 0 24 24"><circle cx="10" cy="16" r="5"/><circle cx="8" cy="3.5" r="1.5"/><path d="M8 6.5V12h6l3 6h2.5M8 9h5"/></symbol>
+<symbol id="i-crutch" viewBox="0 0 24 24"><path d="M7 3h6M10 3v4l-1.5 6h4L11 7M10.5 13v8M8.5 21h4M8 9.5h5"/><path d="M17 4v17M15 21h4M15 8h4"/></symbol>
+<symbol id="i-brace" viewBox="0 0 24 24"><path d="M8 2v6c0 2-2 3-2 6v8M16 2v6c0 2 2 3 2 6v8M8 7h8M6 15h12M6 19h12"/></symbol>
+<symbol id="i-band" viewBox="0 0 24 24"><rect x="1.5" y="8" width="21" height="8" rx="4" transform="rotate(-45 12 12)"/><path d="M9.2 9.2l5.6 5.6"/><circle cx="12" cy="10" r=".4"/><circle cx="10" cy="12" r=".4"/><circle cx="14" cy="12" r=".4"/><circle cx="12" cy="14" r=".4"/></symbol>
+<symbol id="i-mask" viewBox="0 0 24 24"><path d="M4 8.5c3-1 5-1.5 8-1.5s5 .5 8 1.5V13c0 3-4 5-8 5s-8-2-8-5z"/><path d="M4 10H2M20 10h2M8 11h8M8 14h8"/></symbol>
+<symbol id="i-gown" viewBox="0 0 24 24"><path d="M8 3L3 6l2 4 2-1v12h10V9l2 1 2-4-5-3c-1 2-2 3-4 3S9 5 8 3z"/></symbol>
+<symbol id="i-towel" viewBox="0 0 24 24"><rect x="4" y="3" width="13" height="18" rx="1"/><path d="M17 6h3v15h-3M4 16h13"/></symbol>
+<symbol id="i-kit" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M12 10.5v6M9 13.5h6"/></symbol>
+<symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14V4a2 2 0 0 0-4 0v10a4 4 0 1 0 4 0z"/><path d="M12 9v7"/></symbol>
+<symbol id="i-bp" viewBox="0 0 24 24"><circle cx="9" cy="13" r="6"/><path d="M9 13l3-3M15 13h4V7h-2M19 13v4"/></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 10a5 5 0 0 1 8 0M12 12l1.5-3"/></symbol>
+<symbol id="i-lamp" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-trolley" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="11" rx="1"/><path d="M4 9.5h16M7 15v4M17 15v4"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></symbol>
+<symbol id="i-cyl" viewBox="0 0 24 24"><rect x="8" y="7" width="8" height="14" rx="4"/><path d="M10 7V4h4v3M12 4V2M9 13h6"/></symbol>
+<symbol id="i-bin" viewBox="0 0 24 24"><path d="M4 6h16M9 6V4h6v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M5 12h4l1.5-2.5 2 5 1.5-2.5h5"/></symbol>
+<symbol id="i-lungs" viewBox="0 0 24 24"><path d="M12 3v8M12 11c-1 1-3 1-4 0M12 11c1 1 3 1 4 0"/><path d="M8 7c-3 0-5 5-5 10 0 2 1 3 3 3s3-1 3-3V9M16 7c3 0 5 5 5 10 0 2-1 3-3 3s-3-1-3-3V9"/></symbol>
+<symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M10.3 8h.01M13.7 8h.01M10.8 10c.7.5 1.7.5 2.4 0M5 21c0-4 3-7 7-7s7 3 7 7"/></symbol>
+<symbol id="i-bone" viewBox="0 0 24 24"><path d="M8.5 7L17 15.5"/><circle cx="6.5" cy="5" r="2"/><circle cx="5" cy="8.3" r="2"/><circle cx="17.5" cy="19" r="2"/><circle cx="19" cy="15.7" r="2"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M8 7h8M8 11h8M8 15h5"/></symbol>
+<symbol id="i-dish" viewBox="0 0 24 24"><path d="M3 12h18c0 4-4 7-9 7s-9-3-9-7zM7 12c1-3 3-4 5-4s4 1 5 4"/></symbol>
+<symbol id="i-pipette" viewBox="0 0 24 24"><path d="M15 3l6 6M18 6l-9 9-3 1 1-3 9-9M6 16l-3 5 5-3"/></symbol>
+<symbol id="i-spin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="6" r="1.3"/><circle cx="12" cy="18" r="1.3"/><circle cx="6" cy="12" r="1.3"/><circle cx="18" cy="12" r="1.3"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c3 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 3-6 1 2 1 3 3 3 0-3-1-5 0-8z"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24"><path d="M2 9h20v3H2zM5 12v9M19 12v9M9 12l-1.5 5h9L15 12"/></symbol>
+<symbol id="i-screen" viewBox="0 0 24 24"><path d="M3 4h4v15H3zM10 4h4v15h-4zM17 4h4v15h-4zM5 19v2M12 19v2M19 19v2"/></symbol>
+<symbol id="i-cabinet" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1.5"/><path d="M4 12h16M10 7h4M10 17h4"/></symbol>
+<symbol id="i-chair" viewBox="0 0 24 24"><path d="M7 3v9h10V3M5 12h14v3H5zM7 15l-1 6M17 15l1 6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 11h10.6L20.5 7H6.5"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></symbol>
+</defs>
+</svg>
+
+<header>
+  <div class="gut"><div class="wrap">
+    <div class="bar">
+      <a class="brand" href="#top" aria-label="ACE Surgicals home">
+        <span class="logo"><img src="__LOGO__" alt="ACE Surgicals logo" width="75" height="44"></span>
+        <span class="brand-txt"><b>Ace Surgicals Ltd</b><span>RC 7117725 · Kano</span></span>
+      </a>
+      <div class="search">
+        <svg class="i"><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="Search bed, autoclave, forceps…" autocomplete="off" aria-label="Search products">
+        <button class="clr" id="qclr" aria-label="Clear search" hidden>×</button>
+      </div>
+      <button class="cartbtn" id="openCart" aria-label="Open order"><svg class="i"><use href="#i-cart"/></svg><span class="lbl">Order</span><span class="badge" id="badge">0</span></button>
+    </div>
+    <nav class="rail" id="rail" aria-label="Categories"></nav>
+  </div></div>
+</header>
+
+<noscript><div class="gut"><div class="nojs"><b>This price list needs to be opened in a web browser.</b><br>Open it in Chrome or Safari, or visit acesurgicalsltd.com. If you opened it from WhatsApp or the Files app, tap Share and choose "Open in Safari" or "Open with Chrome".</div></div></noscript>
+<main class="gut" id="top">
+  <div class="wrap">
+    <section class="intro">
+      <div>
+        <h1>Medical Items <em>Price List</em></h1>
+        <p>Find what you need, add it to your order and send it straight to our sales desk on WhatsApp. Prices are per unit, <span id="listDate">updated 29/10/2026</span>.</p>
+      </div>
+      <div class="tools">
+        <label for="sort">Sort</label>
+        <select id="sort">
+          <option value="sn">Catalogue order</option>
+          <option value="az">Name A–Z</option>
+          <option value="lo">Price: low to high</option>
+          <option value="hi">Price: high to low</option>
+        </select>
+      </div>
+    </section>
+    <div class="count" id="count" aria-live="polite"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</main>
+
+<footer class="gut">
+  <div class="wrap">
+    <div><h3>Ace Surgicals Ltd</h3><p>Medical, surgical, laboratory and hospital equipment.</p><p>RC 7117725</p></div>
+    <div><h3>Visit</h3><p>15/16 Post Office Rd, Fagge, Kano, Nigeria</p></div>
+    <div><h3>Contact</h3><p>Phone &amp; WhatsApp: <b>+234 907 760 0522</b></p><p><a href="https://wa.me/2349077600522?text=Hello%20ACE%20Surgicals%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener">Chat with us on WhatsApp</a></p><p>acesurgicalsltd@gmail.com</p><p><a href="https://acesurgicalsltd.com" target="_blank" rel="noopener">acesurgicalsltd.com</a></p><p><button class="staff" id="openVerify" type="button">Staff: check an order</button></p></div>
+  </div>
+</footer>
+
+<a class="chat" id="chat" href="https://wa.me/2349077600522?text=Hello%20ACE%20Surgicals%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener" aria-label="Chat with ACE Surgicals on WhatsApp"><svg class="i"><use href="#i-wa"/></svg><span>Chat with us</span></a>
+<div class="float" id="float" hidden><div class="gut"><div class="wrap">
+  <button id="floatBtn"><svg class="i" style="font-size:20px"><use href="#i-cart"/></svg><span id="floatN">0 items</span><span class="t" id="floatT">₦0</span><span>Review order →</span></button>
+</div></div></div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Your order" aria-hidden="true">
+  <div class="dh"><h2>Your order</h2><button class="x" id="closeCart" aria-label="Close order">×</button></div>
+  <div class="db" id="db">
+    <div id="lines"></div>
+    <div id="orderMeta">
+      <div class="totals"><span id="tcount"></span><b id="ttotal">₦0</b></div>
+      <p class="fine">Estimate from the <span id="listDate2">29/10/2026 price list</span>. Our team confirms availability, delivery cost and your final invoice on WhatsApp.</p>
+      <form id="cust" novalidate>
+        <fieldset>
+          <legend>Your details</legend>
+          <div class="two">
+            <div class="f" id="f-name"><label for="cname">Full name <i>*</i></label><input id="cname" autocomplete="name"></div>
+            <div class="f" id="f-phone"><label for="cphone">Phone <i>*</i></label><input id="cphone" type="tel" autocomplete="tel" placeholder="Your phone number"></div>
+          </div>
+          <div class="f"><label for="corg">Hospital / clinic / company</label><input id="corg" autocomplete="organization"></div>
+          <div class="f"><label for="caddr">Delivery address or city</label><input id="caddr" autocomplete="street-address" placeholder="e.g. Wuse 2, Abuja"></div>
+          <div class="f"><label for="cnote">Note for the sales team</label><textarea id="cnote" placeholder="Preferred brand, delivery date, installation…"></textarea></div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <div class="df" id="df">
+    <p class="err" id="err" role="alert"></p>
+    <a class="wa" id="send" href="https://wa.me/2349077600522" target="_blank" rel="noopener"><svg class="i"><use href="#i-wa"/></svg>Send order on WhatsApp</a>
+    <button class="wa2" id="sendPic" type="button"><svg class="i"><use href="#i-image"/></svg>Send as a picture (choose ACE Surgicals in WhatsApp)</button>
+    <div class="alt"><span>Didn't open? Message <b>+234 907 760 0522</b></span><button class="ghost" id="copy" type="button">Copy order text</button></div>
+  </div>
+</aside>
+<div class="modal" id="picModal" role="dialog" aria-labelledby="picH" hidden>
+  <div class="dh"><h2 id="picH">Your order picture</h2><button class="x" id="picClose" aria-label="Close">&times;</button></div>
+  <div class="mb">
+    <img class="shot" id="picImg" alt="Order summary picture">
+    <p class="fine" id="picHelp">Tap <b>Share picture</b> and choose WhatsApp, then pick ACE Surgicals (+234 907 760 0522).</p>
+    <div class="btnrow">
+      <button class="wa" id="picShare" type="button"><svg class="i"><use href="#i-wa"/></svg>Share picture</button>
+      <a class="ghostbtn" id="picSave" href="#" download="ACE-order.png">Save picture</a>
+      <a class="ghostbtn" id="picChat" href="https://wa.me/2349077600522" target="_blank" rel="noopener">Open WhatsApp chat with ACE Surgicals</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="vModal" role="dialog" aria-labelledby="vH" hidden>
+  <div class="dh"><h2 id="vH">Check an order</h2><button class="x" id="vClose" aria-label="Close">&times;</button></div>
+  <div class="mb">
+    <p class="fine">For ACE Surgicals staff. Paste the full WhatsApp order message, or just its order code. The order is rebuilt from the official price list, so any changed item, quantity or price is flagged.</p>
+    <textarea id="vText" placeholder="Paste the order message here"></textarea>
+    <button class="add" id="vGo" type="button" style="justify-content:center;height:44px">Check order</button>
+    <div id="vOut"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= SETTINGS ================= */
+/* Live product list: paste your Google Sheets "Publish to web" CSV link between the quotes.
+   Leave it empty to use the built-in list below. */
+const SHEET_CSV_URL="";
+/* Folder (next to this file on your website) holding photos named in the sheet's Photo column. */
+const PHOTO_FOLDER="photos/";
+const WA_NUMBER="2349077600522";
+/* Web address of this app, used for the "View official order" link in WhatsApp messages.
+   Leave empty to use the address the app is opened from. */
+const APP_URL="";
+const LIST_DATE="29/10/2026";
+/* ============================================ */
+
+const CAT_ORDER=["Ward Equipment","General Medical Equipment","Maternity & Gynecology","Surgical & Theatre","Surgical Instrument","Radiology & Imaging","Laboratory & Diagnostics","Ophthalmology","Dental & ENT","Apparel & Linens","Consumables & Supplies","Physiotherapy","Models & Charts","Laboratory Glassware","Reagents and Chemicals"];
+const BUILT_IN=__DATA__.map(([id,c,n,d,p])=>({id,c:CAT_ORDER[c],n,d,p,photo:""}));
+let items=[],byId=new Map(),CATS=[],priceNote=`ACE Surgicals price list of ${LIST_DATE}`;
+
+const RULES=[
+ [/autoclave linen/,'towel'],[/sink/,'cabinet'],[/specimen/,'bottle'],[/plaster|dipstick|strips/,'band'],[/hot ?plate/,'flame'],[/thermometer/,'thermo'],[/height ruler/,'scale'],
+ [/ambu|ventilator|nebuli|airway|\blma\b|laryngo|anesthesia|rebreather|nasal cannula|et tube|oxygen analy|oxygen concentrator/,'lungs'],
+ [/oxygen/,'cyl'],[/suction/,'device'],
+ [/defib|ecg|cardiac|heart model/,'heart'],
+ [/bp monitor|sphygmo/,'bp'],
+ [/patient monitor|bed head|pendant|vein finder/,'monitor'],[/trolley|stretcher/,'trolley'],
+ [/baby|cot sheet|\bcord\b|phototherapy|feeding pump|foetal/,'baby'],
+ [/delivery bed|operating table|couch|tilt bed|stepper|kick about/,'table'],
+ [/icu bed|hospital bed|mattress/,'bed'],[/pillow|underpad|draw sheet/,'pillow'],
+ [/wheelchair/,'wheel'],[/crutch|walking frame|commode/,'crutch'],
+ [/brace|splint|collar|immobil|sling|corset|binder|support|orthosis|wrap|posture/,'brace'],
+ [/tread ?mill|ergometer|exercise ball/,'device'],
+ [/mri|ct scan|mammogram/,'scan'],[/x-?ray|film viewer|positioning/,'xray'],[/ultrasound gel/,'bottle'],[/ultrasound|scaler|sclaer|a\/b scan|doppler/,'probe'],
+ [/lead |gonard|thyroid shield|shield|goggle/,'shield'],
+ [/slit lamp|ophthalmo|opthalmic|retinoscope|refractometer|tonometer|\bvolk\b|cataract|trial box|snellen|eye model|magnifier/,'eye'],
+ [/\bears?\b|otoscope|audiometer|hearing|ent workstation/,'ear'],
+ [/dental|molar|\btooth\b|teeth|amalgam|impression|matrix|elevator|cavers|rc bar|vail|trimming|mouth gag|frast|rangler/,'tooth'],
+ [/microscope|hand lens|slide/,'micro'],
+ [/centrifuge|shaker|stirrer|roller/,'spin'],
+ [/pipette|dropper|micro pipette/,'pipette'],
+ [/beaker|measuring|cylinder|test tube|boiling tube|jar|bell jar/,'beaker'],
+ [/flask|funnel/,'flask'],
+ [/petri|evaporating|dish|gallipot|tray|bowl|mortar|\btile|kidney/,'dish'],
+ [/refrid|fridge|blood bank/,'fridge'],
+ [/autoclave|steriliz|water bath|incubator|oven|distiller|washer/,'drum'],
+ [/incinerator|bunsen|hot plate|blood warmer/,'flame'],
+ [/analy[sz]er|reader|colorimeter|spectro|electrophoresis|haemoglobin|glucometer|meter|diathermy|machine|pump|concentrator|purifier|stimulator|\btens\b|interferential|laser|unit|endoscopy|suction|extractor|dryer|regulator/,'device'],
+ [/scalpel|blade/,'scalpel'],[/scissors/,'scissors'],
+ [/retractor|probe|director|hammer/,'retractor'],
+ [/suture|needle holder|needle holding/,'needle'],
+ [/forceps|clamp|hook|instrument|descamps|speculum|spatula/,'forceps'],
+ [/syringe|needle|lignocaine|injection/,'syringe'],
+ [/cannula|catheter|giving set|blood bag|urine bag|drip stand|ng tube|tube/,'drip'],
+ [/glove/,'glove'],[/mask|n95/,'mask'],
+ [/gown|scrub|lab coat|apron|ppe|cap|boots|shoes/,'gown'],
+ [/towel|bedsheet|blanket|flannel|drape|linen|mackintosh/,'towel'],
+ [/bandage|plaster|gauze|cotton|swab|strip|dipstick/,'band'],
+ [/first aid|diagnostic set|dissecting set|kit|set/,'kit'],
+ [/thermometer|hygrometer|ph meter/,'thermo'],
+ [/scale|balance|height/,'scale'],
+ [/lamp|light|infrared/,'lamp'],
+ [/trolley|stretcher|cart/,'trolley'],
+ [/\bbin\b|sharps/,'bin'],
+ [/skeleton|bone|torso|pelvic|scapula|atlas|axis|lumbar|thoracic|cervical|joint|girdle/,'bone'],
+ [/chart|model|reproductive/,'chart'],
+ [/screen/,'screen'],[/cabinet|cupboard|locker|board|holder|rack|stand|clock/,'cabinet'],
+ [/stool|chair/,'chair'],[/bedpan|urine can|specimen|container|bottle|iodine|spirit|h2o/,'bottle'],
+ [/stethoscope/,'steth']
+];
+const CAT_ICON={"Ward Equipment":"bed","General Medical Equipment":"device","Maternity & Gynecology":"baby","Surgical & Theatre":"table","Surgical Instrument":"forceps","Radiology & Imaging":"xray","Laboratory & Diagnostics":"micro","Ophthalmology":"eye","Dental & ENT":"tooth","Apparel & Linens":"gown","Consumables & Supplies":"syringe","Physiotherapy":"brace","Models & Charts":"bone","Laboratory Glassware":"beaker","Reagents and Chemicals":"bottle"};
+function iconFor(it){
+  const s=(it.n+' '+it.d).toLowerCase();
+  if(/stethoscope/.test(s))return 'steth';
+  if(it.c==="Reagents and Chemicals"&&!/slide|tips/.test(s))return 'bottle';
+  for(const [re,ic] of RULES) if(re.test(s)) return ic;
+  return CAT_ICON[it.c]||'plus';
+}
+function setItems(list){
+  items=list;items.forEach(i=>i.ic=iconFor(i));
+  byId=new Map(items.map(i=>[i.id,i]));
+  const seen=[...new Set(items.map(i=>i.c))];
+  CATS=[...CAT_ORDER.filter(c=>seen.includes(c)),...seen.filter(c=>!CAT_ORDER.includes(c))];
+  if(cat!=='All'&&!CATS.includes(cat))cat='All';
+}
+function photoSrc(p){p=(p||'').trim();if(!p)return '';return /^(https?:|data:|\/)/i.test(p)?p:PHOTO_FOLDER+p}
+function parseCSV(t){const rows=[];let r=[],f='',q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;else if(c===','){r.push(f);f=''}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;r.push(f);rows.push(r);r=[];f=''}
+    else f+=c}
+  if(f||r.length){r.push(f);rows.push(r)}return rows}
+function fromSheet(text){
+  const rows=parseCSV(text);if(rows.length<2)return null;
+  const h=rows[0].map(x=>x.trim().toLowerCase());
+  const col=k=>h.findIndex(x=>x.startsWith(k));
+  const ci={no:col('no'),c:col('category'),n:col('product'),d:col('description'),p:col('price'),ph:col('photo'),sh:col('show')};
+  if(ci.no<0||ci.n<0||ci.p<0)return null;
+  const out=[];
+  for(const r of rows.slice(1)){
+    const g=k=>ci[k]>=0?(r[ci[k]]||'').trim():'';
+    const id=parseInt(g('no'),10),p=parseInt(g('p').replace(/[^\d]/g,''),10);
+    if(!id||!g('n')||!p)continue;
+    if(/^(no|n|hide|hidden|false|0)$/i.test(g('sh')))continue;
+    out.push({id,c:g('c')||'Other Items',n:g('n'),d:g('d'),p,photo:g('ph')});
+  }
+  return out.length?out:null;
+}
+let cat='All';
+setItems(BUILT_IN);
+
+const fmt=n=>'₦'+n.toLocaleString('en-NG');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ico=(n)=>`<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+
+/* State */
+let cart=new Map(); let q=''; let sort='sn';
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+(store.get('ace-cart')||[]).forEach(([id,qty])=>{if(byId.has(id)&&qty>0)cart.set(id,qty)});
+const savedCust=store.get('ace-cust')||{};
+
+/* Category rail */
+const rail=document.getElementById('rail');
+function renderRail(){
+  const counts={};items.forEach(i=>counts[i.c]=(counts[i.c]||0)+1);
+  rail.innerHTML=[['All',items.length],...CATS.map(c=>[c,counts[c]])].map(([c,n])=>`<button class="chip" data-c="${esc(c)}" aria-pressed="${c===cat}">${esc(c)} <small>${n}</small></button>`).join('');
+}
+rail.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;cat=b.dataset.c;renderRail();renderGrid();window.scrollTo({top:0,behavior:'smooth'})});
+
+/* Grid */
+const grid=document.getElementById('grid');
+function ctrl(it){
+  const qn=cart.get(it.id);
+  return qn?`<div class="step"><button data-a="dec" data-id="${it.id}" aria-label="Fewer">−</button><input type="number" min="0" inputmode="numeric" value="${qn}" data-id="${it.id}" id="qty-${it.id}" aria-label="Quantity of ${esc(it.n)}"><button data-a="inc" data-id="${it.id}" aria-label="More">+</button></div>`
+           :`<button class="add" data-a="add" data-id="${it.id}">${ico('plus').replace('i-plus','i-cart')} Add</button>`;
+}
+function card(it){
+  const src=photoSrc(it.photo);const pic=src?`<img src="${esc(src)}" alt="${esc(it.n)}" loading="lazy" onerror="this.parentNode.classList.remove('hasimg');this.remove()">${ico(it.ic)}`:ico(it.ic);
+  return `<article class="card" data-id="${it.id}"><div class="pic${src?' hasimg':''}">${pic}<span class="sn">No. ${it.id}</span><span class="cat">${esc(it.c)}</span></div>
+  <div class="body"><h3 class="name">${esc(it.n)}</h3>${it.d?`<p class="desc">${esc(it.d)}</p>`:''}
+  <div class="foot"><div class="price">${fmt(it.p)}<small>per unit</small></div><div class="ctl">${ctrl(it)}</div></div></div></article>`;
+}
+function filtered(){
+  const terms=q.toLowerCase().split(/\s+/).filter(Boolean);
+  let list=items.filter(i=>(cat==='All'||i.c===cat)&&terms.every(t=>(i.n+' '+i.d+' '+i.c+' '+i.id).toLowerCase().includes(t)));
+  if(sort==='az')list.sort((a,b)=>a.n.localeCompare(b.n));
+  else if(sort==='lo')list.sort((a,b)=>a.p-b.p);
+  else if(sort==='hi')list.sort((a,b)=>b.p-a.p);
+  else list.sort((a,b)=>a.id-b.id);
+  return list;
+}
+function renderGrid(){
+  const list=filtered();
+  document.getElementById('count').textContent=`${list.length} item${list.length===1?'':'s'}${cat!=='All'?' in '+cat:''}${q?` matching “${q}”`:''}`;
+  grid.innerHTML=list.length?list.map(card).join(''):`<div class="empty"><b>No items match “${esc(q)}”</b>Try a shorter word, check the spelling, or choose All categories. Can't find it? Ask us on WhatsApp at +234 907 760 0522.</div>`;
+}
+function refreshCard(id){
+  const el=grid.querySelector(`.card[data-id="${id}"] .ctl`);if(el)el.innerHTML=ctrl(byId.get(id));
+}
+
+/* Cart ops */
+function setQty(id,n){
+  n=Math.max(0,Math.min(9999,Math.floor(n)||0));
+  if(n)cart.set(id,n);else cart.delete(id);
+  store.set('ace-cart',[...cart]);
+  refreshCard(id);renderCart();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(!b)return;
+  const id=+b.dataset.id,cur=cart.get(id)||0;
+  if(b.dataset.a==='add'){setQty(id,1);toast(`Added ${byId.get(id).n}`)}
+  else if(b.dataset.a==='inc')setQty(id,cur+1);
+  else if(b.dataset.a==='dec')setQty(id,cur-1);
+  else if(b.dataset.a==='rm')setQty(id,0);
+});
+document.addEventListener('change',e=>{const t=e.target;if(t.matches('.step input'))setQty(+t.dataset.id,+t.value)});
+
+/* Drawer */
+const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
+function openCart(){drawer.classList.add('on');scrim.classList.add('on');drawer.setAttribute('aria-hidden','false');document.getElementById('closeCart').focus()}
+function closeCart(){drawer.classList.remove('on');scrim.classList.remove('on');drawer.setAttribute('aria-hidden','true')}
+document.getElementById('openCart').onclick=openCart;
+document.getElementById('floatBtn').onclick=openCart;
+document.getElementById('closeCart').onclick=closeCart;scrim.onclick=()=>{closeCart();closeModals()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCart();closeModals()}});
+
+function totals(){let n=0,t=0;cart.forEach((qty,id)=>{n+=qty;t+=qty*byId.get(id).p});return{n,t,lines:cart.size}}
+function renderCart(){
+  const {n,t,lines}=totals();
+  document.getElementById('badge').textContent=n;
+  const fl=document.getElementById('float');fl.hidden=!n;
+  document.getElementById('floatN').textContent=`${n} item${n===1?'':'s'}`;
+  document.getElementById('floatT').textContent=fmt(t);
+  const L=document.getElementById('lines');
+  document.getElementById('orderMeta').hidden=!lines;document.getElementById('df').hidden=!lines;
+  if(!lines){L.innerHTML=`<div class="dempty">${ico('cart')}<p><b>Your order is empty.</b><br>Tap “Add” on any item to start.</p></div>`;return}
+  L.innerHTML=[...cart].map(([id,qty])=>{const it=byId.get(id);return `<div class="line"><div class="mini">${ico(it.ic)}</div>
+   <div class="ln"><b>${esc(it.n)}</b>${it.d?`<span>${esc(it.d)}</span>`:''}<span class="unit">No. ${id} · ${fmt(it.p)} each</span></div>
+   <div class="lr"><span class="lt">${fmt(qty*it.p)}</span><div class="step"><button data-a="dec" data-id="${id}" aria-label="Fewer">−</button><input type="number" min="0" value="${qty}" data-id="${id}" id="cqty-${id}" aria-label="Quantity"><button data-a="inc" data-id="${id}" aria-label="More">+</button></div><button class="rm" data-a="rm" data-id="${id}">Remove</button></div></div>`}).join('');
+  document.getElementById('tcount').textContent=`${lines} product${lines===1?'':'s'} · ${n} unit${n===1?'':'s'}`;
+  document.getElementById('ttotal').textContent=fmt(t);
+  updateLink();
+}
+
+/* Customer + message */
+const F=['cname','cphone','corg','caddr','cnote'];
+F.forEach(k=>{const el=document.getElementById(k);if(savedCust[k])el.value=savedCust[k];el.addEventListener('input',()=>{const o={};F.forEach(x=>o[x]=document.getElementById(x).value);store.set('ace-cust',o);document.getElementById('f-'+(k==='cname'?'name':k==='cphone'?'phone':'x'))?.classList.remove('bad');updateLink()})});
+const ref='ACE-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+String(Math.floor(1000+Math.random()*9000));
+function message(){
+  const v=k=>document.getElementById(k).value.trim();
+  const d=new Date();const date=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+  const {n,t}=totals();
+  let m=`*ACE SURGICALS – ORDER REQUEST*\nOrder code: ${orderCode()}\nDate: ${date}\n\n*Customer*\nName: ${v('cname')}\nPhone: ${v('cphone')}`;
+  if(v('corg'))m+=`\nFacility: ${v('corg')}`;
+  if(v('caddr'))m+=`\nDeliver to: ${v('caddr')}`;
+  m+=`\n\n*Items*`;
+  let i=0;cart.forEach((qty,id)=>{const it=byId.get(id);i++;m+=`\n${i}. ${it.n}${it.d?' – '+it.d:''} (No. ${id})\n    ${qty} × ${fmt(it.p)} = ${fmt(qty*it.p)}`});
+  m+=`\n\n*Estimated total: ${fmt(t)}*\n(${cart.size} product${cart.size===1?'':'s'}, ${n} unit${n===1?'':'s'})`;
+  if(v('cnote'))m+=`\n\nNote: ${v('cnote')}`;
+  const link=orderLink();if(link)m+=`\n\nView official order: ${link}`;
+  m+=`\n\n_Based on the ${priceNote}. Please confirm availability, delivery and final invoice._`;
+  return m;
+}
+function valid(){
+  const nm=document.getElementById('cname').value.trim(),ph=document.getElementById('cphone').value.replace(/\D/g,'');
+  const errs=[];if(!nm)errs.push('name');if(ph.length<10)errs.push('phone');return errs;
+}
+function updateLink(){
+  const a=document.getElementById('send');
+  a.href=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message())}`;
+  a.setAttribute('aria-disabled',valid().length?'true':'false');
+}
+document.getElementById('send').addEventListener('click',e=>{
+  const errs=valid();const err=document.getElementById('err');
+  if(errs.length){e.preventDefault();
+    if(errs.includes('name'))document.getElementById('f-name').classList.add('bad');
+    if(errs.includes('phone'))document.getElementById('f-phone').classList.add('bad');
+    err.textContent=errs.length===2?'Add your name and phone number so we can reach you.':errs[0]==='name'?'Add your name so we know who is ordering.':'Enter a phone number with at least 10 digits.';
+    document.getElementById(errs[0]==='name'?'cname':'cphone').focus();return}
+  err.textContent='';updateLink();
+});
+document.getElementById('copy').addEventListener('click',()=>{
+  const txt=message();
+  const fallback=()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Order text copied')}catch(e){toast('Select and copy the text manually')}ta.remove()};
+  if(navigator.clipboard?.writeText)navigator.clipboard.writeText(txt).then(()=>toast('Order copied. Paste it into WhatsApp to +234 907 760 0522'),fallback);else fallback();
+});
+
+/* Search / sort */
+const qi=document.getElementById('q'),qc=document.getElementById('qclr');let tmr;
+qi.addEventListener('input',()=>{clearTimeout(tmr);qc.hidden=!qi.value;tmr=setTimeout(()=>{q=qi.value.trim();renderGrid()},120)});
+qc.onclick=()=>{qi.value='';q='';qc.hidden=true;renderGrid();qi.focus()};
+document.getElementById('sort').onchange=e=>{sort=e.target.value;renderGrid()};
+
+/* ---------- Order code: lets staff rebuild the true order from the price list ---------- */
+function fnv(t){let h=0x811c9dc5;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0}return h}
+function sum4(body){return (fnv(body)%1679616).toString(36).toUpperCase().padStart(4,'0')}
+function orderCode(){
+  const body=[...cart].sort((a,b)=>a[0]-b[0]).map(([id,q])=>id.toString(36)+(q>1?':'+q.toString(36):'')).join('.');
+  return 'ACE-'+body+'-'+sum4(body);
+}
+function readCode(text){
+  const m=String(text).match(/ACE-([0-9a-z:]+(?:\.[0-9a-z:]+)*)-([0-9a-z]{4})(?![0-9a-z])/i);
+  if(!m)return {err:'No order code found. Every order from the app has a line starting "Order code: ACE-".'};
+  const body=m[1].toLowerCase();
+  if(sum4(body)!==m[2].toUpperCase())return {err:'The order code has been changed. Do not process this order as written; ask the customer to send it again from the app.',code:m[0]};
+  const lines=[];
+  for(const t of body.split('.')){const [a,b]=t.split(':');const id=parseInt(a,36),q=b?parseInt(b,36):1;if(!id||!q)return {err:'The order code is damaged.'};lines.push([id,q])}
+  return {lines,code:m[0]};
+}
+function appURL(){if(APP_URL)return APP_URL;return /^https?:$/.test(location.protocol)?location.origin+location.pathname:''}
+function orderLink(){const u=appURL();if(!u)return '';
+  const items=[...cart].sort((a,b)=>a[0]-b[0]).map(([id,q])=>q>1?id+'x'+q:String(id));
+  const body=[...cart].sort((a,b)=>a[0]-b[0]).map(([id,q])=>id.toString(36)+(q>1?':'+q.toString(36):'')).join('.');
+  return u+'#order-'+items.join('-')+'-'+sum4(body).toLowerCase()}
+function codeFromHash(h){const m=h.match(/^#order-((?:\d+(?:x\d+)?-)+)([0-9a-z]{4})$/i);if(!m)return null;
+  const body=m[1].slice(0,-1).split('-').map(t=>{const [a,b]=t.split('x');return (+a).toString(36)+(b&&+b>1?':'+(+b).toString(36):'')}).join('.');
+  return 'ACE-'+body+'-'+m[2].toUpperCase()}
+function money(t){return parseInt(String(t).replace(/[^\d]/g,''),10)||0}
+function checkOrder(text){
+  const r=readCode(text);const out=document.getElementById('vOut');
+  if(r.err){out.innerHTML=`<div class="vstat bad">${esc(r.err)}</div>`;return}
+  const issues=[];let total=0;const rows=[];
+  for(const [id,q] of r.lines){const it=byId.get(id);
+    if(!it){issues.push(`Item No. ${id} is no longer in the price list.`);rows.push(`<tr><td>No. ${id} (not in list)</td><td class="r">${q}</td><td class="r">-</td><td class="r">-</td></tr>`);continue}
+    total+=q*it.p;rows.push(`<tr><td>${esc(it.n)}${it.d?' <span style="color:var(--muted)">'+esc(it.d)+'</span>':''} <span style="color:var(--muted)">(No. ${id})</span></td><td class="r">${q}</td><td class="r">${fmt(it.p)}</td><td class="r">${fmt(q*it.p)}</td></tr>`)}
+  const codeMap=new Map(r.lines);
+  if(/\(No\.\s*\d+\)/.test(text)){
+    const seen=new Set();const re=/\(No\.\s*(\d+)\)\s*[\r\n]+\s*(\d+)\s*\D{1,12}?([\d,]+)\s*=\s*\D{0,6}([\d,]+)/g;let m;
+    while((m=re.exec(text))){const id=+m[1],q=+m[2],up=money(m[3]);seen.add(id);const it=byId.get(id);
+      if(!codeMap.has(id)){issues.push(`No. ${id} is in the message but was not ordered in the app.`);continue}
+      if(codeMap.get(id)!==q)issues.push(`No. ${id}: message says ${q} unit(s), the app order was ${codeMap.get(id)}.`);
+      if(it&&up!==it.p)issues.push(`No. ${id}: message price ${fmt(up)}, official price ${fmt(it.p)}.`)}
+    codeMap.forEach((q,id)=>{if(!seen.has(id))issues.push(`No. ${id} was ordered in the app but is missing from the message.`)});
+    const tm=text.match(/Estimated total:\s*\D{0,6}([\d,]+)/i);
+    if(tm&&money(tm[1])!==total)issues.push(`Message total ${fmt(money(tm[1]))}, official total ${fmt(total)}.`);
+  }
+  const status=issues.length?`<div class="vstat bad">The message does not match the order placed in the app.<ul>${issues.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div>`
+    :(/\(No\.\s*\d+\)/.test(text)?`<div class="vstat ok">Order is genuine. Items, quantities and prices match the official price list.</div>`
+      :`<div class="vstat ok">Valid order. This is exactly what the customer ordered in the app, at official prices. If the WhatsApp text differs, go by this.</div>`);
+  out.innerHTML=`${status}<div style="overflow-x:auto"><table class="vtab"><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Unit</th><th class="r">Amount</th></tr></thead><tbody>${rows.join('')}</tbody><tfoot><tr><td colspan="3">Official total</td><td class="r">${fmt(total)}</td></tr></tfoot></table></div><p class="fine" style="margin-top:8px">Prices are today's list. If prices changed after the customer ordered, a price difference here can be genuine.</p>`;
+}
+const vModal=document.getElementById('vModal');
+function openVerify(){vModal.hidden=false;scrim.classList.add('on');document.getElementById('vText').focus()}
+function closeModals(){vModal.hidden=true;document.getElementById('picModal').hidden=true;if(!drawer.classList.contains('on'))scrim.classList.remove('on');if(location.hash==='#verify'||location.hash.startsWith('#order-'))history.replaceState(null,'',location.pathname+location.search)}
+document.getElementById('openVerify').onclick=openVerify;
+document.getElementById('vClose').onclick=closeModals;
+document.getElementById('vGo').onclick=()=>checkOrder(document.getElementById('vText').value);
+function route(){if(location.hash==='#verify'){document.getElementById('vH').textContent='Check an order';openVerify();return}
+  const code=codeFromHash(location.hash);if(code){openVerify();document.getElementById('vH').textContent='Official order';document.getElementById('vText').value=code;checkOrder(code)}}
+window.addEventListener('hashchange',route);
+
+
+/* ---------- Order picture ---------- */
+const FONT='system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif';
+async function orderImage(){
+  const v=k=>document.getElementById(k).value.trim();
+  const W=1080,P=60,c=document.createElement('canvas');let x=c.getContext('2d');
+  const wrap=(t,w,font)=>{x.font=font;const out=[];let cur='';for(const wd of t.split(/\s+/)){const tst=cur?cur+' '+wd:wd;if(x.measureText(tst).width>w&&cur){out.push(cur);cur=wd}else cur=tst}if(cur)out.push(cur);return out.length?out:['']};
+  const fN=`600 28px ${FONT}`,fD=`400 22px ${FONT}`;
+  const rows=[...cart].map(([id,q])=>{const it=byId.get(id);const nl=wrap(it.n,500,fN),dl=it.d?wrap(it.d,500,fD):[];return{it,q,nl,dl,h:nl.length*36+dl.length*29+30+24}});
+  const cust=[['Name',v('cname')],['Phone',v('cphone')],['Facility',v('corg')],['Deliver to',v('caddr')]].filter(r=>r[1]);
+  const note=v('cnote')?wrap('Note: '+v('cnote'),W-2*P,`400 24px ${FONT}`):[];
+  const H=300+cust.length*38+40+60+rows.reduce((a,r)=>a+r.h,0)+120+note.length*32+150;
+  c.width=W;c.height=H;x=c.getContext('2d');
+  x.fillStyle='#fff';x.fillRect(0,0,W,H);
+  const logo=document.querySelector('.logo img');try{await logo.decode()}catch(e){}
+  try{x.drawImage(logo,P,40,204,120)}catch(e){}
+  const {t}=totals();const d=new Date();const date=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+  x.textAlign='right';x.fillStyle='#071266';x.font=`800 40px ${FONT}`;x.fillText('ORDER REQUEST',W-P,82);
+  x.fillStyle='#5A6488';x.font=`400 24px ${FONT}`;x.fillText('Date: '+date,W-P,120);
+  x.font=`600 22px ${FONT}`;x.fillStyle='#0270B8';x.fillText(orderCode(),W-P,154);
+  x.textAlign='left';let y=200;x.fillStyle='#071266';x.fillRect(P,y,W-2*P,4);y+=50;
+  x.fillStyle='#0270B8';x.font=`700 20px ${FONT}`;x.fillText('CUSTOMER',P,y);y+=38;
+  for(const [k,val] of cust){x.fillStyle='#5A6488';x.font=`400 24px ${FONT}`;x.fillText(k,P,y);x.fillStyle='#0B1440';x.font=`600 24px ${FONT}`;x.fillText(val.slice(0,60),P+170,y);y+=38}
+  y+=30;x.fillStyle='#EAF3FD';x.fillRect(P,y-34,W-2*P,52);
+  x.fillStyle='#071266';x.font=`700 20px ${FONT}`;x.fillText('ITEM',P+14,y);x.textAlign='right';x.fillText('QTY',700,y);x.fillText('UNIT PRICE',860,y);x.fillText('AMOUNT',W-P-14,y);x.textAlign='left';y+=50;
+  for(const r of rows){let yy=y+10;x.fillStyle='#0B1440';x.font=fN;for(const l of r.nl){x.fillText(l,P+14,yy);yy+=36}
+    x.fillStyle='#5A6488';x.font=fD;for(const l of r.dl){x.fillText(l,P+14,yy);yy+=29}
+    x.font=`400 20px ${FONT}`;x.fillStyle='#0270B8';x.fillText('No. '+r.it.id,P+14,yy);
+    x.textAlign='right';x.fillStyle='#0B1440';x.font=`600 26px ${FONT}`;x.fillText(String(r.q),700,y+10);x.font=`400 24px ${FONT}`;x.fillText(fmt(r.it.p),860,y+10);x.font=`700 26px ${FONT}`;x.fillText(fmt(r.q*r.it.p),W-P-14,y+10);x.textAlign='left';
+    y+=r.h;x.fillStyle='#DCE3F0';x.fillRect(P,y-22,W-2*P,2)}
+  y+=10;x.fillStyle='#071266';x.fillRect(P,y,W-2*P,84);x.fillStyle='#fff';x.font=`600 26px ${FONT}`;x.fillText('ESTIMATED TOTAL',P+24,y+53);
+  x.textAlign='right';x.font=`800 38px ${FONT}`;x.fillText(fmt(t),W-P-24,y+56);x.textAlign='left';y+=130;
+  x.fillStyle='#0B1440';x.font=`400 24px ${FONT}`;for(const l of note){x.fillText(l,P,y);y+=32}
+  y+=16;x.fillStyle='#5A6488';x.font=`italic 400 21px ${FONT}`;x.fillText(`Based on the ${priceNote}. ACE Surgicals confirms availability, delivery and final invoice.`.slice(0,110),P,y);
+  y+=40;x.font=`600 21px ${FONT}`;x.fillStyle='#071266';x.fillText('ACE Surgicals Ltd  |  RC 7117725  |  15/16 Post Office Rd, Fagge, Kano  |  +234 907 760 0522',P,y);
+  return await new Promise(res=>c.toBlob(res,'image/png'));
+}
+let picURL='',picFile=null;
+document.getElementById('sendPic').addEventListener('click',async()=>{
+  const errs=valid();if(errs.length){document.getElementById('send').click();return}
+  const btn=document.getElementById('sendPic');btn.disabled=true;
+  try{
+    const blob=await orderImage();const code=orderCode();
+    if(picURL)URL.revokeObjectURL(picURL);picURL=URL.createObjectURL(blob);
+    picFile=new File([blob],code+'.png',{type:'image/png'});
+    document.getElementById('picImg').src=picURL;
+    const sv=document.getElementById('picSave');sv.href=picURL;sv.download=code+'.png';
+    document.getElementById('picChat').href=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello ACE Surgicals, I am sending my order as a picture.\nOrder code: '+code+(orderLink()?'\nView official order: '+orderLink():''))}`;
+    const canShare=!!(navigator.canShare&&navigator.canShare({files:[picFile]}));
+    document.getElementById('picShare').hidden=!canShare;
+    document.getElementById('picHelp').innerHTML=canShare?'Tap <b>Share picture</b>, choose WhatsApp, then pick ACE Surgicals (+234 907 760 0522). Not in your contacts? Press and hold the picture to save it, tap <b>Open WhatsApp chat</b> and attach it there.'
+      :'Save the picture (or press and hold it and choose Save), then open the WhatsApp chat with ACE Surgicals and attach it.';
+    closeCart();document.getElementById('picModal').hidden=false;scrim.classList.add('on');
+  }catch(e){toast('Could not create the picture. Use Send order on WhatsApp instead.')}
+  btn.disabled=false;
+});
+document.getElementById('picShare').addEventListener('click',()=>{
+  if(!picFile)return;
+  navigator.share({files:[picFile],title:'ACE Surgicals order',text:'Order code: '+orderCode()}).catch(()=>{});
+});
+document.getElementById('picClose').onclick=closeModals;
+
+let tt;function toast(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),1800)}
+
+renderRail();renderGrid();renderCart();route();
+
+/* Load the live sheet when a link is set; the built-in list stays if it can't be reached. */
+if(SHEET_CSV_URL){
+  fetch(SHEET_CSV_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{
+    const list=fromSheet(t);if(!list)return;
+    setItems(list);
+    [...cart.keys()].forEach(id=>{if(!byId.has(id))cart.delete(id)});
+    store.set('ace-cart',[...cart]);
+    priceNote='current ACE Surgicals price list';
+    document.getElementById('listDate').textContent='always up to date';
+    document.getElementById('listDate2').textContent='current price list';
+    renderRail();renderGrid();renderCart();
+  }).catch(()=>{});
+}
+</script>

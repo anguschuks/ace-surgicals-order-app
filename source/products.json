@@ -1,0 +1,3733 @@
+[
+ {
+  "id": 1,
+  "n": "Bed Head Unit (Horizontal Wall Panel)",
+  "d": "Standard Aluminum Panel (1.2m 1.5m) powder coating. Includes sockets, reading light, and provisions for gas outlets",
+  "p": 1375000,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 2,
+  "n": "Bed Side Locker",
+  "d": "ABS",
+  "p": 62500,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 3,
+  "n": "Bedpan",
+  "d": "Stainless steel",
+  "p": 28800,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 4,
+  "n": "Bedpan",
+  "d": "Plastic",
+  "p": 8800,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 5,
+  "n": "Drip stand",
+  "d": "",
+  "p": 22500,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 6,
+  "n": "Hospital bed",
+  "d": "Semi-fowler metal Single crank (Manual) hospital bed",
+  "p": 200000,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 7,
+  "n": "Hospital bed",
+  "d": "Single crank (Manual) hospital bed with ABS headboard, dripstand and overbed table",
+  "p": 225000,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 8,
+  "n": "Hospital bed",
+  "d": "Double crank (Manual) hospital bed with ABS headboard, dripstand and overbed table",
+  "p": 262500,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 9,
+  "n": "ICU Bed",
+  "d": "Fully Electric, 5-function with CPR release and battery backup",
+  "p": 4875000,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 10,
+  "n": "Mattress",
+  "d": "Hospital bed mattress",
+  "p": 43800,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 11,
+  "n": "Mattress",
+  "d": "Hospital bed single/double crank mattress",
+  "p": 48800,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 12,
+  "n": "Medicine cupboard",
+  "d": "",
+  "p": 106300,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 13,
+  "n": "Over bed table",
+  "d": "",
+  "p": 56300,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 14,
+  "n": "Pillows",
+  "d": "Medical fibre pillows",
+  "p": 6900,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 15,
+  "n": "Ward screen",
+  "d": "4-fold screen",
+  "p": 75000,
+  "c": "Ward Equipment"
+ },
+ {
+  "id": 16,
+  "n": "Air purifier",
+  "d": "Medical grade",
+  "p": 2375000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 17,
+  "n": "Ambu Bag",
+  "d": "Adult",
+  "p": 25000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 18,
+  "n": "Ambu Bag",
+  "d": "Neonatal, paediatric",
+  "p": 25000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 19,
+  "n": "Angle poised lamp",
+  "d": "",
+  "p": 31300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 20,
+  "n": "Autoclave",
+  "d": "20 Liters",
+  "p": 262500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 21,
+  "n": "Autoclave",
+  "d": "24 Liters",
+  "p": 312500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 22,
+  "n": "Autoclave",
+  "d": "50 Liters",
+  "p": 2250000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 23,
+  "n": "Autoclave",
+  "d": "100 Liters",
+  "p": 3875000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 24,
+  "n": "Autoclave",
+  "d": "280 Liter",
+  "p": 12000000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 25,
+  "n": "Blood bank",
+  "d": "120 Liters",
+  "p": 1187500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 26,
+  "n": "Blood warmer",
+  "d": "",
+  "p": 237500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 27,
+  "n": "Bowl with stand",
+  "d": "Single, stainless steel",
+  "p": 31300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 28,
+  "n": "BP monitor",
+  "d": "Standing type - aneroid",
+  "p": 137500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 29,
+  "n": "BP monitor",
+  "d": "Standing type - digital",
+  "p": 200000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 30,
+  "n": "BP monitor",
+  "d": "Digital",
+  "p": 27500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 31,
+  "n": "Cabinet",
+  "d": "Metal medical cabinet",
+  "p": 156300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 32,
+  "n": "Cardiac Arrest Board",
+  "d": "CPR Backboard",
+  "p": 212500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 33,
+  "n": "Chart holder",
+  "d": "Medical chart holder",
+  "p": 5600,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 34,
+  "n": "Defibrillator",
+  "d": "",
+  "p": 1000000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 35,
+  "n": "Diagnostic set",
+  "d": "",
+  "p": 62500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 36,
+  "n": "Dirt cart/Linen trolley",
+  "d": "Single stainless for dirty linen",
+  "p": 112500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 37,
+  "n": "Emergency trolley",
+  "d": "ABS, Crash cart with 5 drawers, monitor plate, drip stand, power cot",
+  "p": 562500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 38,
+  "n": "Examination couch",
+  "d": "Coloured single crank",
+  "p": 225000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 39,
+  "n": "Examination light",
+  "d": "LED",
+  "p": 200000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 40,
+  "n": "Finger Staff",
+  "d": "Different sizes",
+  "p": 6900,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 41,
+  "n": "First Aid Box",
+  "d": "Small, Empty",
+  "p": 13100,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 42,
+  "n": "First Aid Box",
+  "d": "Semi Medium, Empty",
+  "p": 19400,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 43,
+  "n": "First Aid Box",
+  "d": "Medium, Empty",
+  "p": 20000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 44,
+  "n": "First Aid Box",
+  "d": "Big, Empty",
+  "p": 22500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 45,
+  "n": "First Aid Box",
+  "d": "Medium, Fully Stocked, Aluminium, Green",
+  "p": 37500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 46,
+  "n": "Foetal stethoscope (aluminium)",
+  "d": "",
+  "p": 2500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 47,
+  "n": "Foldable stretcher",
+  "d": "",
+  "p": 56300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 48,
+  "n": "Foley catheter",
+  "d": "Pack of 10",
+  "p": 10000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 49,
+  "n": "Glucometer",
+  "d": "",
+  "p": 26300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 50,
+  "n": "Haemoglobinometer (Hemocue)",
+  "d": "",
+  "p": 937500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 51,
+  "n": "Hand Dryer",
+  "d": "Automatic Wall Mount",
+  "p": 53800,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 52,
+  "n": "Hearing Aid",
+  "d": "Basic model",
+  "p": 35000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 53,
+  "n": "Hearing Aid",
+  "d": "Mid-range 1",
+  "p": 68800,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 54,
+  "n": "Hearing Aid",
+  "d": "Mid-range 2",
+  "p": 106000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 55,
+  "n": "Hearing Aid",
+  "d": "Advanced model",
+  "p": 156000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 56,
+  "n": "Height Ruler",
+  "d": "Stadiometer",
+  "p": 75000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 57,
+  "n": "ICU Ventilator",
+  "d": "Adult & paediatric",
+  "p": 11250000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 58,
+  "n": "Incinerator",
+  "d": "Medical waste incinerator",
+  "p": 22500000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 59,
+  "n": "Infrared thermometer",
+  "d": "Handheld",
+  "p": 9400,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 60,
+  "n": "Infusion pump",
+  "d": "Single channel",
+  "p": 362500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 61,
+  "n": "Instrument tray",
+  "d": "Stainless steel, different sizes",
+  "p": 15000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 62,
+  "n": "Instrument trolley",
+  "d": "Stainless steel",
+  "p": 81300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 63,
+  "n": "Kick about",
+  "d": "Stainless steel",
+  "p": 31300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 64,
+  "n": "Laryngoscope",
+  "d": "Standard set multi-blades",
+  "p": 56300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 65,
+  "n": "Littmann Stethoscope",
+  "d": "Littmann Classic II",
+  "p": 13100,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 66,
+  "n": "Littmann Stethoscope",
+  "d": "Littmann Classic III",
+  "p": 35000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 67,
+  "n": "Littmann Stethoscope",
+  "d": "Littmann Cardiology",
+  "p": 56300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 68,
+  "n": "LMA",
+  "d": "Laryngeal Mask Airways",
+  "p": 13800,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 69,
+  "n": "Mackintosh",
+  "d": "",
+  "p": 3100,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 70,
+  "n": "Manual Vacuum Aspiration (MVA) set",
+  "d": "",
+  "p": 25000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 71,
+  "n": "Medical Refrigerator",
+  "d": "Laboratory/Medical Standard",
+  "p": 1500000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 72,
+  "n": "N95 Masks",
+  "d": "Box of 20",
+  "p": 8800,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 73,
+  "n": "Nebulizer",
+  "d": "",
+  "p": 43800,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 74,
+  "n": "Oxygen Analyzer",
+  "d": "O2 gas analyzer",
+  "p": 812500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 75,
+  "n": "Oxygen Concentrator",
+  "d": "5 Liters",
+  "p": 625000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 76,
+  "n": "Oxygen Concentrator",
+  "d": "10 Liters",
+  "p": 812500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 77,
+  "n": "Oxygen Regulator",
+  "d": "Japan technology",
+  "p": 18800,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 78,
+  "n": "Oxygen Regulator",
+  "d": "American tech",
+  "p": 87500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 79,
+  "n": "Oxygen Regulator",
+  "d": "GLOOR, heavy duty",
+  "p": 75000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 80,
+  "n": "Oxygen Unit",
+  "d": "Oxygen cylinder 10L/13kg, regulator, trolley",
+  "p": 250000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 81,
+  "n": "Patella Hammer",
+  "d": "Hammer",
+  "p": 7500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 82,
+  "n": "Patient Monitor",
+  "d": "MINDRAY, with trolley",
+  "p": 1625000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 83,
+  "n": "Patient Monitor",
+  "d": "5 parameter patient monitor",
+  "p": 375000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 84,
+  "n": "Patient Monitor Trolley",
+  "d": "",
+  "p": 150000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 85,
+  "n": "Patient Stepper/Stool",
+  "d": "Double Step, Stainless Steel",
+  "p": 40000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 86,
+  "n": "Patient Trolley",
+  "d": "Stainless steel",
+  "p": 337500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 87,
+  "n": "Pedal Bin",
+  "d": "12 liters, stainless steel",
+  "p": 30000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 88,
+  "n": "Pendant",
+  "d": "Surgical pendant",
+  "p": 3750000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 89,
+  "n": "Pulse Oximeter",
+  "d": "Hand held",
+  "p": 125000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 90,
+  "n": "Pulse Oximeter",
+  "d": "Fingertip",
+  "p": 7500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 91,
+  "n": "Rebreather Masks",
+  "d": "",
+  "p": 2100,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 92,
+  "n": "Scale with height",
+  "d": "Mechanical",
+  "p": 150000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 93,
+  "n": "Shaker/roller",
+  "d": "Blood shaker/roller machine, Standard 6-roller unit",
+  "p": 275000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 94,
+  "n": "Sharps bin",
+  "d": "Sharps box pack of 25",
+  "p": 11300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 95,
+  "n": "Sphygmomanometer",
+  "d": "Mercurial",
+  "p": 37500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 96,
+  "n": "Sphygmomanometer",
+  "d": "Aneroid",
+  "p": 10600,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 97,
+  "n": "Sphygmomanometer",
+  "d": "Aneroid, Standing",
+  "p": 81300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 98,
+  "n": "Spray gun",
+  "d": "For sterilization use",
+  "p": 62500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 99,
+  "n": "Standing magnifier",
+  "d": "",
+  "p": 106300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 100,
+  "n": "Sterilizing drum",
+  "d": "Stainless, set of 3",
+  "p": 58800,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 101,
+  "n": "Stool",
+  "d": "Swivel stool",
+  "p": 62500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 102,
+  "n": "Suction machine",
+  "d": "Double jar electric",
+  "p": 250000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 103,
+  "n": "Suction machine",
+  "d": "Single jar electric",
+  "p": 106300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 104,
+  "n": "Suction machine",
+  "d": "Pedal",
+  "p": 75000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 105,
+  "n": "Syringe pump",
+  "d": "",
+  "p": 562500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 106,
+  "n": "Table top sterilizer",
+  "d": "",
+  "p": 875000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 107,
+  "n": "Tourniquet",
+  "d": "",
+  "p": 3100,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 108,
+  "n": "Urine can (male/female)",
+  "d": "Stainless",
+  "p": 25000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 109,
+  "n": "Vacuum extractor",
+  "d": "",
+  "p": 115000,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 110,
+  "n": "Vein finder",
+  "d": "Handheld",
+  "p": 81300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 111,
+  "n": "Wall Clock",
+  "d": "",
+  "p": 31300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 112,
+  "n": "Water bath",
+  "d": "Digital thermostatic stainless steel 6-holes",
+  "p": 206300,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 113,
+  "n": "Weighing scale",
+  "d": "",
+  "p": 17500,
+  "c": "General Medical Equipment"
+ },
+ {
+  "id": 114,
+  "n": "Baby cot",
+  "d": "Stainless steel with mattress",
+  "p": 112500,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 115,
+  "n": "Baby incubator",
+  "d": "",
+  "p": 2625000,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 116,
+  "n": "Baby radiant warmer",
+  "d": "",
+  "p": 2375000,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 117,
+  "n": "Baby scale",
+  "d": "Mechanical",
+  "p": 37500,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 118,
+  "n": "Baby scale",
+  "d": "Digital",
+  "p": 81300,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 119,
+  "n": "Cord clamp",
+  "d": "Pack of 100",
+  "p": 6900,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 120,
+  "n": "Cord Scissors",
+  "d": "",
+  "p": 3100,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 121,
+  "n": "Cot Sheet",
+  "d": "",
+  "p": 3800,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 122,
+  "n": "Delivery bed",
+  "d": "4-legs Stainless steel frame, manual adjustment",
+  "p": 262500,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 123,
+  "n": "Delivery bed",
+  "d": "8-legs, Stainless steel frame, manual adjustment",
+  "p": 400000,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 124,
+  "n": "Feeding Pump",
+  "d": "Breast feeding pump",
+  "p": 31300,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 125,
+  "n": "Foetal doppler",
+  "d": "Handheld",
+  "p": 43800,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 126,
+  "n": "Phototherapy unit",
+  "d": "LED standing",
+  "p": 600000,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 127,
+  "n": "Sim Delivery forceps",
+  "d": "",
+  "p": 22500,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 128,
+  "n": "Vaginal speculum",
+  "d": "Sims and Cuscos",
+  "p": 28800,
+  "c": "Maternity & Gynecology"
+ },
+ {
+  "id": 129,
+  "n": "Anesthesia machine",
+  "d": "Iso & halo gas, For adult and paediatric use",
+  "p": 12625000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 130,
+  "n": "Diathermy machine",
+  "d": "400W electrosurgical unit",
+  "p": 1625000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 131,
+  "n": "Drapes",
+  "d": "Surgical drapes",
+  "p": 7500,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 132,
+  "n": "Endoscopy Unit",
+  "d": "Endoscopy tower Complete set (Monitor, Processor, Light Source, Camera)",
+  "p": 51250000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 133,
+  "n": "Full body blanket",
+  "d": "",
+  "p": 11300,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 134,
+  "n": "Full body surgical blanket",
+  "d": "",
+  "p": 10000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 135,
+  "n": "Lower body blanket",
+  "d": "",
+  "p": 10000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 139,
+  "n": "Scrub sink",
+  "d": "Double taps with sensor",
+  "p": 4000000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 140,
+  "n": "Surgical access blanket",
+  "d": "",
+  "p": 10000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 141,
+  "n": "Surgical Blades",
+  "d": "Different sizes, packet",
+  "p": 6900,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 142,
+  "n": "Surgical instruments set",
+  "d": "Major surgical instrument set, complete",
+  "p": 1025000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 143,
+  "n": "Theatre boots",
+  "d": "White antistatic rubber boots (per pair)",
+  "p": 10000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 144,
+  "n": "Theatre gown (reusable)",
+  "d": "Washable",
+  "p": 17500,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 145,
+  "n": "Theatre shoes",
+  "d": "Autoclavable rubber clogs (per pair)",
+  "p": 5600,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 146,
+  "n": "Theatre/operation gown (disposable)",
+  "d": "Pack of 10 sterile disposable gown",
+  "p": 25000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 147,
+  "n": "Theatre operating lamp/light",
+  "d": "4-bulb shadowless lamp",
+  "p": 812500,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 148,
+  "n": "Theatre operating lamp/light",
+  "d": "LED standing",
+  "p": 2250000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 149,
+  "n": "Theatre operating lamp/light",
+  "d": "LED ceiling mount double dome",
+  "p": 4000000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 150,
+  "n": "Theatre operating table electric",
+  "d": "Fully electric with battery; Compatible with C-arm and x-ray checkup",
+  "p": 3875000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 151,
+  "n": "Theatre operating table hydraulic",
+  "d": "Hydraulic/manual type; Compatible with C-arm and x-ray checkup",
+  "p": 2625000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 152,
+  "n": "Theatre operating table minor",
+  "d": "Non-Hydraulic; Compatible with C-arm and x-ray checkup",
+  "p": 2000000,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 153,
+  "n": "Under body blanket",
+  "d": "",
+  "p": 11300,
+  "c": "Surgical & Theatre"
+ },
+ {
+  "id": 154,
+  "n": "Abdominal retractor",
+  "d": "Stainless steel",
+  "p": 31300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 155,
+  "n": "Allis forceps",
+  "d": "Stainless steel",
+  "p": 4400,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 156,
+  "n": "Amnihook forceps",
+  "d": "Stainless steel",
+  "p": 6900,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 136,
+  "n": "Babcock Tissue Forceps",
+  "d": "Stainless steel",
+  "p": 5600,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 137,
+  "n": "Balfour Abdominal Retractor",
+  "d": "200x50mm",
+  "p": 112500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 138,
+  "n": "Cheatle forceps",
+  "d": "Stainless steel",
+  "p": 6300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 157,
+  "n": "Crile Forceps",
+  "d": "Curved 140MM",
+  "p": 8800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 158,
+  "n": "Cushion Del STR Forceps",
+  "d": "Straight 250MM",
+  "p": 12500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 159,
+  "n": "Deaver Retractor",
+  "d": "Stainless steel",
+  "p": 17500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 160,
+  "n": "Descamps",
+  "d": "Stainless steel",
+  "p": 12500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 161,
+  "n": "Director W/Tongue",
+  "d": "Straight 145MM",
+  "p": 13000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 162,
+  "n": "Double ended probe",
+  "d": "1.5mm 160mm",
+  "p": 6300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 163,
+  "n": "Doyen intestinal forceps",
+  "d": "Curved 240MM",
+  "p": 17500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 164,
+  "n": "Dressing Forceps",
+  "d": "Stainless steel",
+  "p": 3800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 165,
+  "n": "Duval-Collin Intestinal Forceps",
+  "d": "195MM",
+  "p": 15000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 166,
+  "n": "Episiotomy scissors",
+  "d": "Stainless steel",
+  "p": 3800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 167,
+  "n": "Female Catheter Metal",
+  "d": "12FR 159MM",
+  "p": 3800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 168,
+  "n": "Foerster Sponge Forceps",
+  "d": "",
+  "p": 6300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 169,
+  "n": "Fritsch Abdominal retractor",
+  "d": "64x85MM",
+  "p": 37500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 170,
+  "n": "Gallipot",
+  "d": "Stainless steel",
+  "p": 5000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 171,
+  "n": "Green-Armitage Forceps",
+  "d": "F/C SECT222MM",
+  "p": 6300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 172,
+  "n": "Halsted Mosquito Forceps Del",
+  "d": "Straight 125MM",
+  "p": 2500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 173,
+  "n": "Israel Retractor",
+  "d": "PRONGBLUNT 53X62MM253MM",
+  "p": 21300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 174,
+  "n": "Kelly Retractor",
+  "d": "150x39MM",
+  "p": 33800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 175,
+  "n": "Kidney Dish",
+  "d": "Stainless steel",
+  "p": 5000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 176,
+  "n": "Kocher forceps",
+  "d": "Stainless steel",
+  "p": 7500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 177,
+  "n": "Kocher-Langenbeck retractor",
+  "d": "41x11mm21.6mm",
+  "p": 11300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 178,
+  "n": "Kocher-Ochsner Forceps",
+  "d": "Straight 1x2 200MM",
+  "p": 4400,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 179,
+  "n": "Kocher-Ochsner Forceps",
+  "d": "Straight 160MM",
+  "p": 10600,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 180,
+  "n": "Large Artery Forceps",
+  "d": "Stainless steel",
+  "p": 6300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 181,
+  "n": "Masson Needle holder",
+  "d": "HVY Serrogroove 265mm",
+  "p": 3800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 182,
+  "n": "Mayo-Hegar Needle Holder",
+  "d": "150mm",
+  "p": 3100,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 183,
+  "n": "Mayo-Hegar Needle Holder",
+  "d": "200MM",
+  "p": 4400,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 184,
+  "n": "Mayo Scissors",
+  "d": "Straight, curved",
+  "p": 3800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 185,
+  "n": "Metzenbaum scissors",
+  "d": "",
+  "p": 5000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 186,
+  "n": "Mikulicz Abdominal Retractor",
+  "d": "121x50mm",
+  "p": 112500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 187,
+  "n": "Mikulicz Peritoneum Forceps",
+  "d": "Curved 205MM",
+  "p": 12900,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 188,
+  "n": "Mixter suture forceps",
+  "d": "RT-ANG 230MM",
+  "p": 10000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 189,
+  "n": "Mosquito Artery Forceps",
+  "d": "Stainless steel",
+  "p": 3100,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 190,
+  "n": "Needle Holding Forceps",
+  "d": "Stainless steel",
+  "p": 3800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 191,
+  "n": "Nelson-Metzenbaum Scissors",
+  "d": "Curved 229MM",
+  "p": 4400,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 192,
+  "n": "Nylon Suture",
+  "d": "Size 1, pkt",
+  "p": 3100,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 193,
+  "n": "Nylon Suture",
+  "d": "Size 2, pkt",
+  "p": 3500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 194,
+  "n": "Nylon Suture",
+  "d": "Size 2/0, pkt",
+  "p": 3100,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 195,
+  "n": "Overholt Forceps",
+  "d": "",
+  "p": 15000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 196,
+  "n": "Pean Forceps",
+  "d": "Straight 140MM",
+  "p": 7500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 197,
+  "n": "Plain Dissecting Forceps",
+  "d": "Stainless steel",
+  "p": 2500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 198,
+  "n": "Ribbon Retractor Mall",
+  "d": "330x40mm",
+  "p": 8800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 199,
+  "n": "Rochester Pean Forceps",
+  "d": "Straight 200MM/240MM",
+  "p": 5000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 200,
+  "n": "Scalpel",
+  "d": "4L",
+  "p": 10000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 201,
+  "n": "Scalpel Handle",
+  "d": "#3 125MM/#4 133MM",
+  "p": 3800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 202,
+  "n": "Spencer Wells Artery Forceps",
+  "d": "Stainless steel",
+  "p": 5600,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 203,
+  "n": "Sponge Holding Forceps",
+  "d": "Stainless steel",
+  "p": 5600,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 204,
+  "n": "Standard Tissue Forceps",
+  "d": "",
+  "p": 4400,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 205,
+  "n": "Stitch Scissors",
+  "d": "Stainless steel",
+  "p": 7500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 206,
+  "n": "Surgical Scissors",
+  "d": "",
+  "p": 4400,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 207,
+  "n": "Toothed Dissecting Forceps",
+  "d": "Stainless steel",
+  "p": 2500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 208,
+  "n": "U.S Army retractor",
+  "d": "26x15/43x15-23x15/40x15",
+  "p": 33800,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 209,
+  "n": "Vicryl Suture",
+  "d": "Size 1, pkt",
+  "p": 10000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 210,
+  "n": "Vicryl Suture",
+  "d": "Size 2, pkt",
+  "p": 10600,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 211,
+  "n": "Vicryl Suture",
+  "d": "Size 2/0, pkt",
+  "p": 10000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 212,
+  "n": "Volkmann Retractor",
+  "d": "",
+  "p": 25000,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 213,
+  "n": "Waugh Del Tissue Forceps",
+  "d": "1x2250MM",
+  "p": 5500,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 214,
+  "n": "Wrigley OBST Forceps",
+  "d": "250MM",
+  "p": 21300,
+  "c": "Surgical Instrument"
+ },
+ {
+  "id": 215,
+  "n": "Contrast Media: Omnipaque 350mg",
+  "d": "350mg 100ml Bottle",
+  "p": 38800,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 216,
+  "n": "CT Scan",
+  "d": "16 slice, brand new",
+  "p": 268750000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 217,
+  "n": "Gonad shield",
+  "d": "",
+  "p": 52500,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 218,
+  "n": "Lead apron",
+  "d": "Radiation protection apron",
+  "p": 118800,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 219,
+  "n": "Lead gloves",
+  "d": "Radiation protection gloves pair",
+  "p": 68800,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 220,
+  "n": "Lead goggles",
+  "d": "Radiation protection glasses",
+  "p": 56300,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 221,
+  "n": "Lead shield",
+  "d": "",
+  "p": 350000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 222,
+  "n": "Mammogram machine",
+  "d": "Digital (DR)",
+  "p": 56250000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 223,
+  "n": "Mobile X-ray machine",
+  "d": "Complete Mobile digital X-ray machine 100mA",
+  "p": 26250000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 224,
+  "n": "MRI",
+  "d": "0.35T Brand New + RF Cage",
+  "p": 331250000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 225,
+  "n": "Thyroid shield",
+  "d": "",
+  "p": 52500,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 226,
+  "n": "Ultrasound Gel",
+  "d": "4 liters",
+  "p": 7500,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 227,
+  "n": "Ultrasound machine",
+  "d": "Portable 2D, Tabletop, one probe",
+  "p": 1875000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 228,
+  "n": "Ultrasound machine",
+  "d": "Portable 2D, Tabletop, one probe with battery",
+  "p": 2250000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 229,
+  "n": "Ultrasound machine",
+  "d": "Trolley based 2D ultrasound machine with 2 probes",
+  "p": 8125000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 230,
+  "n": "Ultrasound machine",
+  "d": "Trolley based 3D/4D ultrasound machine with 3 probes",
+  "p": 30000000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 231,
+  "n": "X-ray bulky table",
+  "d": "Standard 4-way table",
+  "p": 1500000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 232,
+  "n": "X-ray chest stand",
+  "d": "",
+  "p": 150000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 233,
+  "n": "X-ray film viewer",
+  "d": "Single",
+  "p": 82500,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 234,
+  "n": "X-ray film viewer",
+  "d": "Double",
+  "p": 118800,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 235,
+  "n": "X-ray machine",
+  "d": "Static 400mA digital X-ray machine complete with Flat Panel Detector (FPD)",
+  "p": 38750000,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 236,
+  "n": "X-Ray Positioning Set",
+  "d": "Foam/Plastic Wedges - Set",
+  "p": 76300,
+  "c": "Radiology & Imaging"
+ },
+ {
+  "id": 237,
+  "n": "Bell jar knob top",
+  "d": "",
+  "p": 17500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 238,
+  "n": "Bio-safety cabinet",
+  "d": "Class II",
+  "p": 6188000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 239,
+  "n": "Bunsen Burner",
+  "d": "With control",
+  "p": 15000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 240,
+  "n": "Chemical balance",
+  "d": "",
+  "p": 3100,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 241,
+  "n": "Chemical goggles",
+  "d": "Chemical goggles",
+  "p": 2500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 242,
+  "n": "Chemistry Analyzer",
+  "d": "Semi-auto",
+  "p": 1625000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 243,
+  "n": "Clamps for retort stands",
+  "d": "",
+  "p": 4800,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 244,
+  "n": "Clinical Centrifuge",
+  "d": "12 placers, digital display",
+  "p": 500000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 245,
+  "n": "Clinical Thermometer",
+  "d": "",
+  "p": 1500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 246,
+  "n": "Colorimeter",
+  "d": "Digital photocolorimeter",
+  "p": 206300,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 247,
+  "n": "Desktop Centrifuge",
+  "d": "6-bucket",
+  "p": 81300,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 248,
+  "n": "Dissecting board",
+  "d": "",
+  "p": 4400,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 249,
+  "n": "Dissecting set",
+  "d": "",
+  "p": 8100,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 250,
+  "n": "ECG machine",
+  "d": "12 channels",
+  "p": 1188000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 251,
+  "n": "Electrolyte analyzer",
+  "d": "Electrolyte analyzer",
+  "p": 3375000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 252,
+  "n": "Electrophoresis machine",
+  "d": "Analogue",
+  "p": 625000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 253,
+  "n": "Filter Paper",
+  "d": "Whatman Pack, 11cm",
+  "p": 3100,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 254,
+  "n": "Gel and clot activator container",
+  "d": "",
+  "p": 14400,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 255,
+  "n": "Haematology analyzer diluent",
+  "d": "",
+  "p": 81300,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 256,
+  "n": "Haematology probe cleanser",
+  "d": "",
+  "p": 62500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 257,
+  "n": "Haematology analyzer",
+  "d": "5 part Full Blood Count machine",
+  "p": 11250000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 258,
+  "n": "Haematology analyzer",
+  "d": "3 part Full Blood Count machine",
+  "p": 4375000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 259,
+  "n": "Haematocrit Centrifuge",
+  "d": "24 capillary tubes",
+  "p": 312500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 260,
+  "n": "Hand lens",
+  "d": "75mm",
+  "p": 1300,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 261,
+  "n": "Hot plate",
+  "d": "With magnetic stirrer",
+  "p": 350000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 262,
+  "n": "Hot plate",
+  "d": "Non magnetic laboratory hotplate",
+  "p": 312500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 263,
+  "n": "Hygrometer",
+  "d": "Wet & dry bulb",
+  "p": 5000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 264,
+  "n": "Lab Incubator",
+  "d": "20 Liters",
+  "p": 400000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 265,
+  "n": "Lab Oven",
+  "d": "30 Liters",
+  "p": 437500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 266,
+  "n": "Micro Pipette",
+  "d": "0-1000uL",
+  "p": 18800,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 267,
+  "n": "Microplate reader",
+  "d": "ELISA reader",
+  "p": 7500000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 268,
+  "n": "Microplate washer",
+  "d": "ELISA washer",
+  "p": 6250000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 269,
+  "n": "Microscope",
+  "d": "Monocular",
+  "p": 93800,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 270,
+  "n": "Microscope",
+  "d": "Binocular",
+  "p": 287500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 271,
+  "n": "Microscope",
+  "d": "Olympus CX23 Compound binocular microscope",
+  "p": 2500000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 272,
+  "n": "Microscope slide",
+  "d": "Packet",
+  "p": 2300,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 273,
+  "n": "Mortar & Pestle",
+  "d": "Porcelain, different sizes",
+  "p": 10600,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 274,
+  "n": "pH Meter",
+  "d": "Digital Pen Type + TDS",
+  "p": 175000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 275,
+  "n": "pH Meter",
+  "d": "Tabletop",
+  "p": 312500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 276,
+  "n": "Pipette rack",
+  "d": "Double deck rack for glass pipette",
+  "p": 5000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 277,
+  "n": "Pipette stand",
+  "d": "Micropipette plastic stand",
+  "p": 50000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 278,
+  "n": "Pipette tips",
+  "d": "Coloured tips pack of 1000",
+  "p": 5000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 279,
+  "n": "Refrigerated centrifuge",
+  "d": "",
+  "p": 5250000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 280,
+  "n": "Spectrophotometer",
+  "d": "VIS Single beam",
+  "p": 512500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 281,
+  "n": "Stainless steel spatula",
+  "d": "Stainless steel spatula",
+  "p": 800,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 282,
+  "n": "Stirrer",
+  "d": "Electric motor controlled stirrer",
+  "p": 312500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 283,
+  "n": "Test tube clamp",
+  "d": "Stainless",
+  "p": 4400,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 284,
+  "n": "Test tube rack",
+  "d": "Stainless",
+  "p": 4400,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 285,
+  "n": "Urine analyzer",
+  "d": "Semi-auto",
+  "p": 1875000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 286,
+  "n": "Water Distiller",
+  "d": "Stainless Steel, Electric 10 Liters",
+  "p": 118800,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 287,
+  "n": "Weighing Balance",
+  "d": "Digital Precision",
+  "p": 28800,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 288,
+  "n": "Weighing Balance",
+  "d": "Beam/Analytical Mechanical 3 Decimal",
+  "p": 287500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 289,
+  "n": "Weighing Balance",
+  "d": "Beam/Analytical Mechanical 4 Decimal",
+  "p": 637500,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 290,
+  "n": "Wooden Spatula",
+  "d": "Pack of 100",
+  "p": 5000,
+  "c": "Laboratory & Diagnostics"
+ },
+ {
+  "id": 291,
+  "n": "78d volk lens",
+  "d": "USA original",
+  "p": 562500,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 292,
+  "n": "A/B Scan",
+  "d": "Ophthalmological ultrasound",
+  "p": 9375000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 293,
+  "n": "Auto refractometer",
+  "d": "ARK 4000",
+  "p": 4375000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 294,
+  "n": "Cataract set",
+  "d": "Standard stainless steel instrument box set",
+  "p": 625000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 295,
+  "n": "Ophthalmoscope",
+  "d": "HEINE Germany",
+  "p": 1000000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 296,
+  "n": "Ophthalmoscope",
+  "d": "",
+  "p": 437500,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 297,
+  "n": "Ophthalmic operating microscope",
+  "d": "",
+  "p": 10625000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 298,
+  "n": "Retinoscope",
+  "d": "Professional",
+  "p": 437500,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 299,
+  "n": "Retinoscope",
+  "d": "HEINE Germany",
+  "p": 750000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 300,
+  "n": "Slit lamp microscope",
+  "d": "2-step magnification model",
+  "p": 4000000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 301,
+  "n": "Snellen's visual acuity chart",
+  "d": "",
+  "p": 9400,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 302,
+  "n": "Tonometer",
+  "d": "Keeler pulse-air tonometer",
+  "p": 8125000,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 303,
+  "n": "Trial box with trial frames",
+  "d": "Stainless steel frames/lenses",
+  "p": 437500,
+  "c": "Ophthalmology"
+ },
+ {
+  "id": 304,
+  "n": "Amalgam Carrier",
+  "d": "",
+  "p": 3800,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 305,
+  "n": "Cavers",
+  "d": "",
+  "p": 3100,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 306,
+  "n": "Children Molar Forceps",
+  "d": "",
+  "p": 17500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 307,
+  "n": "Clinical audiometer",
+  "d": "",
+  "p": 3875000,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 308,
+  "n": "Coyer Elevator",
+  "d": "",
+  "p": 17500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 309,
+  "n": "Dental Amalgamator",
+  "d": "",
+  "p": 237500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 310,
+  "n": "Dental examination set",
+  "d": "",
+  "p": 7500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 311,
+  "n": "Dental forceps set",
+  "d": "Dental extraction and elevator complete kit",
+  "p": 250000,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 312,
+  "n": "Dental Goggles",
+  "d": "",
+  "p": 6300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 313,
+  "n": "Dental instrument Kit sets",
+  "d": "",
+  "p": 181300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 314,
+  "n": "Dental syringe",
+  "d": "",
+  "p": 11300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 315,
+  "n": "Dental unit",
+  "d": "Complete unit with compressor",
+  "p": 4250000,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 316,
+  "n": "Dental X-ray",
+  "d": "",
+  "p": 2375000,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 317,
+  "n": "Dental x-ray viewer",
+  "d": "",
+  "p": 337500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 318,
+  "n": "ENT Workstation",
+  "d": "Complete ENT workstation with endoscopy",
+  "p": 28750000,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 319,
+  "n": "Frast Saw",
+  "d": "",
+  "p": 31300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 320,
+  "n": "Impression Trays",
+  "d": "",
+  "p": 6300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 321,
+  "n": "Matrix Band",
+  "d": "",
+  "p": 6300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 322,
+  "n": "Mouth Gag",
+  "d": "Stainless steel",
+  "p": 10000,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 323,
+  "n": "Otoscope",
+  "d": "Basic pocket set",
+  "p": 62500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 324,
+  "n": "Rangler Forceps",
+  "d": "",
+  "p": 18800,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 325,
+  "n": "RC Bar",
+  "d": "",
+  "p": 6300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 326,
+  "n": "Trimming Machine",
+  "d": "",
+  "p": 112500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 327,
+  "n": "Ultrasonic Scaler",
+  "d": "Woodpecker",
+  "p": 193800,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 328,
+  "n": "Ultrasonic Washer",
+  "d": "6 Liters",
+  "p": 400000,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 329,
+  "n": "Ultrasound scalers sets",
+  "d": "",
+  "p": 187500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 330,
+  "n": "Universal Molar Forceps",
+  "d": "",
+  "p": 17500,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 331,
+  "n": "Vail Vernishers",
+  "d": "",
+  "p": 6300,
+  "c": "Dental & ENT"
+ },
+ {
+  "id": 332,
+  "n": "Apron Plastic",
+  "d": "",
+  "p": 6000,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 333,
+  "n": "Autoclave linen (pack of 100)",
+  "d": "Pack of 100",
+  "p": 312500,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 334,
+  "n": "Bath towels",
+  "d": "Original cotton",
+  "p": 10000,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 335,
+  "n": "Bedsheet and pillowcase",
+  "d": "100% cotton",
+  "p": 8100,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 336,
+  "n": "Blankets",
+  "d": "",
+  "p": 25000,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 337,
+  "n": "Disposable Aprons",
+  "d": "",
+  "p": 9400,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 338,
+  "n": "Disposable sterile gowns",
+  "d": "Single pack",
+  "p": 4800,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 339,
+  "n": "Draw Sheet",
+  "d": "",
+  "p": 43800,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 340,
+  "n": "Face flannels",
+  "d": "",
+  "p": 3100,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 341,
+  "n": "Hand Towels",
+  "d": "",
+  "p": 3800,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 342,
+  "n": "Lab coat",
+  "d": "White cotton long sleeves",
+  "p": 16300,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 343,
+  "n": "Medicine Towels",
+  "d": "",
+  "p": 3800,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 344,
+  "n": "Nurse cap",
+  "d": "Pack of 100",
+  "p": 5000,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 345,
+  "n": "Patient gowns",
+  "d": "Pack of 10",
+  "p": 13800,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 346,
+  "n": "Patient gowns",
+  "d": "Reusable",
+  "p": 9400,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 347,
+  "n": "PPE",
+  "d": "Spillproof PPE overall, TYVEK",
+  "p": 15000,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 348,
+  "n": "Scrubs",
+  "d": "",
+  "p": 18800,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 349,
+  "n": "Surgical Caps",
+  "d": "Reuseable",
+  "p": 5000,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 350,
+  "n": "Underpad",
+  "d": "Pack of 25",
+  "p": 15600,
+  "c": "Apparel & Linens"
+ },
+ {
+  "id": 351,
+  "n": "10% Povidone-Iodine",
+  "d": "500ml",
+  "p": 8100,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 352,
+  "n": "10% Povidone-Iodine",
+  "d": "1 liter",
+  "p": 15000,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 353,
+  "n": "2% Injection Lignocaine",
+  "d": "Plain, 50mls per vial",
+  "p": 1300,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 354,
+  "n": "Abdominal Bandages",
+  "d": "",
+  "p": 11300,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 355,
+  "n": "Adhesive Roller Plaster",
+  "d": "2inch plaster pack",
+  "p": 11900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 356,
+  "n": "Alcohol Swabs",
+  "d": "Box of 100",
+  "p": 1900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 357,
+  "n": "Bladder Syringe",
+  "d": "",
+  "p": 8800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 358,
+  "n": "Blood bag",
+  "d": "Pack of 5",
+  "p": 4400,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 359,
+  "n": "Blood collection bottle",
+  "d": "Vacutainer by 50",
+  "p": 4400,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 360,
+  "n": "Catheter",
+  "d": "Size 16,18",
+  "p": 8100,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 361,
+  "n": "Catheter",
+  "d": "Small sizes 6,8,10,12",
+  "p": 10000,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 362,
+  "n": "Cotton Wool",
+  "d": "200g",
+  "p": 2300,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 363,
+  "n": "Cotton Wool",
+  "d": "500g",
+  "p": 3800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 364,
+  "n": "Cotton Wool",
+  "d": "DELE 500g",
+  "p": 5600,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 365,
+  "n": "Crepe Bandages",
+  "d": "",
+  "p": 5600,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 366,
+  "n": "Disposable Gloves",
+  "d": "Pack of 100",
+  "p": 5000,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 367,
+  "n": "Disposable Needles",
+  "d": "21Gx0.8x 100pcs per pack",
+  "p": 1900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 368,
+  "n": "Ear syringe",
+  "d": "",
+  "p": 8800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 369,
+  "n": "Elbow Gloves",
+  "d": "Box of 50 pairs",
+  "p": 50000,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 370,
+  "n": "ET tube",
+  "d": "Endotracheal tubes different sizes",
+  "p": 1900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 371,
+  "n": "Examination Gloves",
+  "d": "Latex gloves Pack of 100",
+  "p": 4800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 372,
+  "n": "Facemask",
+  "d": "Pack of 50",
+  "p": 1900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 373,
+  "n": "Gauze",
+  "d": "Roll",
+  "p": 8800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 374,
+  "n": "Gauze roll",
+  "d": "36 inches",
+  "p": 10000,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 375,
+  "n": "H2O for Injection",
+  "d": "Pack",
+  "p": 4400,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 376,
+  "n": "Intravenous Giving set",
+  "d": "Set of 25",
+  "p": 9400,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 377,
+  "n": "IV Cannulas",
+  "d": "16G,18G,20G,22G,24G, Box of 50",
+  "p": 7500,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 378,
+  "n": "Methylated spirit",
+  "d": "2 liters",
+  "p": 4800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 379,
+  "n": "Nasal Cannulae",
+  "d": "",
+  "p": 1500,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 380,
+  "n": "Nasopharyngeal Airways",
+  "d": "Different sizes",
+  "p": 7500,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 381,
+  "n": "NG tubes",
+  "d": "Nasogastric tube different sizes",
+  "p": 600,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 382,
+  "n": "Nylon gloves",
+  "d": "Disposable nylon glove pack of 100",
+  "p": 400,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 383,
+  "n": "Plain Bandages",
+  "d": "",
+  "p": 2500,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 384,
+  "n": "Plaster",
+  "d": "2 inch roll",
+  "p": 11900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 385,
+  "n": "Plaster of Paris",
+  "d": "",
+  "p": 10600,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 386,
+  "n": "PT Strips",
+  "d": "Pack of 50",
+  "p": 3900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 387,
+  "n": "Stool specimen bottle",
+  "d": "Pack of 25",
+  "p": 3100,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 388,
+  "n": "Stripe Plaster",
+  "d": "Adhesive Strip Plaster x100 pcs/pack",
+  "p": 1000,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 389,
+  "n": "Surgical Gloves",
+  "d": "Size 7.5 (packs)",
+  "p": 13800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 390,
+  "n": "Syringe 10ml",
+  "d": "Pack of 100 pcs",
+  "p": 8100,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 391,
+  "n": "Syringe 20ml",
+  "d": "Pack of 100 pcs",
+  "p": 8800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 392,
+  "n": "Syringe 2ml",
+  "d": "Pack of 100 pcs",
+  "p": 4300,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 393,
+  "n": "Syringe 5ml",
+  "d": "Pack of 100 pcs",
+  "p": 4900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 394,
+  "n": "Triangular bandages",
+  "d": "",
+  "p": 5600,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 395,
+  "n": "Urine bag",
+  "d": "Pack of 10 bags",
+  "p": 4900,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 396,
+  "n": "Urine dipstick",
+  "d": "Tube of 100 strips",
+  "p": 6300,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 397,
+  "n": "Urine specimen container",
+  "d": "25 per pack",
+  "p": 3100,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 398,
+  "n": "White Plaster rolls",
+  "d": "Rolls",
+  "p": 4800,
+  "c": "Consumables & Supplies"
+ },
+ {
+  "id": 399,
+  "n": "Abdominal corset/binder",
+  "d": "",
+  "p": 9100,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 400,
+  "n": "Ankle Splint",
+  "d": "",
+  "p": 15000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 401,
+  "n": "Arm Immobilizer",
+  "d": "",
+  "p": 33800,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 402,
+  "n": "Arm sling",
+  "d": "Different sizes",
+  "p": 6300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 403,
+  "n": "Bicycle Ergometer",
+  "d": "",
+  "p": 250000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 404,
+  "n": "Cervical Collar Support",
+  "d": "Soft, firm density",
+  "p": 8800,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 405,
+  "n": "Clavicle Brace",
+  "d": "",
+  "p": 15000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 406,
+  "n": "Commode chair",
+  "d": "Aluminium commode chair with/without wheels",
+  "p": 72500,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 407,
+  "n": "Contoured lumbosacral support",
+  "d": "",
+  "p": 16300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 408,
+  "n": "Crutches L",
+  "d": "Aluminium crutches L",
+  "p": 22500,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 409,
+  "n": "Crutches M",
+  "d": "Aluminium crutches M",
+  "p": 21300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 410,
+  "n": "Crutches S",
+  "d": "Aluminium crutches S",
+  "p": 20000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 411,
+  "n": "Electrical Muscle Stimulator",
+  "d": "EMS",
+  "p": 87500,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 412,
+  "n": "Finger Extension Splint",
+  "d": "",
+  "p": 10000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 413,
+  "n": "Gel Exercise Ball",
+  "d": "",
+  "p": 9400,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 414,
+  "n": "Hinged Knee Wrap",
+  "d": "",
+  "p": 20000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 415,
+  "n": "Hip Brace",
+  "d": "",
+  "p": 37500,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 416,
+  "n": "Humerus Brace",
+  "d": "",
+  "p": 46300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 417,
+  "n": "Hydraulic/Electric Tilt Bed",
+  "d": "",
+  "p": 2125000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 418,
+  "n": "Ice Bag",
+  "d": "",
+  "p": 13800,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 419,
+  "n": "Infrared lamp",
+  "d": "",
+  "p": 75000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 420,
+  "n": "Interferential Therapy",
+  "d": "",
+  "p": 187500,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 421,
+  "n": "Knee Immobilizer",
+  "d": "Long, 19\"/48cm",
+  "p": 33800,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 422,
+  "n": "Laser Therapy Machine",
+  "d": "BTL 41110 Laser premium",
+  "p": 8905000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 423,
+  "n": "Lumbar Support/corset",
+  "d": "",
+  "p": 18800,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 424,
+  "n": "Mallet Finger Splint",
+  "d": "",
+  "p": 8100,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 425,
+  "n": "Pelvic Binder",
+  "d": "",
+  "p": 46300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 426,
+  "n": "Posture Corrector",
+  "d": "",
+  "p": 15000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 427,
+  "n": "Pouch Arm Sling",
+  "d": "",
+  "p": 8800,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 428,
+  "n": "Rigid ankle brace",
+  "d": "Different sizes",
+  "p": 6300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 429,
+  "n": "Rigid knee brace",
+  "d": "Different sizes",
+  "p": 11900,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 430,
+  "n": "Rigid Lumbosacral Orthosis",
+  "d": "Different sizes",
+  "p": 11900,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 431,
+  "n": "Rigid wrist support",
+  "d": "Different sizes",
+  "p": 6900,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 432,
+  "n": "Short wave Diathermy",
+  "d": "",
+  "p": 2375000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 433,
+  "n": "Shoulder Immobilizer",
+  "d": "Universal",
+  "p": 46300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 434,
+  "n": "Shoulder Support",
+  "d": "",
+  "p": 11300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 435,
+  "n": "Soft ankle brace",
+  "d": "Different sizes",
+  "p": 5400,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 436,
+  "n": "Soft knee brace",
+  "d": "Different sizes",
+  "p": 5400,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 437,
+  "n": "Taylor's Brace",
+  "d": "",
+  "p": 50000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 438,
+  "n": "TENS",
+  "d": "Transcutaneous Electric Nerve Stimulator",
+  "p": 78100,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 439,
+  "n": "Therapeutic ultrasound Machine",
+  "d": "",
+  "p": 6875000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 440,
+  "n": "Thoracolumbar Traction Machine",
+  "d": "",
+  "p": 812500,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 441,
+  "n": "Tread Mill",
+  "d": "",
+  "p": 325000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 442,
+  "n": "Walking frame",
+  "d": "Aluminium walking frame",
+  "p": 33800,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 443,
+  "n": "Wheelchair",
+  "d": "Standard",
+  "p": 131300,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 444,
+  "n": "Wheelchair",
+  "d": "Electric wheelchair",
+  "p": 1062500,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 445,
+  "n": "Wrist Splint",
+  "d": "Ambidextrous",
+  "p": 10000,
+  "c": "Physiotherapy"
+ },
+ {
+  "id": 446,
+  "n": "Arm Bones",
+  "d": "Chart",
+  "p": 5600,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 447,
+  "n": "Atlas",
+  "d": "Chart",
+  "p": 5600,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 448,
+  "n": "Axis",
+  "d": "Chart",
+  "p": 5600,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 449,
+  "n": "Bacteria",
+  "d": "Chart",
+  "p": 5600,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 450,
+  "n": "Blood Circulatory System",
+  "d": "Chart",
+  "p": 5000,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 451,
+  "n": "Bones of the leg",
+  "d": "Chart",
+  "p": 6300,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 452,
+  "n": "Cervical",
+  "d": "Chart",
+  "p": 5000,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 453,
+  "n": "Ears",
+  "d": "Model",
+  "p": 10000,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 454,
+  "n": "Eye",
+  "d": "Model",
+  "p": 8800,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 455,
+  "n": "Female reproductive systems",
+  "d": "",
+  "p": 81300,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 456,
+  "n": "Heart",
+  "d": "Model",
+  "p": 9400,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 457,
+  "n": "Human Body in Uterus",
+  "d": "Model",
+  "p": 150000,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 458,
+  "n": "Human Torso",
+  "d": "Model, Articulated/Disarticulated",
+  "p": 437500,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 459,
+  "n": "Lumbar",
+  "d": "Chart",
+  "p": 5600,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 460,
+  "n": "Pelvic Girdle",
+  "d": "Chart",
+  "p": 6300,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 461,
+  "n": "Scapula",
+  "d": "Chart",
+  "p": 5600,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 462,
+  "n": "Skeleton",
+  "d": "Complete full body, male/female",
+  "p": 300000,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 463,
+  "n": "Thoracic",
+  "d": "Chart",
+  "p": 5000,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 464,
+  "n": "Types of joint",
+  "d": "Chart",
+  "p": 6300,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 465,
+  "n": "Types of teeth",
+  "d": "Chart",
+  "p": 5000,
+  "c": "Models & Charts"
+ },
+ {
+  "id": 466,
+  "n": "Beaker",
+  "d": "50ml glass",
+  "p": 1600,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 467,
+  "n": "Beaker",
+  "d": "100ml glass",
+  "p": 2600,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 468,
+  "n": "Beaker",
+  "d": "250ml glass",
+  "p": 3100,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 469,
+  "n": "Beaker",
+  "d": "500ml glass",
+  "p": 4100,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 470,
+  "n": "Beaker",
+  "d": "1000ml glass",
+  "p": 7500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 471,
+  "n": "Boiling tube",
+  "d": "10x18mm",
+  "p": 500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 472,
+  "n": "Conical flask",
+  "d": "100ml glass",
+  "p": 2300,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 473,
+  "n": "Conical flask",
+  "d": "250ml glass",
+  "p": 2800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 474,
+  "n": "Conical flask",
+  "d": "500ml glass",
+  "p": 6900,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 475,
+  "n": "Dispensing Bottles",
+  "d": "Plastic Wash bottle",
+  "p": 3800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 476,
+  "n": "Evaporating dish",
+  "d": "100ml",
+  "p": 2500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 477,
+  "n": "Evaporating Dish",
+  "d": "Porcelain",
+  "p": 3100,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 478,
+  "n": "Flask distilling",
+  "d": "250ml",
+  "p": 7500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 479,
+  "n": "Glass Funnel",
+  "d": "Various Sizes - Set",
+  "p": 3100,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 480,
+  "n": "Glass Measuring Jar",
+  "d": "Jar",
+  "p": 18800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 481,
+  "n": "Glass Rod",
+  "d": "Stirring Rod",
+  "p": 1900,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 482,
+  "n": "Laboratory Dish",
+  "d": "0.16L pack of 20",
+  "p": 8800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 483,
+  "n": "Measuring Cylinder",
+  "d": "10ml glass",
+  "p": 2500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 484,
+  "n": "Measuring Cylinder",
+  "d": "25ml glass",
+  "p": 3500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 485,
+  "n": "Measuring Cylinder",
+  "d": "50ml glass",
+  "p": 3800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 486,
+  "n": "Measuring Cylinder",
+  "d": "100ml glass",
+  "p": 4100,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 487,
+  "n": "Measuring Cylinder",
+  "d": "250ml glass",
+  "p": 4600,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 488,
+  "n": "Measuring Cylinder",
+  "d": "500ml glass",
+  "p": 7500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 489,
+  "n": "Measuring Cylinder",
+  "d": "1000ml glass",
+  "p": 11300,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 490,
+  "n": "Petri Dish",
+  "d": "Glass",
+  "p": 2500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 491,
+  "n": "Petri Dish",
+  "d": "Plastic disposable pack of 10",
+  "p": 3800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 492,
+  "n": "Pipettes",
+  "d": "Glass Graduated - Set",
+  "p": 3800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 493,
+  "n": "Plastic measuring Jar",
+  "d": "Jar",
+  "p": 7500,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 494,
+  "n": "Porcelain Dispensing Sink",
+  "d": "Lab Sink",
+  "p": 93800,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 495,
+  "n": "Porcelain Tile",
+  "d": "Ointment Slab",
+  "p": 3100,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 496,
+  "n": "Reagents bottles",
+  "d": "Glass 250ml",
+  "p": 3400,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 497,
+  "n": "Test tube",
+  "d": "Pack of 100",
+  "p": 11300,
+  "c": "Laboratory Glassware"
+ },
+ {
+  "id": 498,
+  "n": "Alpha Ketoglutarate",
+  "d": "5g",
+  "p": 31300,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 499,
+  "n": "Aluminium Chloride",
+  "d": "500g",
+  "p": 22500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 500,
+  "n": "Calcium Chloride",
+  "d": "500g",
+  "p": 16300,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 501,
+  "n": "D-Fructose",
+  "d": "500g",
+  "p": 17500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 502,
+  "n": "Di-Alanine",
+  "d": "100g",
+  "p": 22500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 503,
+  "n": "Di-Aspartic Acid",
+  "d": "25g",
+  "p": 15000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 504,
+  "n": "Epinephrine",
+  "d": "1g",
+  "p": 36300,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 505,
+  "n": "Ethanol",
+  "d": "Analytical grade, 2.5L",
+  "p": 23800,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 506,
+  "n": "Ethanol",
+  "d": "2.5 Litres",
+  "p": 25000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 507,
+  "n": "Fehling's Solution A",
+  "d": "1 Litre",
+  "p": 10000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 508,
+  "n": "Fehling's Solution B",
+  "d": "1 Litre",
+  "p": 10000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 509,
+  "n": "Folin-Ciocalteu Reagent",
+  "d": "100ml",
+  "p": 17500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 510,
+  "n": "Formaldehyde",
+  "d": "2.5 Litres",
+  "p": 25000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 511,
+  "n": "Glucose",
+  "d": "500g",
+  "p": 15000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 512,
+  "n": "Grouping Reagents",
+  "d": "Antisera A, B, D",
+  "p": 3800,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 513,
+  "n": "Lime water II",
+  "d": "",
+  "p": 6300,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 514,
+  "n": "Lithium Sulphate",
+  "d": "100g",
+  "p": 17500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 515,
+  "n": "Magnesium Chloride",
+  "d": "500g",
+  "p": 18800,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 516,
+  "n": "Magnesium phosphate",
+  "d": "500g",
+  "p": 17500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 517,
+  "n": "Magnesium sulphate",
+  "d": "",
+  "p": 12500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 518,
+  "n": "Maltose",
+  "d": "500g",
+  "p": 17500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 519,
+  "n": "Methanol",
+  "d": "Analytical grade, 2.5L",
+  "p": 23800,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 520,
+  "n": "Micro Pipettes Tips",
+  "d": "Pack",
+  "p": 5600,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 521,
+  "n": "Microscope Slide",
+  "d": "Pack",
+  "p": 1900,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 522,
+  "n": "Millon's Reagent",
+  "d": "1 Litre",
+  "p": 12500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 523,
+  "n": "n-Hexane",
+  "d": "2.5L",
+  "p": 35000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 524,
+  "n": "Nutrient Agar",
+  "d": "500g",
+  "p": 75000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 525,
+  "n": "Pepsin Powder",
+  "d": "",
+  "p": 12500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 526,
+  "n": "Picric Acid",
+  "d": "100g",
+  "p": 18800,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 527,
+  "n": "p-Nitro Phenyl Phosphate",
+  "d": "5g",
+  "p": 30000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 528,
+  "n": "Potassium permanganate",
+  "d": "",
+  "p": 17500,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 529,
+  "n": "Potassium Phosphate Monobasic",
+  "d": "500g",
+  "p": 18800,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 530,
+  "n": "Sodium Phosphate",
+  "d": "500g",
+  "p": 15000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 531,
+  "n": "Sucrose",
+  "d": "500g",
+  "p": 15000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 532,
+  "n": "Sudan III",
+  "d": "25g",
+  "p": 10000,
+  "c": "Reagents and Chemicals"
+ },
+ {
+  "id": 533,
+  "n": "Trypsin",
+  "d": "25g",
+  "p": 11300,
+  "c": "Reagents and Chemicals"
+ }
+]

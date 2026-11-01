@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ACE Surgicals Order Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky brand bar + category rail over a dense product grid; order drawer slides from the right (bottom sheet on phones). */
+:root{
+  --navy:#071266; --sky:#0398F5; --sky-soft:#E3F2FE; --sky-ink:#0270B8;
+  --bg:#FFFFFF; --field:#F4F7FC; --surface:#FFFFFF; --fg:#0B1440; --muted:#5A6488; --line:#DCE3F0;
+  --tile:#EAF3FD; --tile-ink:#071266; --wa:#1DA851; --wa-ink:#FFFFFF; --danger:#C62828;
+  --shadow:0 1px 2px rgba(7,18,102,.06),0 6px 24px rgba(7,18,102,.07);
+  color-scheme:light;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* Header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:14px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;flex:none;text-decoration:none}
+.logo{background:#fff;border-radius:10px;padding:3px 6px;display:flex;line-height:0}
+.logo img{height:44px;width:auto}
+.brand-txt{display:flex;flex-direction:column;line-height:1.1}
+.brand-txt b{font-family:var(--f-display);font-stretch:85%;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--navy)}
+.brand-txt span{font-size:12px;color:var(--muted)}
+.search{flex:1;min-width:0;position:relative}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--muted)}
+.search input{width:100%;height:44px;border:1.5px solid var(--line);background:var(--field);border-radius:12px;padding:0 38px 0 40px;font-size:15px}
+.search input:focus{border-color:var(--sky);outline:none;background:var(--surface)}
+.search .clr{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;width:32px;height:32px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:18px;display:grid;place-items:center}
+.cartbtn{flex:none;position:relative;height:44px;border:0;border-radius:12px;background:var(--navy);color:var(--surface);display:flex;align-items:center;gap:8px;padding:0 14px;cursor:pointer;font-weight:600}
+.cartbtn svg{font-size:20px}
+.badge{min-width:22px;height:22px;border-radius:11px;background:var(--sky);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;padding:0 6px;font-variant-numeric:tabular-nums}
+.rail{display:flex;gap:8px;overflow-x:auto;padding-block:0 10px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:500;cursor:pointer;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.chip small{color:var(--muted);font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--surface)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.75}
+
+/* Intro */
+.intro{padding-block:22px 6px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.intro h1{margin:0;font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:clamp(26px,4vw,38px);line-height:1.02;letter-spacing:-.01em;color:var(--navy);text-wrap:balance}
+.intro h1 em{font-style:normal;color:var(--sky)}
+.intro p{margin:6px 0 0;color:var(--muted);max-width:60ch}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tools label{font-size:13px;color:var(--muted)}
+.tools select{height:38px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);padding:0 10px}
+.count{font-size:13px;color:var(--muted);padding-block:8px 12px;font-variant-numeric:tabular-nums}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding-bottom:110px}
+.card{background:var(--surface);border:1px solid var(--line);box-shadow:0 1px 2px rgba(7,18,102,.04);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;content-visibility:auto;contain-intrinsic-size:auto 330px}
+.pic{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--tile);color:var(--tile-ink);display:grid;place-items:center}
+.pic svg{font-size:68px;stroke-width:1.3}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+.pic.hasimg>svg{display:none}
+.sn{position:absolute;left:10px;top:10px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--sky-ink);background:var(--surface);border-radius:6px;padding:2px 7px;font-variant-numeric:tabular-nums}
+.cat{position:absolute;right:10px;bottom:10px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.name{font-family:var(--f-display);font-stretch:92%;font-weight:700;font-size:16.5px;line-height:1.2;margin:0;color:var(--fg)}
+.desc{font-size:13.5px;color:var(--muted);margin:0}
+.foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{font-family:var(--f-display);font-weight:800;font-size:18px;color:var(--navy);font-variant-numeric:tabular-nums;white-space:nowrap}
+.price small{font-family:var(--f-body);font-weight:500;font-size:11px;color:var(--muted);display:block;letter-spacing:.02em}
+.add{height:38px;border:0;border-radius:10px;background:var(--sky);color:#fff;font-weight:600;padding:0 14px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.add:hover{filter:brightness(.95)}
+.step{display:flex;align-items:center;border:1.5px solid var(--sky);border-radius:10px;height:38px;overflow:hidden}
+.step button{width:34px;height:100%;border:0;background:var(--sky-soft);color:var(--sky-ink);font-size:18px;font-weight:600;cursor:pointer}
+.step input{width:40px;height:100%;border:0;text-align:center;background:var(--surface);font-weight:600;font-variant-numeric:tabular-nums;-moz-appearance:textfield}
+.step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.empty{grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--muted)}
+.empty b{display:block;font-family:var(--f-display);font-size:20px;color:var(--fg);margin-bottom:4px}
+
+/* Floating order bar (phones and desktop) */
+.chat{position:fixed;z-index:16;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:48px;padding:0 16px 0 12px;border-radius:24px;background:var(--wa);color:var(--wa-ink);text-decoration:none;font-weight:600;box-shadow:var(--shadow)}
+.chat svg{font-size:26px;stroke:none;fill:currentColor}
+@media (max-width:600px){.chat span{display:none}.chat{width:52px;height:52px;padding:0;justify-content:center;border-radius:50%}}
+.float{position:fixed;left:0;right:0;bottom:0;z-index:15;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));padding-top:12px;pointer-events:none}
+.float .wrap{display:flex;justify-content:flex-end;padding-left:64px}
+.float button{pointer-events:auto;display:flex;align-items:center;gap:14px;border:0;border-radius:14px;background:var(--navy);color:var(--surface);padding:12px 16px;box-shadow:var(--shadow);cursor:pointer;font-weight:600;max-width:100%}
+.float button span.t{font-family:var(--f-display);font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(3,8,34,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--surface);z-index:41;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s ease;box-shadow:var(--shadow);padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px)}
+.drawer.on{transform:none}
+@media (max-width:560px){.drawer{top:auto;height:92%;width:100%;border-radius:18px 18px 0 0;transform:translateY(100%);padding-top:0}}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line)}
+.dh h2{margin:0;font-family:var(--f-display);font-weight:800;font-stretch:85%;font-size:22px;color:var(--navy)}
+.x{border:0;background:var(--field);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:20px;display:grid;place-items:center}
+.db{flex:1;overflow-y:auto;padding:6px 18px 18px}
+.line{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-bottom:1px dashed var(--line)}
+.line .mini{width:44px;height:44px;border-radius:10px;background:var(--tile);color:var(--tile-ink);display:grid;place-items:center;font-size:24px}
+.line .ln{min-width:0}
+.line .ln b{display:block;font-size:14px;line-height:1.25}
+.line .ln span{font-size:12.5px;color:var(--muted)}
+.line .ln .unit{display:block;margin-top:2px;font-variant-numeric:tabular-nums}
+.line .lr{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.line .lt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.line .step{height:32px}.line .step button{width:28px}.line .step input{width:34px}
+.rm{border:0;background:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;padding:0}
+.totals{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 4px}
+.totals span{color:var(--muted);font-size:13px}
+.totals b{font-family:var(--f-display);font-weight:800;font-size:24px;color:var(--navy);font-variant-numeric:tabular-nums}
+.fine{font-size:12px;color:var(--muted);margin:0 0 14px}
+fieldset{border:0;padding:0;margin:8px 0 0;display:grid;gap:10px}
+legend{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--sky-ink);margin-bottom:8px}
+.f{display:grid;gap:4px}
+.f label{font-size:13px;font-weight:500}
+.f label i{font-style:normal;color:var(--danger)}
+.f input,.f textarea,.f select{width:100%;border:1.5px solid var(--line);border-radius:10px;background:var(--field);padding:10px 12px}
+.f textarea{min-height:64px;resize:vertical}
+.f input:focus,.f textarea:focus{border-color:var(--sky);outline:none}
+.f.bad input{border-color:var(--danger)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.df{border-top:1px solid var(--line);padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));display:grid;gap:8px}
+.wa{display:flex;align-items:center;justify-content:center;gap:10px;height:50px;border-radius:12px;background:var(--wa);color:var(--wa-ink);font-weight:700;font-size:16px;text-decoration:none}
+.wa svg{font-size:22px;stroke:none;fill:currentColor}
+.wa[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.alt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.alt b{color:var(--fg);user-select:all;font-variant-numeric:tabular-nums}
+.ghost{border:1.5px solid var(--line);background:var(--surface);border-radius:9px;padding:6px 10px;cursor:pointer;font-size:12.5px;font-weight:600}
+.err{color:var(--danger);font-size:13px;min-height:1em;margin:0}
+.dempty{text-align:center;padding:40px 10px;color:var(--muted)}
+.dempty svg{font-size:48px;color:var(--sky)}
+
+/* Footer */
+footer{background:var(--navy);color:#fff}
+footer .wrap{padding-block:28px 120px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;font-size:14px}
+footer h3{margin:0 0 6px;font-family:var(--f-display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px;color:#7CC8FF}
+footer p{margin:2px 0;color:#D7DEF8}
+footer a{color:#fff}
+.wa2{display:flex;align-items:center;justify-content:center;gap:10px;height:46px;border-radius:12px;border:1.5px solid var(--wa);background:var(--surface);color:var(--fg);font-weight:600;font-size:15px;cursor:pointer}
+.wa2 svg{font-size:20px}
+.modal{position:fixed;z-index:45;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100% - 32px));max-height:calc(100% - 48px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));background:var(--surface);border-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.mb{padding:14px 18px 18px;overflow-y:auto;display:grid;gap:12px}
+.mb p{margin:0}
+.mb .shot{width:100%;border:1px solid var(--line);border-radius:10px;display:block}
+.mb textarea{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:10px;background:var(--field);padding:10px 12px;resize:vertical}
+.btnrow{display:grid;gap:8px}
+.ghostbtn{display:flex;align-items:center;justify-content:center;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;cursor:pointer;text-decoration:none;color:var(--fg)}
+.vstat{border-radius:10px;padding:10px 12px;font-weight:600}
+.vstat.ok{background:#E6F6EC;color:#0E6B33}
+.vstat.bad{background:#FDECEC;color:#A31919}
+.vstat ul{margin:6px 0 0;padding-left:18px;font-weight:500}
+.vtab{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+.vtab th,.vtab td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.vtab td.r,.vtab th.r{text-align:right;white-space:nowrap}
+.vtab tfoot td{font-weight:700;border-bottom:0}
+.staff{font-size:12px;color:#AFC0F0;cursor:pointer;background:none;border:0;padding:0;text-decoration:underline}
+.nojs{max-width:640px;margin:40px auto;padding:20px;border:2px solid #0398F5;border-radius:12px;font-size:16px;color:#0B1440;background:#fff}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;font-weight:500;opacity:0;transition:.2s;z-index:60;pointer-events:none;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+@media (max-width:720px){.brand-txt{display:none}.cartbtn .lbl{display:none}.logo img{height:38px}}
+@media (max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.pic svg{font-size:52px}.name{font-size:15px}.body{padding:10px}.foot{flex-direction:column;align-items:stretch}.add,.step{justify-content:center}.step input{flex:1}.price{font-size:16px}.cat{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 6v13M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-8v6"/><circle cx="6.5" cy="11.5" r="1.8"/></symbol>
+<symbol id="i-pillow" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="8" rx="3"/><path d="M6 8v8M18 8v8"/></symbol>
+<symbol id="i-steth" viewBox="0 0 24 24"><path d="M5 3H4v5a5 5 0 0 0 10 0V3h-1"/><path d="M9 13v2a5 5 0 0 0 10 0v-2"/><circle cx="19" cy="11" r="2"/></symbol>
+<symbol id="i-micro" viewBox="0 0 24 24"><path d="M5 21h14M8 21v-2.5h8M13 18.5a6 6 0 0 0 4-9.5"/><path d="M9 3h4l-1 9h-2z"/><path d="M8 12h6"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3M7.5 14h9"/></symbol>
+<symbol id="i-beaker" viewBox="0 0 24 24"><path d="M4 3h15M5.5 3v15a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V3M5.5 11h5M5.5 15h3"/></symbol>
+<symbol id="i-bottle" viewBox="0 0 24 24"><path d="M10 2h4v3h-4zM9 5h6l1.5 3v12a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2V8z"/><path d="M7.5 11h9v6h-9z"/></symbol>
+<symbol id="i-syringe" viewBox="0 0 24 24"><path d="M18 2l4 4M20 4l-3 3M17 7L8 16l-3-3 9-9zM6.5 14.5L2 19M11 9l1.5 1.5M9 11l1.5 1.5"/></symbol>
+<symbol id="i-drip" viewBox="0 0 24 24"><path d="M8 2h8v8a4 4 0 0 1-8 0zM8 6h8M12 14v2c0 2 4 2 4 4v2"/></symbol>
+<symbol id="i-glove" viewBox="0 0 24 24"><path d="M7.5 21v-5L4 11.5 5.5 10 8 12V5a1.5 1.5 0 0 1 3 0v5V3.5a1.5 1.5 0 0 1 3 0V10V5a1.5 1.5 0 0 1 3 0v8.5c0 4-2 7.5-5 7.5z"/></symbol>
+<symbol id="i-forceps" viewBox="0 0 24 24"><path d="M7 21l4-11 1-7 1 7 4 11"/><path d="M9.5 15h5"/><circle cx="7" cy="21" r=".6"/><circle cx="17" cy="21" r=".6"/></symbol>
+<symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.2 15.8L19 3M15.8 15.8L5 3"/></symbol>
+<symbol id="i-retractor" viewBox="0 0 24 24"><path d="M5 3v10a4 4 0 0 0 4 4h10M19 12v9M14 17v4"/></symbol>
+<symbol id="i-scalpel" viewBox="0 0 24 24"><path d="M3 21l7.5-7.5M10.5 13.5L20 4c1.2 3.5-1 8-5.5 9.5z"/></symbol>
+<symbol id="i-needle" viewBox="0 0 24 24"><path d="M5 19A10 10 0 0 1 19 5"/><circle cx="19.5" cy="4.5" r="1"/><path d="M5 19c2.5 2 6 1.5 7-1s-1-4 1-6"/></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M6 11h3l2-3 2 5 2-2h3M9 20h6M12 16v4"/></symbol>
+<symbol id="i-device" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="13" rx="2"/><path d="M8 6V4h8v2M8 11h4M8 15h8"/><circle cx="16" cy="11" r="1.5"/></symbol>
+<symbol id="i-drum" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="12" cy="12" r="4.5"/><path d="M12 9.5V12l1.5 1.5"/></symbol>
+<symbol id="i-fridge" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M6 9h12M9 5v2M9 12v3"/></symbol>
+<symbol id="i-xray" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 6v12M9 8h6M8 11h8M8 14h8M9.5 17h5"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24"><circle cx="12" cy="11" r="7"/><circle cx="12" cy="11" r="3"/><path d="M4 21h16M8 18l-1 3M16 18l1 3"/></symbol>
+<symbol id="i-probe" viewBox="0 0 24 24"><path d="M9.5 3h5v7l2.5 4H7l2.5-4z"/><path d="M7 14c0 4 2 7 5 7s5-3 5-7"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-tooth" viewBox="0 0 24 24"><path d="M7.5 3C5 3 3.5 5 3.5 8c0 4 2 5 2.5 9s1 4 2 4 1.5-3 2.5-6c.5-1.5 1.5-1.5 2 0 1 3 1.5 6 2.5 6s1.5-1 2-4 2.5-5 2.5-9c0-3-1.5-5-4-5-2 0-3 1-4.5 1S9.5 3 7.5 3z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-ear" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 4-4 5-4 8a3 3 0 0 1-6 0"/><path d="M10 9a2 2 0 0 1 4 0c0 2-2 2-2 4"/></symbol>
+<symbol id="i-wheel" viewBox="0 0 24 24"><circle cx="10" cy="16" r="5"/><circle cx="8" cy="3.5" r="1.5"/><path d="M8 6.5V12h6l3 6h2.5M8 9h5"/></symbol>
+<symbol id="i-crutch" viewBox="0 0 24 24"><path d="M7 3h6M10 3v4l-1.5 6h4L11 7M10.5 13v8M8.5 21h4M8 9.5h5"/><path d="M17 4v17M15 21h4M15 8h4"/></symbol>
+<symbol id="i-brace" viewBox="0 0 24 24"><path d="M8 2v6c0 2-2 3-2 6v8M16 2v6c0 2 2 3 2 6v8M8 7h8M6 15h12M6 19h12"/></symbol>
+<symbol id="i-band" viewBox="0 0 24 24"><rect x="1.5" y="8" width="21" height="8" rx="4" transform="rotate(-45 12 12)"/><path d="M9.2 9.2l5.6 5.6"/><circle cx="12" cy="10" r=".4"/><circle cx="10" cy="12" r=".4"/><circle cx="14" cy="12" r=".4"/><circle cx="12" cy="14" r=".4"/></symbol>
+<symbol id="i-mask" viewBox="0 0 24 24"><path d="M4 8.5c3-1 5-1.5 8-1.5s5 .5 8 1.5V13c0 3-4 5-8 5s-8-2-8-5z"/><path d="M4 10H2M20 10h2M8 11h8M8 14h8"/></symbol>
+<symbol id="i-gown" viewBox="0 0 24 24"><path d="M8 3L3 6l2 4 2-1v12h10V9l2 1 2-4-5-3c-1 2-2 3-4 3S9 5 8 3z"/></symbol>
+<symbol id="i-towel" viewBox="0 0 24 24"><rect x="4" y="3" width="13" height="18" rx="1"/><path d="M17 6h3v15h-3M4 16h13"/></symbol>
+<symbol id="i-kit" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M12 10.5v6M9 13.5h6"/></symbol>
+<symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14V4a2 2 0 0 0-4 0v10a4 4 0 1 0 4 0z"/><path d="M12 9v7"/></symbol>
+<symbol id="i-bp" viewBox="0 0 24 24"><circle cx="9" cy="13" r="6"/><path d="M9 13l3-3M15 13h4V7h-2M19 13v4"/></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 10a5 5 0 0 1 8 0M12 12l1.5-3"/></symbol>
+<symbol id="i-lamp" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-trolley" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="11" rx="1"/><path d="M4 9.5h16M7 15v4M17 15v4"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></symbol>
+<symbol id="i-cyl" viewBox="0 0 24 24"><rect x="8" y="7" width="8" height="14" rx="4"/><path d="M10 7V4h4v3M12 4V2M9 13h6"/></symbol>
+<symbol id="i-bin" viewBox="0 0 24 24"><path d="M4 6h16M9 6V4h6v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M5 12h4l1.5-2.5 2 5 1.5-2.5h5"/></symbol>
+<symbol id="i-lungs" viewBox="0 0 24 24"><path d="M12 3v8M12 11c-1 1-3 1-4 0M12 11c1 1 3 1 4 0"/><path d="M8 7c-3 0-5 5-5 10 0 2 1 3 3 3s3-1 3-3V9M16 7c3 0 5 5 5 10 0 2-1 3-3 3s-3-1-3-3V9"/></symbol>
+<symbol id="i-baby" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M10.3 8h.01M13.7 8h.01M10.8 10c.7.5 1.7.5 2.4 0M5 21c0-4 3-7 7-7s7 3 7 7"/></symbol>
+<symbol id="i-bone" viewBox="0 0 24 24"><path d="M8.5 7L17 15.5"/><circle cx="6.5" cy="5" r="2"/><circle cx="5" cy="8.3" r="2"/><circle cx="17.5" cy="19" r="2"/><circle cx="19" cy="15.7" r="2"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M8 7h8M8 11h8M8 15h5"/></symbol>
+<symbol id="i-dish" viewBox="0 0 24 24"><path d="M3 12h18c0 4-4 7-9 7s-9-3-9-7zM7 12c1-3 3-4 5-4s4 1 5 4"/></symbol>
+<symbol id="i-pipette" viewBox="0 0 24 24"><path d="M15 3l6 6M18 6l-9 9-3 1 1-3 9-9M6 16l-3 5 5-3"/></symbol>
+<symbol id="i-spin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="6" r="1.3"/><circle cx="12" cy="18" r="1.3"/><circle cx="6" cy="12" r="1.3"/><circle cx="18" cy="12" r="1.3"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c3 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 3-6 1 2 1 3 3 3 0-3-1-5 0-8z"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24"><path d="M2 9h20v3H2zM5 12v9M19 12v9M9 12l-1.5 5h9L15 12"/></symbol>
+<symbol id="i-screen" viewBox="0 0 24 24"><path d="M3 4h4v15H3zM10 4h4v15h-4zM17 4h4v15h-4zM5 19v2M12 19v2M19 19v2"/></symbol>
+<symbol id="i-cabinet" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1.5"/><path d="M4 12h16M10 7h4M10 17h4"/></symbol>
+<symbol id="i-chair" viewBox="0 0 24 24"><path d="M7 3v9h10V3M5 12h14v3H5zM7 15l-1 6M17 15l1 6"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 17l-5-5-9 8"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 11h10.6L20.5 7H6.5"/><circle cx="9" cy="19.5" r="1.5"/><circle cx="17" cy="19.5" r="1.5"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3z"/></symbol>
+</defs>
+</svg>
+
+<header>
+  <div class="gut"><div class="wrap">
+    <div class="bar">
+      <a class="brand" href="#top" aria-label="ACE Surgicals home">
+        <span class="logo"><img src="data:image/webp;base64,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" alt="ACE Surgicals logo" width="75" height="44"></span>
+        <span class="brand-txt"><b>Ace Surgicals Ltd</b><span>RC 7117725 &#xb7; Kano</span></span>
+      </a>
+      <div class="search">
+        <svg class="i"><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="Search bed, autoclave, forceps&#x2026;" autocomplete="off" aria-label="Search products">
+        <button class="clr" id="qclr" aria-label="Clear search" hidden>&#xd7;</button>
+      </div>
+      <button class="cartbtn" id="openCart" aria-label="Open order"><svg class="i"><use href="#i-cart"/></svg><span class="lbl">Order</span><span class="badge" id="badge">0</span></button>
+    </div>
+    <nav class="rail" id="rail" aria-label="Categories"></nav>
+  </div></div>
+</header>
+
+<noscript><div class="gut"><div class="nojs"><b>This price list needs to be opened in a web browser.</b><br>Open it in Chrome or Safari, or visit acesurgicalsltd.com. If you opened it from WhatsApp or the Files app, tap Share and choose "Open in Safari" or "Open with Chrome".</div></div></noscript>
+<main class="gut" id="top">
+  <div class="wrap">
+    <section class="intro">
+      <div>
+        <h1>Medical Items <em>Price List</em></h1>
+        <p>Find what you need, add it to your order and send it straight to our sales desk on WhatsApp. Prices are per unit, <span id="listDate">updated 29/10/2026</span>.</p>
+      </div>
+      <div class="tools">
+        <label for="sort">Sort</label>
+        <select id="sort">
+          <option value="sn">Catalogue order</option>
+          <option value="az">Name A&#x2013;Z</option>
+          <option value="lo">Price: low to high</option>
+          <option value="hi">Price: high to low</option>
+        </select>
+      </div>
+    </section>
+    <div class="count" id="count" aria-live="polite"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</main>
+
+<footer class="gut">
+  <div class="wrap">
+    <div><h3>Ace Surgicals Ltd</h3><p>Medical, surgical, laboratory and hospital equipment.</p><p>RC 7117725</p></div>
+    <div><h3>Visit</h3><p>15/16 Post Office Rd, Fagge, Kano, Nigeria</p></div>
+    <div><h3>Contact</h3><p>Phone &amp; WhatsApp: <b>+234 907 760 0522</b></p><p><a href="https://wa.me/2349077600522?text=Hello%20ACE%20Surgicals%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener">Chat with us on WhatsApp</a></p><p>acesurgicalsltd@gmail.com</p><p><a href="https://acesurgicalsltd.com" target="_blank" rel="noopener">acesurgicalsltd.com</a></p><p><button class="staff" id="openVerify" type="button">Staff: check an order</button></p></div>
+  </div>
+</footer>
+
+<a class="chat" id="chat" href="https://wa.me/2349077600522?text=Hello%20ACE%20Surgicals%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener" aria-label="Chat with ACE Surgicals on WhatsApp"><svg class="i"><use href="#i-wa"/></svg><span>Chat with us</span></a>
+<div class="float" id="float" hidden><div class="gut"><div class="wrap">
+  <button id="floatBtn"><svg class="i" style="font-size:20px"><use href="#i-cart"/></svg><span id="floatN">0 items</span><span class="t" id="floatT">&#x20a6;0</span><span>Review order &#x2192;</span></button>
+</div></div></div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Your order" aria-hidden="true">
+  <div class="dh"><h2>Your order</h2><button class="x" id="closeCart" aria-label="Close order">&#xd7;</button></div>
+  <div class="db" id="db">
+    <div id="lines"></div>
+    <div id="orderMeta">
+      <div class="totals"><span id="tcount"></span><b id="ttotal">&#x20a6;0</b></div>
+      <p class="fine">Estimate from the <span id="listDate2">29/10/2026 price list</span>. Our team confirms availability, delivery cost and your final invoice on WhatsApp.</p>
+      <form id="cust" novalidate>
+        <fieldset>
+          <legend>Your details</legend>
+          <div class="two">
+            <div class="f" id="f-name"><label for="cname">Full name <i>*</i></label><input id="cname" autocomplete="name"></div>
+            <div class="f" id="f-phone"><label for="cphone">Phone <i>*</i></label><input id="cphone" type="tel" autocomplete="tel" placeholder="Your phone number"></div>
+          </div>
+          <div class="f"><label for="corg">Hospital / clinic / company</label><input id="corg" autocomplete="organization"></div>
+          <div class="f"><label for="caddr">Delivery address or city</label><input id="caddr" autocomplete="street-address" placeholder="e.g. Wuse 2, Abuja"></div>
+          <div class="f"><label for="cnote">Note for the sales team</label><textarea id="cnote" placeholder="Preferred brand, delivery date, installation&#x2026;"></textarea></div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <div class="df" id="df">
+    <p class="err" id="err" role="alert"></p>
+    <a class="wa" id="send" href="https://wa.me/2349077600522" target="_blank" rel="noopener"><svg class="i"><use href="#i-wa"/></svg>Send order on WhatsApp</a>
+    <button class="wa2" id="sendPic" type="button"><svg class="i"><use href="#i-image"/></svg>Send as a picture (choose ACE Surgicals in WhatsApp)</button>
+    <div class="alt"><span>Didn't open? Message <b>+234 907 760 0522</b></span><button class="ghost" id="copy" type="button">Copy order text</button></div>
+  </div>
+</aside>
+<div class="modal" id="picModal" role="dialog" aria-labelledby="picH" hidden>
+  <div class="dh"><h2 id="picH">Your order picture</h2><button class="x" id="picClose" aria-label="Close">&times;</button></div>
+  <div class="mb">
+    <img class="shot" id="picImg" alt="Order summary picture">
+    <p class="fine" id="picHelp">Tap <b>Share picture</b> and choose WhatsApp, then pick ACE Surgicals (+234 907 760 0522).</p>
+    <div class="btnrow">
+      <button class="wa" id="picShare" type="button"><svg class="i"><use href="#i-wa"/></svg>Share picture</button>
+      <a class="ghostbtn" id="picSave" href="#" download="ACE-order.png">Save picture</a>
+      <a class="ghostbtn" id="picChat" href="https://wa.me/2349077600522" target="_blank" rel="noopener">Open WhatsApp chat with ACE Surgicals</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="vModal" role="dialog" aria-labelledby="vH" hidden>
+  <div class="dh"><h2 id="vH">Check an order</h2><button class="x" id="vClose" aria-label="Close">&times;</button></div>
+  <div class="mb">
+    <p class="fine">For ACE Surgicals staff. Paste the full WhatsApp order message, or just its order code. The order is rebuilt from the official price list, so any changed item, quantity or price is flagged.</p>
+    <textarea id="vText" placeholder="Paste the order message here"></textarea>
+    <button class="add" id="vGo" type="button" style="justify-content:center;height:44px">Check order</button>
+    <div id="vOut"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= SETTINGS ================= */
+/* Live product list: paste your Google Sheets "Publish to web" CSV link between the quotes.
+   Leave it empty to use the built-in list below. */
+const SHEET_CSV_URL="";
+/* Folder (next to this file on your website) holding photos named in the sheet's Photo column. */
+const PHOTO_FOLDER="photos/";
+const WA_NUMBER="2349077600522";
+/* Web address of this app, used for the "View official order" link in WhatsApp messages.
+   Leave empty to use the address the app is opened from. */
+const APP_URL="";
+const LIST_DATE="29/10/2026";
+/* ============================================ */
+
+const CAT_ORDER=["Ward Equipment","General Medical Equipment","Maternity & Gynecology","Surgical & Theatre","Surgical Instrument","Radiology & Imaging","Laboratory & Diagnostics","Ophthalmology","Dental & ENT","Apparel & Linens","Consumables & Supplies","Physiotherapy","Models & Charts","Laboratory Glassware","Reagents and Chemicals"];
+const BUILT_IN=[[1,0,"Bed Head Unit (Horizontal Wall Panel)","Standard Aluminum Panel (1.2m 1.5m) powder coating. Includes sockets, reading light, and provisions for gas outlets",1375000],[2,0,"Bed Side Locker","ABS",62500],[3,0,"Bedpan","Stainless steel",28800],[4,0,"Bedpan","Plastic",8800],[5,0,"Drip stand","",22500],[6,0,"Hospital bed","Semi-fowler metal Single crank (Manual) hospital bed",200000],[7,0,"Hospital bed","Single crank (Manual) hospital bed with ABS headboard, dripstand and overbed table",225000],[8,0,"Hospital bed","Double crank (Manual) hospital bed with ABS headboard, dripstand and overbed table",262500],[9,0,"ICU Bed","Fully Electric, 5-function with CPR release and battery backup",4875000],[10,0,"Mattress","Hospital bed mattress",43800],[11,0,"Mattress","Hospital bed single/double crank mattress",48800],[12,0,"Medicine cupboard","",106300],[13,0,"Over bed table","",56300],[14,0,"Pillows","Medical fibre pillows",6900],[15,0,"Ward screen","4-fold screen",75000],[16,1,"Air purifier","Medical grade",2375000],[17,1,"Ambu Bag","Adult",25000],[18,1,"Ambu Bag","Neonatal, paediatric",25000],[19,1,"Angle poised lamp","",31300],[20,1,"Autoclave","20 Liters",262500],[21,1,"Autoclave","24 Liters",312500],[22,1,"Autoclave","50 Liters",2250000],[23,1,"Autoclave","100 Liters",3875000],[24,1,"Autoclave","280 Liter",12000000],[25,1,"Blood bank","120 Liters",1187500],[26,1,"Blood warmer","",237500],[27,1,"Bowl with stand","Single, stainless steel",31300],[28,1,"BP monitor","Standing type - aneroid",137500],[29,1,"BP monitor","Standing type - digital",200000],[30,1,"BP monitor","Digital",27500],[31,1,"Cabinet","Metal medical cabinet",156300],[32,1,"Cardiac Arrest Board","CPR Backboard",212500],[33,1,"Chart holder","Medical chart holder",5600],[34,1,"Defibrillator","",1000000],[35,1,"Diagnostic set","",62500],[36,1,"Dirt cart/Linen trolley","Single stainless for dirty linen",112500],[37,1,"Emergency trolley","ABS, Crash cart with 5 drawers, monitor plate, drip stand, power cot",562500],[38,1,"Examination couch","Coloured single crank",225000],[39,1,"Examination light","LED",200000],[40,1,"Finger Staff","Different sizes",6900],[41,1,"First Aid Box","Small, Empty",13100],[42,1,"First Aid Box","Semi Medium, Empty",19400],[43,1,"First Aid Box","Medium, Empty",20000],[44,1,"First Aid Box","Big, Empty",22500],[45,1,"First Aid Box","Medium, Fully Stocked, Aluminium, Green",37500],[46,1,"Foetal stethoscope (aluminium)","",2500],[47,1,"Foldable stretcher","",56300],[48,1,"Foley catheter","Pack of 10",10000],[49,1,"Glucometer","",26300],[50,1,"Haemoglobinometer (Hemocue)","",937500],[51,1,"Hand Dryer","Automatic Wall Mount",53800],[52,1,"Hearing Aid","Basic model",35000],[53,1,"Hearing Aid","Mid-range 1",68800],[54,1,"Hearing Aid","Mid-range 2",106000],[55,1,"Hearing Aid","Advanced model",156000],[56,1,"Height Ruler","Stadiometer",75000],[57,1,"ICU Ventilator","Adult & paediatric",11250000],[58,1,"Incinerator","Medical waste incinerator",22500000],[59,1,"Infrared thermometer","Handheld",9400],[60,1,"Infusion pump","Single channel",362500],[61,1,"Instrument tray","Stainless steel, different sizes",15000],[62,1,"Instrument trolley","Stainless steel",81300],[63,1,"Kick about","Stainless steel",31300],[64,1,"Laryngoscope","Standard set multi-blades",56300],[65,1,"Littmann Stethoscope","Littmann Classic II",13100],[66,1,"Littmann Stethoscope","Littmann Classic III",35000],[67,1,"Littmann Stethoscope","Littmann Cardiology",56300],[68,1,"LMA","Laryngeal Mask Airways",13800],[69,1,"Mackintosh","",3100],[70,1,"Manual Vacuum Aspiration (MVA) set","",25000],[71,1,"Medical Refrigerator","Laboratory/Medical Standard",1500000],[72,1,"N95 Masks","Box of 20",8800],[73,1,"Nebulizer","",43800],[74,1,"Oxygen Analyzer","O2 gas analyzer",812500],[75,1,"Oxygen Concentrator","5 Liters",625000],[76,1,"Oxygen Concentrator","10 Liters",812500],[77,1,"Oxygen Regulator","Japan technology",18800],[78,1,"Oxygen Regulator","American tech",87500],[79,1,"Oxygen Regulator","GLOOR, heavy duty",75000],[80,1,"Oxygen Unit","Oxygen cylinder 10L/13kg, regulator, trolley",250000],[81,1,"Patella Hammer","Hammer",7500],[82,1,"Patient Monitor","MINDRAY, with trolley",1625000],[83,1,"Patient Monitor","5 parameter patient monitor",375000],[84,1,"Patient Monitor Trolley","",150000],[85,1,"Patient Stepper/Stool","Double Step, Stainless Steel",40000],[86,1,"Patient Trolley","Stainless steel",337500],[87,1,"Pedal Bin","12 liters, stainless steel",30000],[88,1,"Pendant","Surgical pendant",3750000],[89,1,"Pulse Oximeter","Hand held",125000],[90,1,"Pulse Oximeter","Fingertip",7500],[91,1,"Rebreather Masks","",2100],[92,1,"Scale with height","Mechanical",150000],[93,1,"Shaker/roller","Blood shaker/roller machine, Standard 6-roller unit",275000],[94,1,"Sharps bin","Sharps box pack of 25",11300],[95,1,"Sphygmomanometer","Mercurial",37500],[96,1,"Sphygmomanometer","Aneroid",10600],[97,1,"Sphygmomanometer","Aneroid, Standing",81300],[98,1,"Spray gun","For sterilization use",62500],[99,1,"Standing magnifier","",106300],[100,1,"Sterilizing drum","Stainless, set of 3",58800],[101,1,"Stool","Swivel stool",62500],[102,1,"Suction machine","Double jar electric",250000],[103,1,"Suction machine","Single jar electric",106300],[104,1,"Suction machine","Pedal",75000],[105,1,"Syringe pump","",562500],[106,1,"Table top sterilizer","",875000],[107,1,"Tourniquet","",3100],[108,1,"Urine can (male/female)","Stainless",25000],[109,1,"Vacuum extractor","",115000],[110,1,"Vein finder","Handheld",81300],[111,1,"Wall Clock","",31300],[112,1,"Water bath","Digital thermostatic stainless steel 6-holes",206300],[113,1,"Weighing scale","",17500],[114,2,"Baby cot","Stainless steel with mattress",112500],[115,2,"Baby incubator","",2625000],[116,2,"Baby radiant warmer","",2375000],[117,2,"Baby scale","Mechanical",37500],[118,2,"Baby scale","Digital",81300],[119,2,"Cord clamp","Pack of 100",6900],[120,2,"Cord Scissors","",3100],[121,2,"Cot Sheet","",3800],[122,2,"Delivery bed","4-legs Stainless steel frame, manual adjustment",262500],[123,2,"Delivery bed","8-legs, Stainless steel frame, manual adjustment",400000],[124,2,"Feeding Pump","Breast feeding pump",31300],[125,2,"Foetal doppler","Handheld",43800],[126,2,"Phototherapy unit","LED standing",600000],[127,2,"Sim Delivery forceps","",22500],[128,2,"Vaginal speculum","Sims and Cuscos",28800],[129,3,"Anesthesia machine","Iso & halo gas, For adult and paediatric use",12625000],[130,3,"Diathermy machine","400W electrosurgical unit",1625000],[131,3,"Drapes","Surgical drapes",7500],[132,3,"Endoscopy Unit","Endoscopy tower Complete set (Monitor, Processor, Light Source, Camera)",51250000],[133,3,"Full body blanket","",11300],[134,3,"Full body surgical blanket","",10000],[135,3,"Lower body blanket","",10000],[139,3,"Scrub sink","Double taps with sensor",4000000],[140,3,"Surgical access blanket","",10000],[141,3,"Surgical Blades","Different sizes, packet",6900],[142,3,"Surgical instruments set","Major surgical instrument set, complete",1025000],[143,3,"Theatre boots","White antistatic rubber boots (per pair)",10000],[144,3,"Theatre gown (reusable)","Washable",17500],[145,3,"Theatre shoes","Autoclavable rubber clogs (per pair)",5600],[146,3,"Theatre/operation gown (disposable)","Pack of 10 sterile disposable gown",25000],[147,3,"Theatre operating lamp/light","4-bulb shadowless lamp",812500],[148,3,"Theatre operating lamp/light","LED standing",2250000],[149,3,"Theatre operating lamp/light","LED ceiling mount double dome",4000000],[150,3,"Theatre operating table electric","Fully electric with battery; Compatible with C-arm and x-ray checkup",3875000],[151,3,"Theatre operating table hydraulic","Hydraulic/manual type; Compatible with C-arm and x-ray checkup",2625000],[152,3,"Theatre operating table minor","Non-Hydraulic; Compatible with C-arm and x-ray checkup",2000000],[153,3,"Under body blanket","",11300],[154,4,"Abdominal retractor","Stainless steel",31300],[155,4,"Allis forceps","Stainless steel",4400],[156,4,"Amnihook forceps","Stainless steel",6900],[136,4,"Babcock Tissue Forceps","Stainless steel",5600],[137,4,"Balfour Abdominal Retractor","200x50mm",112500],[138,4,"Cheatle forceps","Stainless steel",6300],[157,4,"Crile Forceps","Curved 140MM",8800],[158,4,"Cushion Del STR Forceps","Straight 250MM",12500],[159,4,"Deaver Retractor","Stainless steel",17500],[160,4,"Descamps","Stainless steel",12500],[161,4,"Director W/Tongue","Straight 145MM",13000],[162,4,"Double ended probe","1.5mm 160mm",6300],[163,4,"Doyen intestinal forceps","Curved 240MM",17500],[164,4,"Dressing Forceps","Stainless steel",3800],[165,4,"Duval-Collin Intestinal Forceps","195MM",15000],[166,4,"Episiotomy scissors","Stainless steel",3800],[167,4,"Female Catheter Metal","12FR 159MM",3800],[168,4,"Foerster Sponge Forceps","",6300],[169,4,"Fritsch Abdominal retractor","64x85MM",37500],[170,4,"Gallipot","Stainless steel",5000],[171,4,"Green-Armitage Forceps","F/C SECT222MM",6300],[172,4,"Halsted Mosquito Forceps Del","Straight 125MM",2500],[173,4,"Israel Retractor","PRONGBLUNT 53X62MM253MM",21300],[174,4,"Kelly Retractor","150x39MM",33800],[175,4,"Kidney Dish","Stainless steel",5000],[176,4,"Kocher forceps","Stainless steel",7500],[177,4,"Kocher-Langenbeck retractor","41x11mm21.6mm",11300],[178,4,"Kocher-Ochsner Forceps","Straight 1x2 200MM",4400],[179,4,"Kocher-Ochsner Forceps","Straight 160MM",10600],[180,4,"Large Artery Forceps","Stainless steel",6300],[181,4,"Masson Needle holder","HVY Serrogroove 265mm",3800],[182,4,"Mayo-Hegar Needle Holder","150mm",3100],[183,4,"Mayo-Hegar Needle Holder","200MM",4400],[184,4,"Mayo Scissors","Straight, curved",3800],[185,4,"Metzenbaum scissors","",5000],[186,4,"Mikulicz Abdominal Retractor","121x50mm",112500],[187,4,"Mikulicz Peritoneum Forceps","Curved 205MM",12900],[188,4,"Mixter suture forceps","RT-ANG 230MM",10000],[189,4,"Mosquito Artery Forceps","Stainless steel",3100],[190,4,"Needle Holding Forceps","Stainless steel",3800],[191,4,"Nelson-Metzenbaum Scissors","Curved 229MM",4400],[192,4,"Nylon Suture","Size 1, pkt",3100],[193,4,"Nylon Suture","Size 2, pkt",3500],[194,4,"Nylon Suture","Size 2/0, pkt",3100],[195,4,"Overholt Forceps","",15000],[196,4,"Pean Forceps","Straight 140MM",7500],[197,4,"Plain Dissecting Forceps","Stainless steel",2500],[198,4,"Ribbon Retractor Mall","330x40mm",8800],[199,4,"Rochester Pean Forceps","Straight 200MM/240MM",5000],[200,4,"Scalpel","4L",10000],[201,4,"Scalpel Handle","#3 125MM/#4 133MM",3800],[202,4,"Spencer Wells Artery Forceps","Stainless steel",5600],[203,4,"Sponge Holding Forceps","Stainless steel",5600],[204,4,"Standard Tissue Forceps","",4400],[205,4,"Stitch Scissors","Stainless steel",7500],[206,4,"Surgical Scissors","",4400],[207,4,"Toothed Dissecting Forceps","Stainless steel",2500],[208,4,"U.S Army retractor","26x15/43x15-23x15/40x15",33800],[209,4,"Vicryl Suture","Size 1, pkt",10000],[210,4,"Vicryl Suture","Size 2, pkt",10600],[211,4,"Vicryl Suture","Size 2/0, pkt",10000],[212,4,"Volkmann Retractor","",25000],[213,4,"Waugh Del Tissue Forceps","1x2250MM",5500],[214,4,"Wrigley OBST Forceps","250MM",21300],[215,5,"Contrast Media: Omnipaque 350mg","350mg 100ml Bottle",38800],[216,5,"CT Scan","16 slice, brand new",268750000],[217,5,"Gonad shield","",52500],[218,5,"Lead apron","Radiation protection apron",118800],[219,5,"Lead gloves","Radiation protection gloves pair",68800],[220,5,"Lead goggles","Radiation protection glasses",56300],[221,5,"Lead shield","",350000],[222,5,"Mammogram machine","Digital (DR)",56250000],[223,5,"Mobile X-ray machine","Complete Mobile digital X-ray machine 100mA",26250000],[224,5,"MRI","0.35T Brand New + RF Cage",331250000],[225,5,"Thyroid shield","",52500],[226,5,"Ultrasound Gel","4 liters",7500],[227,5,"Ultrasound machine","Portable 2D, Tabletop, one probe",1875000],[228,5,"Ultrasound machine","Portable 2D, Tabletop, one probe with battery",2250000],[229,5,"Ultrasound machine","Trolley based 2D ultrasound machine with 2 probes",8125000],[230,5,"Ultrasound machine","Trolley based 3D/4D ultrasound machine with 3 probes",30000000],[231,5,"X-ray bulky table","Standard 4-way table",1500000],[232,5,"X-ray chest stand","",150000],[233,5,"X-ray film viewer","Single",82500],[234,5,"X-ray film viewer","Double",118800],[235,5,"X-ray machine","Static 400mA digital X-ray machine complete with Flat Panel Detector (FPD)",38750000],[236,5,"X-Ray Positioning Set","Foam/Plastic Wedges - Set",76300],[237,6,"Bell jar knob top","",17500],[238,6,"Bio-safety cabinet","Class II",6188000],[239,6,"Bunsen Burner","With control",15000],[240,6,"Chemical balance","",3100],[241,6,"Chemical goggles","Chemical goggles",2500],[242,6,"Chemistry Analyzer","Semi-auto",1625000],[243,6,"Clamps for retort stands","",4800],[244,6,"Clinical Centrifuge","12 placers, digital display",500000],[245,6,"Clinical Thermometer","",1500],[246,6,"Colorimeter","Digital photocolorimeter",206300],[247,6,"Desktop Centrifuge","6-bucket",81300],[248,6,"Dissecting board","",4400],[249,6,"Dissecting set","",8100],[250,6,"ECG machine","12 channels",1188000],[251,6,"Electrolyte analyzer","Electrolyte analyzer",3375000],[252,6,"Electrophoresis machine","Analogue",625000],[253,6,"Filter Paper","Whatman Pack, 11cm",3100],[254,6,"Gel and clot activator container","",14400],[255,6,"Haematology analyzer diluent","",81300],[256,6,"Haematology probe cleanser","",62500],[257,6,"Haematology analyzer","5 part Full Blood Count machine",11250000],[258,6,"Haematology analyzer","3 part Full Blood Count machine",4375000],[259,6,"Haematocrit Centrifuge","24 capillary tubes",312500],[260,6,"Hand lens","75mm",1300],[261,6,"Hot plate","With magnetic stirrer",350000],[262,6,"Hot plate","Non magnetic laboratory hotplate",312500],[263,6,"Hygrometer","Wet & dry bulb",5000],[264,6,"Lab Incubator","20 Liters",400000],[265,6,"Lab Oven","30 Liters",437500],[266,6,"Micro Pipette","0-1000uL",18800],[267,6,"Microplate reader","ELISA reader",7500000],[268,6,"Microplate washer","ELISA washer",6250000],[269,6,"Microscope","Monocular",93800],[270,6,"Microscope","Binocular",287500],[271,6,"Microscope","Olympus CX23 Compound binocular microscope",2500000],[272,6,"Microscope slide","Packet",2300],[273,6,"Mortar & Pestle","Porcelain, different sizes",10600],[274,6,"pH Meter","Digital Pen Type + TDS",175000],[275,6,"pH Meter","Tabletop",312500],[276,6,"Pipette rack","Double deck rack for glass pipette",5000],[277,6,"Pipette stand","Micropipette plastic stand",50000],[278,6,"Pipette tips","Coloured tips pack of 1000",5000],[279,6,"Refrigerated centrifuge","",5250000],[280,6,"Spectrophotometer","VIS Single beam",512500],[281,6,"Stainless steel spatula","Stainless steel spatula",800],[282,6,"Stirrer","Electric motor controlled stirrer",312500],[283,6,"Test tube clamp","Stainless",4400],[284,6,"Test tube rack","Stainless",4400],[285,6,"Urine analyzer","Semi-auto",1875000],[286,6,"Water Distiller","Stainless Steel, Electric 10 Liters",118800],[287,6,"Weighing Balance","Digital Precision",28800],[288,6,"Weighing Balance","Beam/Analytical Mechanical 3 Decimal",287500],[289,6,"Weighing Balance","Beam/Analytical Mechanical 4 Decimal",637500],[290,6,"Wooden Spatula","Pack of 100",5000],[291,7,"78d volk lens","USA original",562500],[292,7,"A/B Scan","Ophthalmological ultrasound",9375000],[293,7,"Auto refractometer","ARK 4000",4375000],[294,7,"Cataract set","Standard stainless steel instrument box set",625000],[295,7,"Ophthalmoscope","HEINE Germany",1000000],[296,7,"Ophthalmoscope","",437500],[297,7,"Ophthalmic operating microscope","",10625000],[298,7,"Retinoscope","Professional",437500],[299,7,"Retinoscope","HEINE Germany",750000],[300,7,"Slit lamp microscope","2-step magnification model",4000000],[301,7,"Snellen's visual acuity chart","",9400],[302,7,"Tonometer","Keeler pulse-air tonometer",8125000],[303,7,"Trial box with trial frames","Stainless steel frames/lenses",437500],[304,8,"Amalgam Carrier","",3800],[305,8,"Cavers","",3100],[306,8,"Children Molar Forceps","",17500],[307,8,"Clinical audiometer","",3875000],[308,8,"Coyer Elevator","",17500],[309,8,"Dental Amalgamator","",237500],[310,8,"Dental examination set","",7500],[311,8,"Dental forceps set","Dental extraction and elevator complete kit",250000],[312,8,"Dental Goggles","",6300],[313,8,"Dental instrument Kit sets","",181300],[314,8,"Dental syringe","",11300],[315,8,"Dental unit","Complete unit with compressor",4250000],[316,8,"Dental X-ray","",2375000],[317,8,"Dental x-ray viewer","",337500],[318,8,"ENT Workstation","Complete ENT workstation with endoscopy",28750000],[319,8,"Frast Saw","",31300],[320,8,"Impression Trays","",6300],[321,8,"Matrix Band","",6300],[322,8,"Mouth Gag","Stainless steel",10000],[323,8,"Otoscope","Basic pocket set",62500],[324,8,"Rangler Forceps","",18800],[325,8,"RC Bar","",6300],[326,8,"Trimming Machine","",112500],[327,8,"Ultrasonic Scaler","Woodpecker",193800],[328,8,"Ultrasonic Washer","6 Liters",400000],[329,8,"Ultrasound scalers sets","",187500],[330,8,"Universal Molar Forceps","",17500],[331,8,"Vail Vernishers","",6300],[332,9,"Apron Plastic","",6000],[333,9,"Autoclave linen (pack of 100)","Pack of 100",312500],[334,9,"Bath towels","Original cotton",10000],[335,9,"Bedsheet and pillowcase","100% cotton",8100],[336,9,"Blankets","",25000],[337,9,"Disposable Aprons","",9400],[338,9,"Disposable sterile gowns","Single pack",4800],[339,9,"Draw Sheet","",43800],[340,9,"Face flannels","",3100],[341,9,"Hand Towels","",3800],[342,9,"Lab coat","White cotton long sleeves",16300],[343,9,"Medicine Towels","",3800],[344,9,"Nurse cap","Pack of 100",5000],[345,9,"Patient gowns","Pack of 10",13800],[346,9,"Patient gowns","Reusable",9400],[347,9,"PPE","Spillproof PPE overall, TYVEK",15000],[348,9,"Scrubs","",18800],[349,9,"Surgical Caps","Reuseable",5000],[350,9,"Underpad","Pack of 25",15600],[351,10,"10% Povidone-Iodine","500ml",8100],[352,10,"10% Povidone-Iodine","1 liter",15000],[353,10,"2% Injection Lignocaine","Plain, 50mls per vial",1300],[354,10,"Abdominal Bandages","",11300],[355,10,"Adhesive Roller Plaster","2inch plaster pack",11900],[356,10,"Alcohol Swabs","Box of 100",1900],[357,10,"Bladder Syringe","",8800],[358,10,"Blood bag","Pack of 5",4400],[359,10,"Blood collection bottle","Vacutainer by 50",4400],[360,10,"Catheter","Size 16,18",8100],[361,10,"Catheter","Small sizes 6,8,10,12",10000],[362,10,"Cotton Wool","200g",2300],[363,10,"Cotton Wool","500g",3800],[364,10,"Cotton Wool","DELE 500g",5600],[365,10,"Crepe Bandages","",5600],[366,10,"Disposable Gloves","Pack of 100",5000],[367,10,"Disposable Needles","21Gx0.8x 100pcs per pack",1900],[368,10,"Ear syringe","",8800],[369,10,"Elbow Gloves","Box of 50 pairs",50000],[370,10,"ET tube","Endotracheal tubes different sizes",1900],[371,10,"Examination Gloves","Latex gloves Pack of 100",4800],[372,10,"Facemask","Pack of 50",1900],[373,10,"Gauze","Roll",8800],[374,10,"Gauze roll","36 inches",10000],[375,10,"H2O for Injection","Pack",4400],[376,10,"Intravenous Giving set","Set of 25",9400],[377,10,"IV Cannulas","16G,18G,20G,22G,24G, Box of 50",7500],[378,10,"Methylated spirit","2 liters",4800],[379,10,"Nasal Cannulae","",1500],[380,10,"Nasopharyngeal Airways","Different sizes",7500],[381,10,"NG tubes","Nasogastric tube different sizes",600],[382,10,"Nylon gloves","Disposable nylon glove pack of 100",400],[383,10,"Plain Bandages","",2500],[384,10,"Plaster","2 inch roll",11900],[385,10,"Plaster of Paris","",10600],[386,10,"PT Strips","Pack of 50",3900],[387,10,"Stool specimen bottle","Pack of 25",3100],[388,10,"Stripe Plaster","Adhesive Strip Plaster x100 pcs/pack",1000],[389,10,"Surgical Gloves","Size 7.5 (packs)",13800],[390,10,"Syringe 10ml","Pack of 100 pcs",8100],[391,10,"Syringe 20ml","Pack of 100 pcs",8800],[392,10,"Syringe 2ml","Pack of 100 pcs",4300],[393,10,"Syringe 5ml","Pack of 100 pcs",4900],[394,10,"Triangular bandages","",5600],[395,10,"Urine bag","Pack of 10 bags",4900],[396,10,"Urine dipstick","Tube of 100 strips",6300],[397,10,"Urine specimen container","25 per pack",3100],[398,10,"White Plaster rolls","Rolls",4800],[399,11,"Abdominal corset/binder","",9100],[400,11,"Ankle Splint","",15000],[401,11,"Arm Immobilizer","",33800],[402,11,"Arm sling","Different sizes",6300],[403,11,"Bicycle Ergometer","",250000],[404,11,"Cervical Collar Support","Soft, firm density",8800],[405,11,"Clavicle Brace","",15000],[406,11,"Commode chair","Aluminium commode chair with/without wheels",72500],[407,11,"Contoured lumbosacral support","",16300],[408,11,"Crutches L","Aluminium crutches L",22500],[409,11,"Crutches M","Aluminium crutches M",21300],[410,11,"Crutches S","Aluminium crutches S",20000],[411,11,"Electrical Muscle Stimulator","EMS",87500],[412,11,"Finger Extension Splint","",10000],[413,11,"Gel Exercise Ball","",9400],[414,11,"Hinged Knee Wrap","",20000],[415,11,"Hip Brace","",37500],[416,11,"Humerus Brace","",46300],[417,11,"Hydraulic/Electric Tilt Bed","",2125000],[418,11,"Ice Bag","",13800],[419,11,"Infrared lamp","",75000],[420,11,"Interferential Therapy","",187500],[421,11,"Knee Immobilizer","Long, 19\"/48cm",33800],[422,11,"Laser Therapy Machine","BTL 41110 Laser premium",8905000],[423,11,"Lumbar Support/corset","",18800],[424,11,"Mallet Finger Splint","",8100],[425,11,"Pelvic Binder","",46300],[426,11,"Posture Corrector","",15000],[427,11,"Pouch Arm Sling","",8800],[428,11,"Rigid ankle brace","Different sizes",6300],[429,11,"Rigid knee brace","Different sizes",11900],[430,11,"Rigid Lumbosacral Orthosis","Different sizes",11900],[431,11,"Rigid wrist support","Different sizes",6900],[432,11,"Short wave Diathermy","",2375000],[433,11,"Shoulder Immobilizer","Universal",46300],[434,11,"Shoulder Support","",11300],[435,11,"Soft ankle brace","Different sizes",5400],[436,11,"Soft knee brace","Different sizes",5400],[437,11,"Taylor's Brace","",50000],[438,11,"TENS","Transcutaneous Electric Nerve Stimulator",78100],[439,11,"Therapeutic ultrasound Machine","",6875000],[440,11,"Thoracolumbar Traction Machine","",812500],[441,11,"Tread Mill","",325000],[442,11,"Walking frame","Aluminium walking frame",33800],[443,11,"Wheelchair","Standard",131300],[444,11,"Wheelchair","Electric wheelchair",1062500],[445,11,"Wrist Splint","Ambidextrous",10000],[446,12,"Arm Bones","Chart",5600],[447,12,"Atlas","Chart",5600],[448,12,"Axis","Chart",5600],[449,12,"Bacteria","Chart",5600],[450,12,"Blood Circulatory System","Chart",5000],[451,12,"Bones of the leg","Chart",6300],[452,12,"Cervical","Chart",5000],[453,12,"Ears","Model",10000],[454,12,"Eye","Model",8800],[455,12,"Female reproductive systems","",81300],[456,12,"Heart","Model",9400],[457,12,"Human Body in Uterus","Model",150000],[458,12,"Human Torso","Model, Articulated/Disarticulated",437500],[459,12,"Lumbar","Chart",5600],[460,12,"Pelvic Girdle","Chart",6300],[461,12,"Scapula","Chart",5600],[462,12,"Skeleton","Complete full body, male/female",300000],[463,12,"Thoracic","Chart",5000],[464,12,"Types of joint","Chart",6300],[465,12,"Types of teeth","Chart",5000],[466,13,"Beaker","50ml glass",1600],[467,13,"Beaker","100ml glass",2600],[468,13,"Beaker","250ml glass",3100],[469,13,"Beaker","500ml glass",4100],[470,13,"Beaker","1000ml glass",7500],[471,13,"Boiling tube","10x18mm",500],[472,13,"Conical flask","100ml glass",2300],[473,13,"Conical flask","250ml glass",2800],[474,13,"Conical flask","500ml glass",6900],[475,13,"Dispensing Bottles","Plastic Wash bottle",3800],[476,13,"Evaporating dish","100ml",2500],[477,13,"Evaporating Dish","Porcelain",3100],[478,13,"Flask distilling","250ml",7500],[479,13,"Glass Funnel","Various Sizes - Set",3100],[480,13,"Glass Measuring Jar","Jar",18800],[481,13,"Glass Rod","Stirring Rod",1900],[482,13,"Laboratory Dish","0.16L pack of 20",8800],[483,13,"Measuring Cylinder","10ml glass",2500],[484,13,"Measuring Cylinder","25ml glass",3500],[485,13,"Measuring Cylinder","50ml glass",3800],[486,13,"Measuring Cylinder","100ml glass",4100],[487,13,"Measuring Cylinder","250ml glass",4600],[488,13,"Measuring Cylinder","500ml glass",7500],[489,13,"Measuring Cylinder","1000ml glass",11300],[490,13,"Petri Dish","Glass",2500],[491,13,"Petri Dish","Plastic disposable pack of 10",3800],[492,13,"Pipettes","Glass Graduated - Set",3800],[493,13,"Plastic measuring Jar","Jar",7500],[494,13,"Porcelain Dispensing Sink","Lab Sink",93800],[495,13,"Porcelain Tile","Ointment Slab",3100],[496,13,"Reagents bottles","Glass 250ml",3400],[497,13,"Test tube","Pack of 100",11300],[498,14,"Alpha Ketoglutarate","5g",31300],[499,14,"Aluminium Chloride","500g",22500],[500,14,"Calcium Chloride","500g",16300],[501,14,"D-Fructose","500g",17500],[502,14,"Di-Alanine","100g",22500],[503,14,"Di-Aspartic Acid","25g",15000],[504,14,"Epinephrine","1g",36300],[505,14,"Ethanol","Analytical grade, 2.5L",23800],[506,14,"Ethanol","2.5 Litres",25000],[507,14,"Fehling's Solution A","1 Litre",10000],[508,14,"Fehling's Solution B","1 Litre",10000],[509,14,"Folin-Ciocalteu Reagent","100ml",17500],[510,14,"Formaldehyde","2.5 Litres",25000],[511,14,"Glucose","500g",15000],[512,14,"Grouping Reagents","Antisera A, B, D",3800],[513,14,"Lime water II","",6300],[514,14,"Lithium Sulphate","100g",17500],[515,14,"Magnesium Chloride","500g",18800],[516,14,"Magnesium phosphate","500g",17500],[517,14,"Magnesium sulphate","",12500],[518,14,"Maltose","500g",17500],[519,14,"Methanol","Analytical grade, 2.5L",23800],[520,14,"Micro Pipettes Tips","Pack",5600],[521,14,"Microscope Slide","Pack",1900],[522,14,"Millon's Reagent","1 Litre",12500],[523,14,"n-Hexane","2.5L",35000],[524,14,"Nutrient Agar","500g",75000],[525,14,"Pepsin Powder","",12500],[526,14,"Picric Acid","100g",18800],[527,14,"p-Nitro Phenyl Phosphate","5g",30000],[528,14,"Potassium permanganate","",17500],[529,14,"Potassium Phosphate Monobasic","500g",18800],[530,14,"Sodium Phosphate","500g",15000],[531,14,"Sucrose","500g",15000],[532,14,"Sudan III","25g",10000],[533,14,"Trypsin","25g",11300]].map(([id,c,n,d,p])=>({id,c:CAT_ORDER[c],n,d,p,photo:""}));
+let items=[],byId=new Map(),CATS=[],priceNote=`ACE Surgicals price list of ${LIST_DATE}`;
+
+const RULES=[
+ [/autoclave linen/,'towel'],[/sink/,'cabinet'],[/specimen/,'bottle'],[/plaster|dipstick|strips/,'band'],[/hot ?plate/,'flame'],[/thermometer/,'thermo'],[/height ruler/,'scale'],
+ [/ambu|ventilator|nebuli|airway|\blma\b|laryngo|anesthesia|rebreather|nasal cannula|et tube|oxygen analy|oxygen concentrator/,'lungs'],
+ [/oxygen/,'cyl'],[/suction/,'device'],
+ [/defib|ecg|cardiac|heart model/,'heart'],
+ [/bp monitor|sphygmo/,'bp'],
+ [/patient monitor|bed head|pendant|vein finder/,'monitor'],[/trolley|stretcher/,'trolley'],
+ [/baby|cot sheet|\bcord\b|phototherapy|feeding pump|foetal/,'baby'],
+ [/delivery bed|operating table|couch|tilt bed|stepper|kick about/,'table'],
+ [/icu bed|hospital bed|mattress/,'bed'],[/pillow|underpad|draw sheet/,'pillow'],
+ [/wheelchair/,'wheel'],[/crutch|walking frame|commode/,'crutch'],
+ [/brace|splint|collar|immobil|sling|corset|binder|support|orthosis|wrap|posture/,'brace'],
+ [/tread ?mill|ergometer|exercise ball/,'device'],
+ [/mri|ct scan|mammogram/,'scan'],[/x-?ray|film viewer|positioning/,'xray'],[/ultrasound gel/,'bottle'],[/ultrasound|scaler|sclaer|a\/b scan|doppler/,'probe'],
+ [/lead |gonard|thyroid shield|shield|goggle/,'shield'],
+ [/slit lamp|ophthalmo|opthalmic|retinoscope|refractometer|tonometer|\bvolk\b|cataract|trial box|snellen|eye model|magnifier/,'eye'],
+ [/\bears?\b|otoscope|audiometer|hearing|ent workstation/,'ear'],
+ [/dental|molar|\btooth\b|teeth|amalgam|impression|matrix|elevator|cavers|rc bar|vail|trimming|mouth gag|frast|rangler/,'tooth'],
+ [/microscope|hand lens|slide/,'micro'],
+ [/centrifuge|shaker|stirrer|roller/,'spin'],
+ [/pipette|dropper|micro pipette/,'pipette'],
+ [/beaker|measuring|cylinder|test tube|boiling tube|jar|bell jar/,'beaker'],
+ [/flask|funnel/,'flask'],
+ [/petri|evaporating|dish|gallipot|tray|bowl|mortar|\btile|kidney/,'dish'],
+ [/refrid|fridge|blood bank/,'fridge'],
+ [/autoclave|steriliz|water bath|incubator|oven|distiller|washer/,'drum'],
+ [/incinerator|bunsen|hot plate|blood warmer/,'flame'],
+ [/analy[sz]er|reader|colorimeter|spectro|electrophoresis|haemoglobin|glucometer|meter|diathermy|machine|pump|concentrator|purifier|stimulator|\btens\b|interferential|laser|unit|endoscopy|suction|extractor|dryer|regulator/,'device'],
+ [/scalpel|blade/,'scalpel'],[/scissors/,'scissors'],
+ [/retractor|probe|director|hammer/,'retractor'],
+ [/suture|needle holder|needle holding/,'needle'],
+ [/forceps|clamp|hook|instrument|descamps|speculum|spatula/,'forceps'],
+ [/syringe|needle|lignocaine|injection/,'syringe'],
+ [/cannula|catheter|giving set|blood bag|urine bag|drip stand|ng tube|tube/,'drip'],
+ [/glove/,'glove'],[/mask|n95/,'mask'],
+ [/gown|scrub|lab coat|apron|ppe|cap|boots|shoes/,'gown'],
+ [/towel|bedsheet|blanket|flannel|drape|linen|mackintosh/,'towel'],
+ [/bandage|plaster|gauze|cotton|swab|strip|dipstick/,'band'],
+ [/first aid|diagnostic set|dissecting set|kit|set/,'kit'],
+ [/thermometer|hygrometer|ph meter/,'thermo'],
+ [/scale|balance|height/,'scale'],
+ [/lamp|light|infrared/,'lamp'],
+ [/trolley|stretcher|cart/,'trolley'],
+ [/\bbin\b|sharps/,'bin'],
+ [/skeleton|bone|torso|pelvic|scapula|atlas|axis|lumbar|thoracic|cervical|joint|girdle/,'bone'],
+ [/chart|model|reproductive/,'chart'],
+ [/screen/,'screen'],[/cabinet|cupboard|locker|board|holder|rack|stand|clock/,'cabinet'],
+ [/stool|chair/,'chair'],[/bedpan|urine can|specimen|container|bottle|iodine|spirit|h2o/,'bottle'],
+ [/stethoscope/,'steth']
+];
+const CAT_ICON={"Ward Equipment":"bed","General Medical Equipment":"device","Maternity & Gynecology":"baby","Surgical & Theatre":"table","Surgical Instrument":"forceps","Radiology & Imaging":"xray","Laboratory & Diagnostics":"micro","Ophthalmology":"eye","Dental & ENT":"tooth","Apparel & Linens":"gown","Consumables & Supplies":"syringe","Physiotherapy":"brace","Models & Charts":"bone","Laboratory Glassware":"beaker","Reagents and Chemicals":"bottle"};
+function iconFor(it){
+  const s=(it.n+' '+it.d).toLowerCase();
+  if(/stethoscope/.test(s))return 'steth';
+  if(it.c==="Reagents and Chemicals"&&!/slide|tips/.test(s))return 'bottle';
+  for(const [re,ic] of RULES) if(re.test(s)) return ic;
+  return CAT_ICON[it.c]||'plus';
+}
+function setItems(list){
+  items=list;items.forEach(i=>i.ic=iconFor(i));
+  byId=new Map(items.map(i=>[i.id,i]));
+  const seen=[...new Set(items.map(i=>i.c))];
+  CATS=[...CAT_ORDER.filter(c=>seen.includes(c)),...seen.filter(c=>!CAT_ORDER.includes(c))];
+  if(cat!=='All'&&!CATS.includes(cat))cat='All';
+}
+function photoSrc(p){p=(p||'').trim();if(!p)return '';return /^(https?:|data:|\/)/i.test(p)?p:PHOTO_FOLDER+p}
+function parseCSV(t){const rows=[];let r=[],f='',q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;else if(c===','){r.push(f);f=''}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;r.push(f);rows.push(r);r=[];f=''}
+    else f+=c}
+  if(f||r.length){r.push(f);rows.push(r)}return rows}
+function fromSheet(text){
+  const rows=parseCSV(text);if(rows.length<2)return null;
+  const h=rows[0].map(x=>x.trim().toLowerCase());
+  const col=k=>h.findIndex(x=>x.startsWith(k));
+  const ci={no:col('no'),c:col('category'),n:col('product'),d:col('description'),p:col('price'),ph:col('photo'),sh:col('show')};
+  if(ci.no<0||ci.n<0||ci.p<0)return null;
+  const out=[];
+  for(const r of rows.slice(1)){
+    const g=k=>ci[k]>=0?(r[ci[k]]||'').trim():'';
+    const id=parseInt(g('no'),10),p=parseInt(g('p').replace(/[^\d]/g,''),10);
+    if(!id||!g('n')||!p)continue;
+    if(/^(no|n|hide|hidden|false|0)$/i.test(g('sh')))continue;
+    out.push({id,c:g('c')||'Other Items',n:g('n'),d:g('d'),p,photo:g('ph')});
+  }
+  return out.length?out:null;
+}
+let cat='All';
+setItems(BUILT_IN);
+
+const fmt=n=>'\u20a6'+n.toLocaleString('en-NG');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ico=(n)=>`<svg class="i" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+
+/* State */
+let cart=new Map(); let q=''; let sort='sn';
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+(store.get('ace-cart')||[]).forEach(([id,qty])=>{if(byId.has(id)&&qty>0)cart.set(id,qty)});
+const savedCust=store.get('ace-cust')||{};
+
+/* Category rail */
+const rail=document.getElementById('rail');
+function renderRail(){
+  const counts={};items.forEach(i=>counts[i.c]=(counts[i.c]||0)+1);
+  rail.innerHTML=[['All',items.length],...CATS.map(c=>[c,counts[c]])].map(([c,n])=>`<button class="chip" data-c="${esc(c)}" aria-pressed="${c===cat}">${esc(c)} <small>${n}</small></button>`).join('');
+}
+rail.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;cat=b.dataset.c;renderRail();renderGrid();window.scrollTo({top:0,behavior:'smooth'})});
+
+/* Grid */
+const grid=document.getElementById('grid');
+function ctrl(it){
+  const qn=cart.get(it.id);
+  return qn?`<div class="step"><button data-a="dec" data-id="${it.id}" aria-label="Fewer">\u2212</button><input type="number" min="0" inputmode="numeric" value="${qn}" data-id="${it.id}" id="qty-${it.id}" aria-label="Quantity of ${esc(it.n)}"><button data-a="inc" data-id="${it.id}" aria-label="More">+</button></div>`
+           :`<button class="add" data-a="add" data-id="${it.id}">${ico('plus').replace('i-plus','i-cart')} Add</button>`;
+}
+function card(it){
+  const src=photoSrc(it.photo);const pic=src?`<img src="${esc(src)}" alt="${esc(it.n)}" loading="lazy" onerror="this.parentNode.classList.remove('hasimg');this.remove()">${ico(it.ic)}`:ico(it.ic);
+  return `<article class="card" data-id="${it.id}"><div class="pic${src?' hasimg':''}">${pic}<span class="sn">No. ${it.id}</span><span class="cat">${esc(it.c)}</span></div>
+  <div class="body"><h3 class="name">${esc(it.n)}</h3>${it.d?`<p class="desc">${esc(it.d)}</p>`:''}
+  <div class="foot"><div class="price">${fmt(it.p)}<small>per unit</small></div><div class="ctl">${ctrl(it)}</div></div></div></article>`;
+}
+function filtered(){
+  const terms=q.toLowerCase().split(/\s+/).filter(Boolean);
+  let list=items.filter(i=>(cat==='All'||i.c===cat)&&terms.every(t=>(i.n+' '+i.d+' '+i.c+' '+i.id).toLowerCase().includes(t)));
+  if(sort==='az')list.sort((a,b)=>a.n.localeCompare(b.n));
+  else if(sort==='lo')list.sort((a,b)=>a.p-b.p);
+  else if(sort==='hi')list.sort((a,b)=>b.p-a.p);
+  else list.sort((a,b)=>a.id-b.id);
+  return list;
+}
+function renderGrid(){
+  const list=filtered();
+  document.getElementById('count').textContent=`${list.length} item${list.length===1?'':'s'}${cat!=='All'?' in '+cat:''}${q?` matching \u201c${q}\u201d`:''}`;
+  grid.innerHTML=list.length?list.map(card).join(''):`<div class="empty"><b>No items match \u201c${esc(q)}\u201d</b>Try a shorter word, check the spelling, or choose All categories. Can't find it? Ask us on WhatsApp at +234 907 760 0522.</div>`;
+}
+function refreshCard(id){
+  const el=grid.querySelector(`.card[data-id="${id}"] .ctl`);if(el)el.innerHTML=ctrl(byId.get(id));
+}
+
+/* Cart ops */
+function setQty(id,n){
+  n=Math.max(0,Math.min(9999,Math.floor(n)||0));
+  if(n)cart.set(id,n);else cart.delete(id);
+  store.set('ace-cart',[...cart]);
+  refreshCard(id);renderCart();
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(!b)return;
+  const id=+b.dataset.id,cur=cart.get(id)||0;
+  if(b.dataset.a==='add'){setQty(id,1);toast(`Added ${byId.get(id).n}`)}
+  else if(b.dataset.a==='inc')setQty(id,cur+1);
+  else if(b.dataset.a==='dec')setQty(id,cur-1);
+  else if(b.dataset.a==='rm')setQty(id,0);
+});
+document.addEventListener('change',e=>{const t=e.target;if(t.matches('.step input'))setQty(+t.dataset.id,+t.value)});
+
+/* Drawer */
+const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
+function openCart(){drawer.classList.add('on');scrim.classList.add('on');drawer.setAttribute('aria-hidden','false');document.getElementById('closeCart').focus()}
+function closeCart(){drawer.classList.remove('on');scrim.classList.remove('on');drawer.setAttribute('aria-hidden','true')}
+document.getElementById('openCart').onclick=openCart;
+document.getElementById('floatBtn').onclick=openCart;
+document.getElementById('closeCart').onclick=closeCart;scrim.onclick=()=>{closeCart();closeModals()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCart();closeModals()}});
+
+function totals(){let n=0,t=0;cart.forEach((qty,id)=>{n+=qty;t+=qty*byId.get(id).p});return{n,t,lines:cart.size}}
+function renderCart(){
+  const {n,t,lines}=totals();
+  document.getElementById('badge').textContent=n;
+  const fl=document.getElementById('float');fl.hidden=!n;
+  document.getElementById('floatN').textContent=`${n} item${n===1?'':'s'}`;
+  document.getElementById('floatT').textContent=fmt(t);
+  const L=document.getElementById('lines');
+  document.getElementById('orderMeta').hidden=!lines;document.getElementById('df').hidden=!lines;
+  if(!lines){L.innerHTML=`<div class="dempty">${ico('cart')}<p><b>Your order is empty.</b><br>Tap \u201cAdd\u201d on any item to start.</p></div>`;return}
+  L.innerHTML=[...cart].map(([id,qty])=>{const it=byId.get(id);return `<div class="line"><div class="mini">${ico(it.ic)}</div>
+   <div class="ln"><b>${esc(it.n)}</b>${it.d?`<span>${esc(it.d)}</span>`:''}<span class="unit">No. ${id} \u00b7 ${fmt(it.p)} each</span></div>
+   <div class="lr"><span class="lt">${fmt(qty*it.p)}</span><div class="step"><button data-a="dec" data-id="${id}" aria-label="Fewer">\u2212</button><input type="number" min="0" value="${qty}" data-id="${id}" id="cqty-${id}" aria-label="Quantity"><button data-a="inc" data-id="${id}" aria-label="More">+</button></div><button class="rm" data-a="rm" data-id="${id}">Remove</button></div></div>`}).join('');
+  document.getElementById('tcount').textContent=`${lines} product${lines===1?'':'s'} \u00b7 ${n} unit${n===1?'':'s'}`;
+  document.getElementById('ttotal').textContent=fmt(t);
+  updateLink();
+}
+
+/* Customer + message */
+const F=['cname','cphone','corg','caddr','cnote'];
+F.forEach(k=>{const el=document.getElementById(k);if(savedCust[k])el.value=savedCust[k];el.addEventListener('input',()=>{const o={};F.forEach(x=>o[x]=document.getElementById(x).value);store.set('ace-cust',o);document.getElementById('f-'+(k==='cname'?'name':k==='cphone'?'phone':'x'))?.classList.remove('bad');updateLink()})});
+const ref='ACE-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+String(Math.floor(1000+Math.random()*9000));
+function message(){
+  const v=k=>document.getElementById(k).value.trim();
+  const d=new Date();const date=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+  const {n,t}=totals();
+  let m=`*ACE SURGICALS \u2013 ORDER REQUEST*\nOrder code: ${orderCode()}\nDate: ${date}\n\n*Customer*\nName: ${v('cname')}\nPhone: ${v('cphone')}`;
+  if(v('corg'))m+=`\nFacility: ${v('corg')}`;
+  if(v('caddr'))m+=`\nDeliver to: ${v('caddr')}`;
+  m+=`\n\n*Items*`;
+  let i=0;cart.forEach((qty,id)=>{const it=byId.get(id);i++;m+=`\n${i}. ${it.n}${it.d?' \u2013 '+it.d:''} (No. ${id})\n    ${qty} \u00d7 ${fmt(it.p)} = ${fmt(qty*it.p)}`});
+  m+=`\n\n*Estimated total: ${fmt(t)}*\n(${cart.size} product${cart.size===1?'':'s'}, ${n} unit${n===1?'':'s'})`;
+  if(v('cnote'))m+=`\n\nNote: ${v('cnote')}`;
+  const link=orderLink();if(link)m+=`\n\nView official order: ${link}`;
+  m+=`\n\n_Based on the ${priceNote}. Please confirm availability, delivery and final invoice._`;
+  return m;
+}
+function valid(){
+  const nm=document.getElementById('cname').value.trim(),ph=document.getElementById('cphone').value.replace(/\D/g,'');
+  const errs=[];if(!nm)errs.push('name');if(ph.length<10)errs.push('phone');return errs;
+}
+function updateLink(){
+  const a=document.getElementById('send');
+  a.href=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message())}`;
+  a.setAttribute('aria-disabled',valid().length?'true':'false');
+}
+document.getElementById('send').addEventListener('click',e=>{
+  const errs=valid();const err=document.getElementById('err');
+  if(errs.length){e.preventDefault();
+    if(errs.includes('name'))document.getElementById('f-name').classList.add('bad');
+    if(errs.includes('phone'))document.getElementById('f-phone').classList.add('bad');
+    err.textContent=errs.length===2?'Add your name and phone number so we can reach you.':errs[0]==='name'?'Add your name so we know who is ordering.':'Enter a phone number with at least 10 digits.';
+    document.getElementById(errs[0]==='name'?'cname':'cphone').focus();return}
+  err.textContent='';updateLink();
+});
+document.getElementById('copy').addEventListener('click',()=>{
+  const txt=message();
+  const fallback=()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Order text copied')}catch(e){toast('Select and copy the text manually')}ta.remove()};
+  if(navigator.clipboard?.writeText)navigator.clipboard.writeText(txt).then(()=>toast('Order copied. Paste it into WhatsApp to +234 907 760 0522'),fallback);else fallback();
+});
+
+/* Search / sort */
+const qi=document.getElementById('q'),qc=document.getElementById('qclr');let tmr;
+qi.addEventListener('input',()=>{clearTimeout(tmr);qc.hidden=!qi.value;tmr=setTimeout(()=>{q=qi.value.trim();renderGrid()},120)});
+qc.onclick=()=>{qi.value='';q='';qc.hidden=true;renderGrid();qi.focus()};
+document.getElementById('sort').onchange=e=>{sort=e.target.value;renderGrid()};
+
+/* ---------- Order code: lets staff rebuild the true order from the price list ---------- */
+function fnv(t){let h=0x811c9dc5;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0}return h}
+function sum4(body){return (fnv(body)%1679616).toString(36).toUpperCase().padStart(4,'0')}
+function orderCode(){
+  const body=[...cart].sort((a,b)=>a[0]-b[0]).map(([id,q])=>id.toString(36)+(q>1?':'+q.toString(36):'')).join('.');
+  return 'ACE-'+body+'-'+sum4(body);
+}
+function readCode(text){
+  const m=String(text).match(/ACE-([0-9a-z:]+(?:\.[0-9a-z:]+)*)-([0-9a-z]{4})(?![0-9a-z])/i);
+  if(!m)return {err:'No order code found. Every order from the app has a line starting "Order code: ACE-".'};
+  const body=m[1].toLowerCase();
+  if(sum4(body)!==m[2].toUpperCase())return {err:'The order code has been changed. Do not process this order as written; ask the customer to send it again from the app.',code:m[0]};
+  const lines=[];
+  for(const t of body.split('.')){const [a,b]=t.split(':');const id=parseInt(a,36),q=b?parseInt(b,36):1;if(!id||!q)return {err:'The order code is damaged.'};lines.push([id,q])}
+  return {lines,code:m[0]};
+}
+function appURL(){if(APP_URL)return APP_URL;return /^https?:$/.test(location.protocol)?location.origin+location.pathname:''}
+function orderLink(){const u=appURL();if(!u)return '';
+  const items=[...cart].sort((a,b)=>a[0]-b[0]).map(([id,q])=>q>1?id+'x'+q:String(id));
+  const body=[...cart].sort((a,b)=>a[0]-b[0]).map(([id,q])=>id.toString(36)+(q>1?':'+q.toString(36):'')).join('.');
+  return u+'#order-'+items.join('-')+'-'+sum4(body).toLowerCase()}
+function codeFromHash(h){const m=h.match(/^#order-((?:\d+(?:x\d+)?-)+)([0-9a-z]{4})$/i);if(!m)return null;
+  const body=m[1].slice(0,-1).split('-').map(t=>{const [a,b]=t.split('x');return (+a).toString(36)+(b&&+b>1?':'+(+b).toString(36):'')}).join('.');
+  return 'ACE-'+body+'-'+m[2].toUpperCase()}
+function money(t){return parseInt(String(t).replace(/[^\d]/g,''),10)||0}
+function checkOrder(text){
+  const r=readCode(text);const out=document.getElementById('vOut');
+  if(r.err){out.innerHTML=`<div class="vstat bad">${esc(r.err)}</div>`;return}
+  const issues=[];let total=0;const rows=[];
+  for(const [id,q] of r.lines){const it=byId.get(id);
+    if(!it){issues.push(`Item No. ${id} is no longer in the price list.`);rows.push(`<tr><td>No. ${id} (not in list)</td><td class="r">${q}</td><td class="r">-</td><td class="r">-</td></tr>`);continue}
+    total+=q*it.p;rows.push(`<tr><td>${esc(it.n)}${it.d?' <span style="color:var(--muted)">'+esc(it.d)+'</span>':''} <span style="color:var(--muted)">(No. ${id})</span></td><td class="r">${q}</td><td class="r">${fmt(it.p)}</td><td class="r">${fmt(q*it.p)}</td></tr>`)}
+  const codeMap=new Map(r.lines);
+  if(/\(No\.\s*\d+\)/.test(text)){
+    const seen=new Set();const re=/\(No\.\s*(\d+)\)\s*[\r\n]+\s*(\d+)\s*\D{1,12}?([\d,]+)\s*=\s*\D{0,6}([\d,]+)/g;let m;
+    while((m=re.exec(text))){const id=+m[1],q=+m[2],up=money(m[3]);seen.add(id);const it=byId.get(id);
+      if(!codeMap.has(id)){issues.push(`No. ${id} is in the message but was not ordered in the app.`);continue}
+      if(codeMap.get(id)!==q)issues.push(`No. ${id}: message says ${q} unit(s), the app order was ${codeMap.get(id)}.`);
+      if(it&&up!==it.p)issues.push(`No. ${id}: message price ${fmt(up)}, official price ${fmt(it.p)}.`)}
+    codeMap.forEach((q,id)=>{if(!seen.has(id))issues.push(`No. ${id} was ordered in the app but is missing from the message.`)});
+    const tm=text.match(/Estimated total:\s*\D{0,6}([\d,]+)/i);
+    if(tm&&money(tm[1])!==total)issues.push(`Message total ${fmt(money(tm[1]))}, official total ${fmt(total)}.`);
+  }
+  const status=issues.length?`<div class="vstat bad">The message does not match the order placed in the app.<ul>${issues.map(x=>'<li>'+esc(x)+'</li>').join('')}</ul></div>`
+    :(/\(No\.\s*\d+\)/.test(text)?`<div class="vstat ok">Order is genuine. Items, quantities and prices match the official price list.</div>`
+      :`<div class="vstat ok">Valid order. This is exactly what the customer ordered in the app, at official prices. If the WhatsApp text differs, go by this.</div>`);
+  out.innerHTML=`${status}<div style="overflow-x:auto"><table class="vtab"><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Unit</th><th class="r">Amount</th></tr></thead><tbody>${rows.join('')}</tbody><tfoot><tr><td colspan="3">Official total</td><td class="r">${fmt(total)}</td></tr></tfoot></table></div><p class="fine" style="margin-top:8px">Prices are today's list. If prices changed after the customer ordered, a price difference here can be genuine.</p>`;
+}
+const vModal=document.getElementById('vModal');
+function openVerify(){vModal.hidden=false;scrim.classList.add('on');document.getElementById('vText').focus()}
+function closeModals(){vModal.hidden=true;document.getElementById('picModal').hidden=true;if(!drawer.classList.contains('on'))scrim.classList.remove('on');if(location.hash==='#verify'||location.hash.startsWith('#order-'))history.replaceState(null,'',location.pathname+location.search)}
+document.getElementById('openVerify').onclick=openVerify;
+document.getElementById('vClose').onclick=closeModals;
+document.getElementById('vGo').onclick=()=>checkOrder(document.getElementById('vText').value);
+function route(){if(location.hash==='#verify'){document.getElementById('vH').textContent='Check an order';openVerify();return}
+  const code=codeFromHash(location.hash);if(code){openVerify();document.getElementById('vH').textContent='Official order';document.getElementById('vText').value=code;checkOrder(code)}}
+window.addEventListener('hashchange',route);
+
+
+/* ---------- Order picture ---------- */
+const FONT='system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif';
+async function orderImage(){
+  const v=k=>document.getElementById(k).value.trim();
+  const W=1080,P=60,c=document.createElement('canvas');let x=c.getContext('2d');
+  const wrap=(t,w,font)=>{x.font=font;const out=[];let cur='';for(const wd of t.split(/\s+/)){const tst=cur?cur+' '+wd:wd;if(x.measureText(tst).width>w&&cur){out.push(cur);cur=wd}else cur=tst}if(cur)out.push(cur);return out.length?out:['']};
+  const fN=`600 28px ${FONT}`,fD=`400 22px ${FONT}`;
+  const rows=[...cart].map(([id,q])=>{const it=byId.get(id);const nl=wrap(it.n,500,fN),dl=it.d?wrap(it.d,500,fD):[];return{it,q,nl,dl,h:nl.length*36+dl.length*29+30+24}});
+  const cust=[['Name',v('cname')],['Phone',v('cphone')],['Facility',v('corg')],['Deliver to',v('caddr')]].filter(r=>r[1]);
+  const note=v('cnote')?wrap('Note: '+v('cnote'),W-2*P,`400 24px ${FONT}`):[];
+  const H=300+cust.length*38+40+60+rows.reduce((a,r)=>a+r.h,0)+120+note.length*32+150;
+  c.width=W;c.height=H;x=c.getContext('2d');
+  x.fillStyle='#fff';x.fillRect(0,0,W,H);
+  const logo=document.querySelector('.logo img');try{await logo.decode()}catch(e){}
+  try{x.drawImage(logo,P,40,204,120)}catch(e){}
+  const {t}=totals();const d=new Date();const date=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+  x.textAlign='right';x.fillStyle='#071266';x.font=`800 40px ${FONT}`;x.fillText('ORDER REQUEST',W-P,82);
+  x.fillStyle='#5A6488';x.font=`400 24px ${FONT}`;x.fillText('Date: '+date,W-P,120);
+  x.font=`600 22px ${FONT}`;x.fillStyle='#0270B8';x.fillText(orderCode(),W-P,154);
+  x.textAlign='left';let y=200;x.fillStyle='#071266';x.fillRect(P,y,W-2*P,4);y+=50;
+  x.fillStyle='#0270B8';x.font=`700 20px ${FONT}`;x.fillText('CUSTOMER',P,y);y+=38;
+  for(const [k,val] of cust){x.fillStyle='#5A6488';x.font=`400 24px ${FONT}`;x.fillText(k,P,y);x.fillStyle='#0B1440';x.font=`600 24px ${FONT}`;x.fillText(val.slice(0,60),P+170,y);y+=38}
+  y+=30;x.fillStyle='#EAF3FD';x.fillRect(P,y-34,W-2*P,52);
+  x.fillStyle='#071266';x.font=`700 20px ${FONT}`;x.fillText('ITEM',P+14,y);x.textAlign='right';x.fillText('QTY',700,y);x.fillText('UNIT PRICE',860,y);x.fillText('AMOUNT',W-P-14,y);x.textAlign='left';y+=50;
+  for(const r of rows){let yy=y+10;x.fillStyle='#0B1440';x.font=fN;for(const l of r.nl){x.fillText(l,P+14,yy);yy+=36}
+    x.fillStyle='#5A6488';x.font=fD;for(const l of r.dl){x.fillText(l,P+14,yy);yy+=29}
+    x.font=`400 20px ${FONT}`;x.fillStyle='#0270B8';x.fillText('No. '+r.it.id,P+14,yy);
+    x.textAlign='right';x.fillStyle='#0B1440';x.font=`600 26px ${FONT}`;x.fillText(String(r.q),700,y+10);x.font=`400 24px ${FONT}`;x.fillText(fmt(r.it.p),860,y+10);x.font=`700 26px ${FONT}`;x.fillText(fmt(r.q*r.it.p),W-P-14,y+10);x.textAlign='left';
+    y+=r.h;x.fillStyle='#DCE3F0';x.fillRect(P,y-22,W-2*P,2)}
+  y+=10;x.fillStyle='#071266';x.fillRect(P,y,W-2*P,84);x.fillStyle='#fff';x.font=`600 26px ${FONT}`;x.fillText('ESTIMATED TOTAL',P+24,y+53);
+  x.textAlign='right';x.font=`800 38px ${FONT}`;x.fillText(fmt(t),W-P-24,y+56);x.textAlign='left';y+=130;
+  x.fillStyle='#0B1440';x.font=`400 24px ${FONT}`;for(const l of note){x.fillText(l,P,y);y+=32}
+  y+=16;x.fillStyle='#5A6488';x.font=`italic 400 21px ${FONT}`;x.fillText(`Based on the ${priceNote}. ACE Surgicals confirms availability, delivery and final invoice.`.slice(0,110),P,y);
+  y+=40;x.font=`600 21px ${FONT}`;x.fillStyle='#071266';x.fillText('ACE Surgicals Ltd  |  RC 7117725  |  15/16 Post Office Rd, Fagge, Kano  |  +234 907 760 0522',P,y);
+  return await new Promise(res=>c.toBlob(res,'image/png'));
+}
+let picURL='',picFile=null;
+document.getElementById('sendPic').addEventListener('click',async()=>{
+  const errs=valid();if(errs.length){document.getElementById('send').click();return}
+  const btn=document.getElementById('sendPic');btn.disabled=true;
+  try{
+    const blob=await orderImage();const code=orderCode();
+    if(picURL)URL.revokeObjectURL(picURL);picURL=URL.createObjectURL(blob);
+    picFile=new File([blob],code+'.png',{type:'image/png'});
+    document.getElementById('picImg').src=picURL;
+    const sv=document.getElementById('picSave');sv.href=picURL;sv.download=code+'.png';
+    document.getElementById('picChat').href=`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello ACE Surgicals, I am sending my order as a picture.\nOrder code: '+code+(orderLink()?'\nView official order: '+orderLink():''))}`;
+    const canShare=!!(navigator.canShare&&navigator.canShare({files:[picFile]}));
+    document.getElementById('picShare').hidden=!canShare;
+    document.getElementById('picHelp').innerHTML=canShare?'Tap <b>Share picture</b>, choose WhatsApp, then pick ACE Surgicals (+234 907 760 0522). Not in your contacts? Press and hold the picture to save it, tap <b>Open WhatsApp chat</b> and attach it there.'
+      :'Save the picture (or press and hold it and choose Save), then open the WhatsApp chat with ACE Surgicals and attach it.';
+    closeCart();document.getElementById('picModal').hidden=false;scrim.classList.add('on');
+  }catch(e){toast('Could not create the picture. Use Send order on WhatsApp instead.')}
+  btn.disabled=false;
+});
+document.getElementById('picShare').addEventListener('click',()=>{
+  if(!picFile)return;
+  navigator.share({files:[picFile],title:'ACE Surgicals order',text:'Order code: '+orderCode()}).catch(()=>{});
+});
+document.getElementById('picClose').onclick=closeModals;
+
+let tt;function toast(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),1800)}
+
+renderRail();renderGrid();renderCart();route();
+
+/* Load the live sheet when a link is set; the built-in list stays if it can't be reached. */
+if(SHEET_CSV_URL){
+  fetch(SHEET_CSV_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{
+    const list=fromSheet(t);if(!list)return;
+    setItems(list);
+    [...cart.keys()].forEach(id=>{if(!byId.has(id))cart.delete(id)});
+    store.set('ace-cart',[...cart]);
+    priceNote='current ACE Surgicals price list';
+    document.getElementById('listDate').textContent='always up to date';
+    document.getElementById('listDate2').textContent='current price list';
+    renderRail();renderGrid();renderCart();
+  }).catch(()=>{});
+}
+</script>
+
+</body>
+</html>
