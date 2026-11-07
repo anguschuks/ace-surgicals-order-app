@@ -101,6 +101,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:va
 .db{flex:1;overflow-y:auto;padding:6px 18px 18px}
 .line{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-bottom:1px dashed var(--line)}
 .line .mini{width:44px;height:44px;border-radius:10px;background:var(--tile);color:var(--tile-ink);display:grid;place-items:center;font-size:24px}
+.line .mini img{width:100%;height:100%;object-fit:contain;background:#fff;border-radius:10px}
 .line .ln{min-width:0}
 .line .ln b{display:block;font-size:14px;line-height:1.25}
 .line .ln span{font-size:12.5px;color:var(--muted)}
@@ -351,7 +352,7 @@ const LIST_DATE="29/10/2026";
 /* ============================================ */
 
 const CAT_ORDER=["Ward Equipment","General Medical Equipment","Maternity & Gynecology","Surgical & Theatre","Surgical Instrument","Radiology & Imaging","Laboratory & Diagnostics","Ophthalmology","Dental & ENT","Apparel & Linens","Consumables & Supplies","Physiotherapy","Models & Charts","Laboratory Glassware","Reagents and Chemicals"];
-const BUILT_IN=__DATA__.map(([id,c,n,d,p])=>({id,c:CAT_ORDER[c],n,d,p,photo:""}));
+const BUILT_IN=__DATA__.map(([id,c,n,d,p,ph])=>({id,c:CAT_ORDER[c],n,d,p,photo:ph||""}));
 let items=[],byId=new Map(),CATS=[],priceNote=`ACE Surgicals price list of ${LIST_DATE}`;
 
 const RULES=[
@@ -531,7 +532,7 @@ function renderCart(){
   const L=document.getElementById('lines');
   document.getElementById('orderMeta').hidden=!lines;document.getElementById('df').hidden=!lines;
   if(!lines){L.innerHTML=`<div class="dempty">${ico('cart')}<p><b>Your order is empty.</b><br>Tap “Add” on any item to start.</p></div>`;return}
-  L.innerHTML=[...cart].map(([id,qty])=>{const it=byId.get(id);return `<div class="line"><div class="mini">${ico(it.ic)}</div>
+  L.innerHTML=[...cart].map(([id,qty])=>{const it=byId.get(id);return `<div class="line"><div class="mini">${photoSrc(it.photo)?`<img src="${esc(photoSrc(it.photo))}" alt="" loading="lazy">`:ico(it.ic)}</div>
    <div class="ln"><b>${esc(it.n)}</b>${it.d?`<span>${esc(it.d)}</span>`:''}<span class="unit">No. ${id} · ${fmt(it.p)} each</span></div>
    <div class="lr"><span class="lt">${fmt(qty*it.p)}</span><div class="step"><button data-a="dec" data-id="${id}" aria-label="Fewer">−</button><input type="number" min="0" value="${qty}" data-id="${id}" id="cqty-${id}" aria-label="Quantity"><button data-a="inc" data-id="${id}" aria-label="More">+</button></div><button class="rm" data-a="rm" data-id="${id}">Remove</button></div></div>`}).join('');
   document.getElementById('tcount').textContent=`${lines} product${lines===1?'':'s'} · ${n} unit${n===1?'':'s'}`;

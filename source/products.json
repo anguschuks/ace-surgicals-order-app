@@ -109,98 +109,112 @@
   "n": "Air purifier",
   "d": "Medical grade",
   "p": 2375000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "016-air-purifier.jpg"
  },
  {
   "id": 17,
   "n": "Ambu Bag",
   "d": "Adult",
   "p": 25000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "017-ambu-bag-adult.jpg"
  },
  {
   "id": 18,
   "n": "Ambu Bag",
   "d": "Neonatal, paediatric",
   "p": 25000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "018-ambu-bag-neonatal.jpg"
  },
  {
   "id": 19,
   "n": "Angle poised lamp",
   "d": "",
   "p": 31300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "019-angle-poised-lamp.jpg"
  },
  {
   "id": 20,
   "n": "Autoclave",
   "d": "20 Liters",
   "p": 262500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "020-autoclave-20-liters.jpg"
  },
  {
   "id": 21,
   "n": "Autoclave",
   "d": "24 Liters",
   "p": 312500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "021-autoclave-24-liters.jpg"
  },
  {
   "id": 22,
   "n": "Autoclave",
   "d": "50 Liters",
   "p": 2250000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "022-autoclave-50-liters.jpg"
  },
  {
   "id": 23,
   "n": "Autoclave",
   "d": "100 Liters",
   "p": 3875000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "023-autoclave-100-liters.jpg"
  },
  {
   "id": 24,
   "n": "Autoclave",
   "d": "280 Liter",
   "p": 12000000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "024-autoclave-280-liters.jpg"
  },
  {
   "id": 25,
   "n": "Blood bank",
   "d": "120 Liters",
   "p": 1187500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "025-blood-bank-120-liters.jpg"
  },
  {
   "id": 26,
   "n": "Blood warmer",
   "d": "",
   "p": 237500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "026-blood-warmer.jpg"
  },
  {
   "id": 27,
   "n": "Bowl with stand",
   "d": "Single, stainless steel",
   "p": 31300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "027-bowl-with-stand.jpg"
  },
  {
   "id": 28,
   "n": "BP monitor",
   "d": "Standing type - aneroid",
   "p": 137500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "028-bp-monitor-standing-type-aneroid.jpg"
  },
  {
   "id": 29,
   "n": "BP monitor",
   "d": "Standing type - digital",
   "p": 200000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "029-bp-monitor-standing-type-digital.jpg"
  },
  {
   "id": 30,
@@ -214,581 +228,664 @@
   "n": "Cabinet",
   "d": "Metal medical cabinet",
   "p": 156300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "031-cabinet.jpg"
  },
  {
   "id": 32,
   "n": "Cardiac Arrest Board",
   "d": "CPR Backboard",
   "p": 212500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "032-cardiac-arrest-board.jpg"
  },
  {
   "id": 33,
   "n": "Chart holder",
   "d": "Medical chart holder",
   "p": 5600,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "033-chart-holder.jpg"
  },
  {
   "id": 34,
   "n": "Defibrillator",
   "d": "",
   "p": 1000000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "034-defibrillator.jpg"
  },
  {
   "id": 35,
   "n": "Diagnostic set",
   "d": "",
   "p": 62500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "035-diagnostic-set.jpg"
  },
  {
   "id": 36,
   "n": "Dirt cart/Linen trolley",
   "d": "Single stainless for dirty linen",
   "p": 112500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "036-dirt-cart-linen-trolley.jpg"
  },
  {
   "id": 37,
   "n": "Emergency trolley",
   "d": "ABS, Crash cart with 5 drawers, monitor plate, drip stand, power cot",
   "p": 562500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "037-emergency-trolley.jpg"
  },
  {
   "id": 38,
   "n": "Examination couch",
   "d": "Coloured single crank",
   "p": 225000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "038-examination-couch.jpg"
  },
  {
   "id": 39,
   "n": "Examination light",
   "d": "LED",
   "p": 200000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "039-examination-light.jpg"
  },
  {
   "id": 40,
   "n": "Finger Staff",
   "d": "Different sizes",
   "p": 6900,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "040-finger-staff.jpg"
  },
  {
   "id": 41,
   "n": "First Aid Box",
   "d": "Small, Empty",
   "p": 13100,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "041-first-aid-box-small-empty.jpg"
  },
  {
   "id": 42,
   "n": "First Aid Box",
   "d": "Semi Medium, Empty",
   "p": 19400,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "042-first-aid-box-semi-medium-empty.jpg"
  },
  {
   "id": 43,
   "n": "First Aid Box",
   "d": "Medium, Empty",
   "p": 20000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "043-first-aid-box-medium-empty.jpg"
  },
  {
   "id": 44,
   "n": "First Aid Box",
   "d": "Big, Empty",
   "p": 22500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "044-first-aid-box-big-empty.jpg"
  },
  {
   "id": 45,
   "n": "First Aid Box",
   "d": "Medium, Fully Stocked, Aluminium, Green",
   "p": 37500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "045-first-aid-box-medium-fully-stocked.jpg"
  },
  {
   "id": 46,
   "n": "Foetal stethoscope (aluminium)",
   "d": "",
   "p": 2500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "046-foetal-stethoscope-aluminium.jpg"
  },
  {
   "id": 47,
   "n": "Foldable stretcher",
   "d": "",
   "p": 56300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "047-foldable-stretcher.jpg"
  },
  {
   "id": 48,
   "n": "Foley catheter",
   "d": "Pack of 10",
   "p": 10000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "048-foley-catheter.jpg"
  },
  {
   "id": 49,
   "n": "Glucometer",
   "d": "",
   "p": 26300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "049-glucometer.jpg"
  },
  {
   "id": 50,
   "n": "Haemoglobinometer (Hemocue)",
   "d": "",
   "p": 937500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "050-haemoglobinometer-hemocue.jpg"
  },
  {
   "id": 51,
   "n": "Hand Dryer",
   "d": "Automatic Wall Mount",
   "p": 53800,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "051-hand-dryer.jpg"
  },
  {
   "id": 52,
   "n": "Hearing Aid",
   "d": "Basic model",
   "p": 35000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "052-hearing-aid-basic-model.jpg"
  },
  {
   "id": 53,
   "n": "Hearing Aid",
   "d": "Mid-range 1",
   "p": 68800,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "053-hearing-aid-mid-range-1.jpg"
  },
  {
   "id": 54,
   "n": "Hearing Aid",
   "d": "Mid-range 2",
   "p": 106000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "054-hearing-aid-mid-range-2.jpg"
  },
  {
   "id": 55,
   "n": "Hearing Aid",
   "d": "Advanced model",
   "p": 156000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "055-hearing-aid-advanced-model.jpg"
  },
  {
   "id": 56,
   "n": "Height Ruler",
   "d": "Stadiometer",
   "p": 75000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "056-height-ruler-stadiometer.jpg"
  },
  {
   "id": 57,
   "n": "ICU Ventilator",
   "d": "Adult & paediatric",
   "p": 11250000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "057-icu-ventilator.jpg"
  },
  {
   "id": 58,
   "n": "Incinerator",
   "d": "Medical waste incinerator",
   "p": 22500000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "058-incinerator.jpg"
  },
  {
   "id": 59,
   "n": "Infrared thermometer",
   "d": "Handheld",
   "p": 9400,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "059-infrared-thermometer.jpg"
  },
  {
   "id": 60,
   "n": "Infusion pump",
   "d": "Single channel",
   "p": 362500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "060-infusion-pump.jpg"
  },
  {
   "id": 61,
   "n": "Instrument tray",
   "d": "Stainless steel, different sizes",
   "p": 15000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "061-instrument-tray.jpg"
  },
  {
   "id": 62,
   "n": "Instrument trolley",
   "d": "Stainless steel",
   "p": 81300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "062-instrument-trolley.jpg"
  },
  {
   "id": 63,
   "n": "Kick about",
   "d": "Stainless steel",
   "p": 31300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "063-kick-about.jpg"
  },
  {
   "id": 64,
   "n": "Laryngoscope",
   "d": "Standard set multi-blades",
   "p": 56300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "064-laryngoscope.jpg"
  },
  {
   "id": 65,
   "n": "Littmann Stethoscope",
   "d": "Littmann Classic II",
   "p": 13100,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "065-littmann-stethoscope-littmann-classic-ii.jpg"
  },
  {
   "id": 66,
   "n": "Littmann Stethoscope",
   "d": "Littmann Classic III",
   "p": 35000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "066-littmann-stethoscope-littmann-classic-iii.jpg"
  },
  {
   "id": 67,
   "n": "Littmann Stethoscope",
   "d": "Littmann Cardiology",
   "p": 56300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "067-littmann-stethoscope-littmann-cardiology.jpg"
  },
  {
   "id": 68,
   "n": "LMA",
   "d": "Laryngeal Mask Airways",
   "p": 13800,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "068-lma.jpg"
  },
  {
   "id": 69,
   "n": "Mackintosh",
   "d": "",
   "p": 3100,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "069-mackintosh.jpg"
  },
  {
   "id": 70,
   "n": "Manual Vacuum Aspiration (MVA) set",
   "d": "",
   "p": 25000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "070-manual-vacuum-aspiration-mva-set.jpg"
  },
  {
   "id": 71,
   "n": "Medical Refrigerator",
   "d": "Laboratory/Medical Standard",
   "p": 1500000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "071-medical-refrigerator.jpg"
  },
  {
   "id": 72,
   "n": "N95 Masks",
   "d": "Box of 20",
   "p": 8800,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "072-n95-masks.jpg"
  },
  {
   "id": 73,
   "n": "Nebulizer",
   "d": "",
   "p": 43800,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "073-nebulizer.jpg"
  },
  {
   "id": 74,
   "n": "Oxygen Analyzer",
   "d": "O2 gas analyzer",
   "p": 812500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "074-oxygen-analyzer.jpg"
  },
  {
   "id": 75,
   "n": "Oxygen Concentrator",
   "d": "5 Liters",
   "p": 625000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "075-oxygen-concentrator-5-liters.jpg"
  },
  {
   "id": 76,
   "n": "Oxygen Concentrator",
   "d": "10 Liters",
   "p": 812500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "076-oxygen-concentrator-10-liters.jpg"
  },
  {
   "id": 77,
   "n": "Oxygen Regulator",
   "d": "Japan technology",
   "p": 18800,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "077-oxygen-regulator-japan-technology.jpg"
  },
  {
   "id": 78,
   "n": "Oxygen Regulator",
   "d": "American tech",
   "p": 87500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "078-oxygen-regulator-american-tech.jpg"
  },
  {
   "id": 79,
   "n": "Oxygen Regulator",
   "d": "GLOOR, heavy duty",
   "p": 75000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "079-oxygen-regulator-gloor-heavy-duty.jpg"
  },
  {
   "id": 80,
   "n": "Oxygen Unit",
   "d": "Oxygen cylinder 10L/13kg, regulator, trolley",
   "p": 250000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "080-oxygen-unit.jpg"
  },
  {
   "id": 81,
   "n": "Patella Hammer",
   "d": "Hammer",
   "p": 7500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "081-patella-hammer.jpg"
  },
  {
   "id": 82,
   "n": "Patient Monitor",
   "d": "MINDRAY, with trolley",
   "p": 1625000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "082-patient-monitor-mindray-with-trolley.jpg"
  },
  {
   "id": 83,
   "n": "Patient Monitor",
   "d": "5 parameter patient monitor",
   "p": 375000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "083-patient-monitor-5-parameter-patient-monitor.jpg"
  },
  {
   "id": 84,
   "n": "Patient Monitor Trolley",
   "d": "",
   "p": 150000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "084-patient-monitor-trolley.jpg"
  },
  {
   "id": 85,
   "n": "Patient Stepper/Stool",
   "d": "Double Step, Stainless Steel",
   "p": 40000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "085-patient-stepper-stool.jpg"
  },
  {
   "id": 86,
   "n": "Patient Trolley",
   "d": "Stainless steel",
   "p": 337500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "086-patient-trolley.jpg"
  },
  {
   "id": 87,
   "n": "Pedal Bin",
   "d": "12 liters, stainless steel",
   "p": 30000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "087-pedal-bin.jpg"
  },
  {
   "id": 88,
   "n": "Pendant",
   "d": "Surgical pendant",
   "p": 3750000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "088-pendant.jpg"
  },
  {
   "id": 89,
   "n": "Pulse Oximeter",
   "d": "Hand held",
   "p": 125000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "089-pulse-oximeter-hand-held.jpg"
  },
  {
   "id": 90,
   "n": "Pulse Oximeter",
   "d": "Fingertip",
   "p": 7500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "090-pulse-oximeter-fingertip.jpg"
  },
  {
   "id": 91,
   "n": "Rebreather Masks",
   "d": "",
   "p": 2100,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "091-rebreather-masks.jpg"
  },
  {
   "id": 92,
   "n": "Scale with height",
   "d": "Mechanical",
   "p": 150000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "092-scale-with-height.jpg"
  },
  {
   "id": 93,
   "n": "Shaker/roller",
   "d": "Blood shaker/roller machine, Standard 6-roller unit",
   "p": 275000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "093-shaker-roller.jpg"
  },
  {
   "id": 94,
   "n": "Sharps bin",
   "d": "Sharps box pack of 25",
   "p": 11300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "094-sharps-bin.jpg"
  },
  {
   "id": 95,
   "n": "Sphygmomanometer",
   "d": "Mercurial",
   "p": 37500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "095-sphygmomanometer-mercurial.jpg"
  },
  {
   "id": 96,
   "n": "Sphygmomanometer",
   "d": "Aneroid",
   "p": 10600,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "096-sphygmomanometer-aneroid.jpg"
  },
  {
   "id": 97,
   "n": "Sphygmomanometer",
   "d": "Aneroid, Standing",
   "p": 81300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "097-sphygmomanometer-aneroid-standing.jpg"
  },
  {
   "id": 98,
   "n": "Spray gun",
   "d": "For sterilization use",
   "p": 62500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "098-spray-gun.jpg"
  },
  {
   "id": 99,
   "n": "Standing magnifier",
   "d": "",
   "p": 106300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "099-standing-magnifier.jpg"
  },
  {
   "id": 100,
   "n": "Sterilizing drum",
   "d": "Stainless, set of 3",
   "p": 58800,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "100-sterilizing-drum.jpg"
  },
  {
   "id": 101,
   "n": "Stool",
   "d": "Swivel stool",
   "p": 62500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "101-stool.jpg"
  },
  {
   "id": 102,
   "n": "Suction machine",
   "d": "Double jar electric",
   "p": 250000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "102-suction-machine-double-jar-electric.jpg"
  },
  {
   "id": 103,
   "n": "Suction machine",
   "d": "Single jar electric",
   "p": 106300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "103-suction-machine-single-jar-electric.jpg"
  },
  {
   "id": 104,
   "n": "Suction machine",
   "d": "Pedal",
   "p": 75000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "104-suction-machine-pedal.jpg"
  },
  {
   "id": 105,
   "n": "Syringe pump",
   "d": "",
   "p": 562500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "105-syringe-pump.jpg"
  },
  {
   "id": 106,
   "n": "Table top sterilizer",
   "d": "",
   "p": 875000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "106-table-top-sterilizer.jpg"
  },
  {
   "id": 107,
   "n": "Tourniquet",
   "d": "",
   "p": 3100,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "107-tourniquet.jpg"
  },
  {
   "id": 108,
   "n": "Urine can (male/female)",
   "d": "Stainless",
   "p": 25000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "108-urine-can-male-female.jpg"
  },
  {
   "id": 109,
   "n": "Vacuum extractor",
   "d": "",
   "p": 115000,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "109-vacuum-extractor.jpg"
  },
  {
   "id": 110,
   "n": "Vein finder",
   "d": "Handheld",
   "p": 81300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "110-vein-finder.jpg"
  },
  {
   "id": 111,
   "n": "Wall Clock",
   "d": "",
   "p": 31300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "111-wall-clock.jpg"
  },
  {
   "id": 112,
   "n": "Water bath",
   "d": "Digital thermostatic stainless steel 6-holes",
   "p": 206300,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "112-water-bath.jpg"
  },
  {
   "id": 113,
   "n": "Weighing scale",
   "d": "",
   "p": 17500,
-  "c": "General Medical Equipment"
+  "c": "General Medical Equipment",
+  "photo": "113-weighing-scale.jpg"
  },
  {
   "id": 114,

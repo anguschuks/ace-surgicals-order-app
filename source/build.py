@@ -6,7 +6,7 @@ s=s.replace('<symbol id="i-search"','<symbol id="i-image" viewBox="0 0 24 24"><r
 
 d=json.load(open(os.path.join(H,'products.json')))
 CATS=["Ward Equipment","General Medical Equipment","Maternity & Gynecology","Surgical & Theatre","Surgical Instrument","Radiology & Imaging","Laboratory & Diagnostics","Ophthalmology","Dental & ENT","Apparel & Linens","Consumables & Supplies","Physiotherapy","Models & Charts","Laboratory Glassware","Reagents and Chemicals"]
-data=[[i['id'],CATS.index(i['c']),i['n'],i['d'],i['p']] for i in d]
+data=[[i['id'],CATS.index(i['c']),i['n'],i['d'],i['p']]+([i['photo']] if i.get('photo') else []) for i in d]
 logo='data:image/webp;base64,'+base64.b64encode(open(os.path.join(H,'logo.webp'),'rb').read()).decode()
 s=s.replace('__DATA__',json.dumps(data,ensure_ascii=True,separators=(',',':'))).replace('__LOGO__',logo)
 # make the whole file pure ASCII so no device can mis-read the encoding
